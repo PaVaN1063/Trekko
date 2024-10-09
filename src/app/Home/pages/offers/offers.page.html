@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>OFFERS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let record of records" routerLink="/tabs/Home/trip-details">
+    <img
+      *ngIf="record.hasSpecialOffer"
+      src="../../assets/illustrations/special-offer-tag.jpg"
+      alt="Special Offer"
+      class="special-offer-image"
+    />
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text class="textHeading"
+              ><b>Name of the Service Provider:</b></ion-text
+            >
+          </ion-col>
+          <ion-col size="6">
+            <ion-text>{{record.serviceProvider}}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text>Trek Duration:</ion-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text>{{record.trekDuration}}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text class="textHeading"><b>Pickup Date & Time:</b></ion-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text>{{record.pickupDateTime}}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- Special Offer Badge -->
+      <ion-badge
+        color="success"
+        style="position: absolute; top: 10px; right: 10px"
+      >
+        {{record.specialOffer}}
+      </ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-row *ngIf="transactionData === false" class="ion-justify-content-center">
+    <ion-col>
+      <ion-img
+        src="../../assets/illustrations/NoResultsFound.jpg"
+        alt="Not Found"
+        style="max-width: 700px; height: auto"
+      ></ion-img>
+    </ion-col>
+  </ion-row>
+</ion-content>

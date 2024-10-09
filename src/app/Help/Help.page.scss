@@ -1,0 +1,45 @@
+.track-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.tracking-line {
+  width: 2px;
+  background-color: gray;
+  height: 100%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: rgb(40, 15, 206);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%; /* Ensure the dot is centered horizontally */
+  transform: translateX(-50%);
+}
+
+.dot:nth-child(1) {
+  top: 0%;
+}
+
+.dot:nth-child(2) {
+  top: 25%;
+}
+
+.dot:nth-child(3) {
+  top: 50%;
+}
+
+.dot:nth-child(4) {
+  top: 75%;
+}
+
+.dot:nth-child(5) {
+  top: 100%;
+}

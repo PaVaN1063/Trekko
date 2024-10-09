@@ -1,0 +1,7 @@
+{
+  "name": "Aorbo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

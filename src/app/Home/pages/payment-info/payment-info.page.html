@@ -1,0 +1,121 @@
+
+
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <button ion-button (click)="goBack()" class="back-button">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Pay ₹1000</ion-title>
+    <ion-buttons slot="end">
+      <ion-text style="color: rgb(255, 0, 0);">{{ minutes }}:{{ seconds | number: '2.0' }}</ion-text>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Review Booking Section -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Review Booking</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <div class="content-row">
+        <ion-text>2 Slots</ion-text>
+        <!-- Global scss used -->
+        <ion-button fill="clear" size="small" color="primary" (click)="openModal()"> 
+          View Details
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+
+  <!-- Coupon Code Section -->
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <ion-icon name="gift-outline"></ion-icon>
+          </ion-col>
+          <ion-col size="7">
+            <ion-text>Have a coupon code?</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="9">
+            <ion-input placeholder="Coupon code"></ion-input>
+          </ion-col>
+          <ion-col size="3">
+            <ion-button>Apply</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <!-- Payment Methods Card -->
+    <ion-list>
+      <ion-radio-group>
+        <!-- PhonePe Option -->
+        <ion-item>
+          <ion-label>
+            <img
+              src="assets/Logos/phpay.png"
+              alt="PhonePe"
+              style="height: 20px; vertical-align: middle"
+            />
+            PhonePe
+          </ion-label>
+          <ion-radio slot="start" value="phonepe"></ion-radio>
+        </ion-item>
+  
+        <!-- Paytm Option -->
+        <ion-item>
+          <ion-label>
+            <img
+              src="assets/Logos/paytm.png"
+              alt="Paytm"
+              style="height: 20px; vertical-align: middle"
+            />
+            Paytm
+          </ion-label>
+          <ion-radio slot="start" value="paytm"></ion-radio>
+        </ion-item>
+  
+        <!-- Enter UPI ID Option -->
+        <ion-item>
+          <ion-label>
+            <img
+              src="assets/Logos/upi.png"
+              alt="UPI"
+              style="height: 20px; vertical-align: middle"
+            />
+            Enter UPI ID
+          </ion-label>
+          <ion-radio slot="start" value="upi"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+  
+      <!-- Debit/Credit Card Option -->
+      <ion-item>
+        <ion-label>Add Debit / Credit Card</ion-label>
+        <ion-button fill="clear" slot="end">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-icon name="card-outline" slot="start"></ion-icon>
+        <ion-label>Visa, Master Card & more</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  
+  
+</ion-content>

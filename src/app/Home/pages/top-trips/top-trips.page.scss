@@ -1,0 +1,132 @@
+
+//header
+.header label{
+  color: #000000;
+  font-weight: bold;
+}
+
+ion-item.header-item {
+  border-radius: 25px; /* Rounded corners */
+  border: 2px solid #b4b4b4; /* Border similar to your image */
+  padding: 5px 0px; /* Padding inside the item */
+  display: flex; /* Flexbox for layout */
+  align-items: center; /* Center the items vertically */
+}
+
+.headerImg {
+  width: 10%;
+  height: 70%;
+}
+
+.booking-label {
+  font-size: 17px; /* Adjust font size */
+  font-weight: bold;
+  color: #000;
+  margin-left: 15px; /* Space between icon and label */
+  flex: 1; /* Take up remaining space to push button and toggle to the right */
+}
+
+.know-more-btn {
+  font-size: 12px; /* Smaller button text */
+  margin-right: 10px; /* Space between button and toggle */
+}
+
+ion-toggle {
+  margin-left: 8px; /* Space between button and toggle */
+}
+
+// ***********************
+
+.textHeading{
+    color: black;
+    font-weight: bold;
+}
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  //swiper
+  .swiper-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
+    width: 100%;  /* Ensure the swiper takes full width */
+    overflow: hidden; /* Hide overflow to prevent excess movement */
+  }
+  
+  .swiper-wrapper {
+    display: flex;
+  }
+  
+  .swiper-slide {
+    width: auto;  /* Ensure the chip fits the content only */
+    scroll-snap-align: start;  /* Aligns the slide to the start of the scroll container */
+  }
+  
+  ion-chip {
+    margin: 0 5px;  /* Control spacing between chips */
+    font-size: 16px;  /* Adjust font size if necessary */
+  }
+
+  
+  //main body
+  Ion-grid{
+    margin-top: 20px;
+  }
+  
+  /* Increase the size of the card */
+ion-card {
+  position: relative;
+  height: 200px; /* Increased card height */
+  padding-right: 20px; /* Add some padding to avoid overflow */
+}
+
+/* Position the side section properly */
+.side-section {
+  position: absolute;
+  top: 50px; /* Align side section lower down in the card */
+  right: 10px; /* Align it with the special offer on the right side */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align content to the right */
+}
+
+/* Align text and icon in the side section */
+.sideImg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Aligns XXXX and Onwards to the right */
+}
+
+/* Styling for the "View Itinerary" link */
+.view-itenary {
+  margin-top: 10px; /* Space between sideImg and View Itinerary */
+  color: #4779b5;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Special offer image */
+.special-offer-image {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  animation: pulse 2s infinite;
+  border-radius: 50%;
+}
+
+/* Align and size the GDPR icon */
+.sideImgIcon {
+  margin-top: 10px;
+  width: 44px;
+  height: 44px;
+}

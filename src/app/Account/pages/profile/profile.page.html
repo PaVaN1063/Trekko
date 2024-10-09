@@ -1,0 +1,85 @@
+  <ion-header>
+    <ion-toolbar>
+         <ion-buttons slot="start">
+      <button ion-button (click)="goBack()" class="back-button">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+      <ion-title>Edit Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="profile-header">
+      <ion-avatar style="width: 100px; height: 100px;">
+        <img src="assets/images/profileman.png" />
+        <ion-icon name="camera" class="profile-camera"></ion-icon>
+      </ion-avatar>
+      <!-- Hidden file input -->
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden>
+    </div>
+    
+
+    <ion-list lines="none">
+      <!-- Name -->
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input value="John"></ion-input>
+      </ion-item>
+
+      <!-- Email -->
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input value="John@gmail.com"></ion-input>
+        <ion-note slot="end" color="primary">Verified</ion-note>
+      </ion-item>
+
+      <!-- Phone Number -->
+      <ion-item>
+        <ion-label position="stacked">Phone Number</ion-label>
+        <ion-input value="+91 9999999999"></ion-input>
+        <ion-note slot="end" color="primary">Verified</ion-note>
+      </ion-item>
+
+      <!-- Gender with Radio Buttons -->
+      <ion-item>
+        <ion-label position="stacked">Gender</ion-label>
+        <ion-radio-group>
+          <div class="radio-inline">
+            <ion-item lines="none">
+              <ion-label>Male</ion-label>
+              <ion-radio slot="start" value="male"></ion-radio>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>Female</ion-label>
+              <ion-radio slot="start" value="female"></ion-radio>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>Other</ion-label>
+              <ion-radio slot="start" value="other"></ion-radio>
+            </ion-item>
+          </div>
+        </ion-radio-group>
+      </ion-item>
+      
+
+      <ion-item>
+        <ion-label position="stacked">Date of Birth</ion-label>
+        <!-- <ion-datetime display-format="MMMM DD, YYYY" value="2002-08-23"></ion-datetime> -->
+        <ion-input type="date" ></ion-input>
+      </ion-item>
+
+      <!-- Other Information (Optional) -->
+      <!-- <ion-item>
+        <ion-label position="stacked">Other Information (Optional)</ion-label>
+        <ion-textarea placeholder="Enter additional information..."></ion-textarea>
+      </ion-item> -->
+    </ion-list>
+
+    <!-- Grid layout for NPWP and e-KTP -->
+    
+    <ion-footer>
+      <ion-button shape="round" expand="block" color="warning">Save Changes</ion-button>
+    </ion-footer>
+
+  </ion-content>

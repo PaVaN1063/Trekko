@@ -1,0 +1,156 @@
+html, body {
+  height: 100%;
+  overflow: hidden; /* Ensure no scroll on body */
+}
+
+ion-content {
+  --background: linear-gradient(to right, #51BBFD, #3136b9);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh; /* Set full height to avoid overflow */
+  overflow: hidden; /* Hide any potential overflow */
+}
+.empty-space {
+  height: 20px;  /* Adjust the height for how much empty space you want */
+  width: 100%;   /* Make it full width if needed */
+  background: transparent; /* Keep it transparent if you don't want it visible */
+  margin-bottom: 10px; /* Optional: Add space below */
+  margin-top: 20px; /* Optional: Add space above */
+}
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+  .highlight-text {
+      text-align: left;
+      padding: 20px;
+      .text_your_trek {
+        color: #000;
+      }
+    }
+ .form-container {
+      width: 100%;
+      padding: 20px;
+
+      .input-field {
+        background: white;
+        border-radius: 25px;
+        margin-bottom: 10px;
+      }
+      
+      ::ng-deep .native-input {
+        margin-left: 20px;
+      }
+
+      ion-button {
+        --background: linear-gradient(to right, #F0E94C, #15A21F);
+        --color: black;
+        --border-radius: 25px;
+        font-weight:bold
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+
+
+.image-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 200px; /* Keep it within the viewable screen area */
+  z-index: 0;
+
+  ion-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.5;
+  }
+}
+
+.agreement-content {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+
+  span, a {
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+
+// **************************ION-MODEL****************************
+
+.BackToLogin{
+  --background: #ffffff;
+  --color: rgb(192, 206, 0);
+  --border-radius: 8px;
+  --border-color: 1px solid #ffffff;
+  --box-shadow: 5px 3px #888888;
+  --padding: 8px;
+  --margin: 10px;
+}
+
+.otp-text {
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.otp-grid {
+  --ion-grid-padding: 0px;
+  margin-bottom: 20px;
+}
+
+.otp-input {
+  text-align: center;
+  font-size: 24px;
+  border-radius: 15px;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --border-color: #ffd700;
+  --border-width: 2px;
+  --background: #fffacd;
+}
+
+.countdown-timer {
+  margin-bottom: 10px;
+  color: #000;
+  font-size: 14px;
+}
+
+// ion-button {
+//   --background: #ffd700;
+//   --border-radius: 20px;
+// }
+
+ion-text {
+  color: #ffd700;
+  text-decoration: underline;
+  cursor: pointer;
+}

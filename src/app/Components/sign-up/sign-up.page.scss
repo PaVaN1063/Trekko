@@ -1,0 +1,52 @@
+ion-item.custom-input {
+  margin: 0 auto; /* Center horizontally */
+  margin-bottom: 16px;
+  width: 80%;
+  //   background-color: #fdd835 !important; /* Yellow background for ion-item */
+  border: 1px solid black; /* Black border */
+  border-radius: 20px; /* Rounded corners */
+  --padding-start: 10px; /* Adjusts padding for the icon */
+}
+
+.custom-input ion-icon {
+  margin-right: 10px; /* Adjust the spacing */
+}
+.bottom {
+  text-align: center;
+  margin-top: 30px;
+  .custom-checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .custom-checkbox ion-checkbox {
+    --size: 20px;
+    --checkbox-background-checked: #000000;
+  }
+
+  .custom-checkbox ion-checkbox::part(container) {
+    border-radius: 6px;
+    border: 2px solid #000000;
+  }
+
+  .custom-checkbox ion-label {
+    margin-left: 10px; /* Add space between the checkbox and label */
+  }
+  .signUpButton {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: white;
+  }
+  
+}
+.error p {
+  color: red;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.toast-green {
+  background-color: green; /* Background color */
+  color:#000000
+}

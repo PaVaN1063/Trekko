@@ -1,0 +1,105 @@
+.custom-toolbar {
+  --background: white;  /* Set header background to white */
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  --border-color: transparent; /* Remove any border */
+}
+
+.special-offer-badge {
+    font-size: 10px;
+    background-color: #d8a1e6; /* Adjust color as per your theme */
+  }
+  
+  .itinerary-link {
+    font-size: 14px;
+    color: #3366cc;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  ion-icon {
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+  
+  ion-col {
+    text-align: center;
+  }
+  
+  ion-card {
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  // *******************************************
+
+
+  .start_Date{
+    font-size: 10px;
+  }
+  .onwards{
+    font-size: 10px;
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding: 12px;
+    background-color: rgb(129, 129, 129);
+    border-radius: 40px;
+    
+  }
+
+/* Styles for the first ion-card */
+.service-card {
+  padding-right: 20px;
+  height: 150px;
+  position: relative;
+}
+
+/* Special Offer Image */
+.service-card .special-offer-image {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  animation: pulse 2s infinite;
+  border-radius: 50%;
+}
+
+/* Position and Style the Side Section */
+.service-card .side-section {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 1; /* Add this line */
+}
+
+
+/* Align Text and Icon in the Side Section */
+.service-card .sideImg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+
+.service-card .sideImgIcon {
+  margin-right: 10px; /* Space between images */
+  width: 20px;
+  height: 20px;
+}
+
+.service-card .view-itenary {
+  margin-top: 10px;
+  color: #4779b5;
+  font-weight: bold;
+  text-align: right;
+  font-size: 10px;
+}
+

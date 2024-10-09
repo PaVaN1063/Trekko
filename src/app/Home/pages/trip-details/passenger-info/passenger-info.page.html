@@ -1,0 +1,214 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="custom-toolbar">
+    <!-- Back Button -->
+    <ion-buttons slot="start">
+      <button ion-button (click)="goBack()" class="back-button">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- Header Title, initially hidden -->
+    <ion-title class="header-title" [class.visible]="showHeaderTitle"
+      >Passenger Details</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content (ionScroll)="onScroll($event)" scrollEvents="true">
+  <div
+    class="page-title"
+    style="font-weight: 600; font-size: 20px; padding-left: 15px"
+  >
+    <span>Passenger Details</span>
+  </div>
+
+  <!-- Section: Dates (From Day and To Day) -->
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5">
+          <ion-item>
+            <ion-label position="floating">From Day</ion-label><br />
+            <ion-input placeholder="XXXXXXXXXX" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2" class="text-center">
+          <ion-label>→</ion-label>
+        </ion-col>
+        <ion-col size="5">
+          <ion-item>
+            <ion-label position="floating">To Day</ion-label><br />
+            <ion-input placeholder="XXXXXXXXXX" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- Section: Contact Details -->
+  <ion-card>
+    <ion-item>
+      <ion-label>Contact Details</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email ID</ion-label><br />
+      <ion-input placeholder="Enter Email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Phone Number</ion-label><br />
+      <ion-input placeholder="Enter Phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">State of Residency</ion-label><br />
+      <ion-input placeholder="Select State"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-icon
+        name="logo-whatsapp"
+        slot="start"
+        size="large"
+        color="success"
+      ></ion-icon>
+      <ion-label>Send booking & trip updates on Whatsapp</ion-label>
+      <ion-toggle slot="end"></ion-toggle>
+    </ion-item>
+  </ion-card>
+
+  <!-- Section: Passenger Details -->
+  <ion-card>
+    <ion-item>
+      <ion-label>Passenger Details</ion-label>
+    </ion-item>
+
+    <ion-item class="spaced-input">
+      <ion-label position="floating">Name</ion-label><br />
+      <ion-input placeholder="Enter Name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Age</ion-label><br />
+      <ion-input placeholder="Enter Age"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-segment>
+        <ion-segment-button value="male">
+          <ion-label>Male</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="female">
+          <ion-label>Female</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+  </ion-card>
+
+  <!-- Section: Free Cancellation -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>Free Cancellation</ion-label>
+      <ion-icon name="alarm-outline" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="small-text"
+        >Valid till 1 day before the Departure</ion-label
+      >
+    </ion-item>
+
+    <ion-list>
+      <ion-radio-group>
+        <ion-item>
+          <ion-label>Add Free Cancellation</ion-label>
+          <ion-radio slot="start" value="add"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Don’t add Free Cancellation</ion-label>
+          <ion-radio slot="start" value="no-add"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+  </ion-card>
+
+  <!-- Section: Aorbo Insurance Program -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>Aorbo Insurance Program</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea placeholder="Insurance details..."></ion-textarea>
+    </ion-item>
+  </ion-card>
+
+  <!-- Section: Terms & Conditions -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label color="primary">Terms & Conditions</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea
+        placeholder="Terms and Conditions details..."
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Amount</ion-label>
+      <ion-input value="XXXX" readonly></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label class="small-text">Tax excluded</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <!-- Pay Now Button -->
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button
+        expand="block"
+        color="success"
+        routerLink="/tabs/Home/payment-info"
+        >Pay Now</ion-button
+      >
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
+
+<!-- CSS to Adjust Spacing -->
+<style>
+  .text-center {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ion-label.small-text {
+    font-size: 12px;
+    color: #666;
+  }
+
+  ion-footer {
+    padding-bottom: 20px;
+  }
+
+  /* Spacing for the input fields */
+  .spaced-input ion-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Adjust segment for better spacing */
+  ion-segment {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Space between sections */
+  ion-card {
+    margin-bottom: 15px;
+  }
+</style>

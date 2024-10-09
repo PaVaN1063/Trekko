@@ -1,0 +1,31 @@
+
+.custom-tab-bar {
+    // --background: #f1c40f; /* Yellow background */
+    // --color: black; /* Default icon and text color */
+    // --color-selected: black; /* Selected icon and text color */
+    // --tab-button-icon-size: 24px; /* Adjust icon size if needed */
+    // --tab-button-min-width: 72px; /* Ensure buttons are wide enough */
+    --background: #f1c40f; /* Yellow background */
+    --color: black; /* Default icon and text color */
+    --color-selected: black; /* Selected icon and text color */
+  }
+  
+  .custom-tab-bar ion-tab-button {
+    font-weight: bold;
+  }
+  
+  .custom-tab-bar ion-tab-button.ion-selected {
+    --color-selected: black; /* Ensure selected state uses black */
+  }
+  
+  .custom-tab-bar ion-tab-button ion-icon {
+    --color: black;
+    --color-selected: black;
+  }
+  
+  .custom-tab-bar ion-tab-button ion-label {
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: center;
+  }
+  

@@ -1,0 +1,97 @@
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" style="padding-top: 20px;">My Account</ion-title>
+  
+      <!-- Right end support icon -->
+      <ion-buttons slot="end" style="padding-top: 20px;">
+        <span>English</span>
+        <ion-button (click)="goToSupport()">
+          <img src="assets/icon/helpdesk.png" alt="Help" style="width: 24px; height: 24px;" />
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+
+
+  <ion-content class="ion-padding">
+    <!-- Card with Options -->
+    <ion-card  >
+      <ion-list>
+        <!-- Passenger Information -->
+        <ion-item>
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label routerLink="profile">Passenger Information</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- My Bookings -->
+        <ion-item>
+          <ion-icon name="grid-outline" slot="start"></ion-icon>
+          <ion-label>My Bookings</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Safety & Security -->
+        <ion-item>
+          <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+          <ion-label>Safety & Security</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Help -->
+        <ion-item>
+          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+          <ion-label>Help</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Claims -->
+        <ion-item>
+          <ion-icon name="shield-outline" slot="start"></ion-icon>
+          <ion-label>Claims</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Notifications -->
+        <ion-item>
+          <ion-icon name="notifications-outline" slot="start"></ion-icon>
+          <ion-label>Notifications</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <!-- Referrals -->
+        <ion-item>
+          <ion-icon name="people-circle-outline" slot="start"></ion-icon>
+          <ion-label>Referrals</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Become Partner -->
+        <ion-item>
+          <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+          <ion-label>Become Partner</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Rate App -->
+        <ion-item>
+          <ion-icon name="star-outline" slot="start"></ion-icon>
+          <ion-label>Rate App</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- About -->
+        <ion-item>
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+          <ion-label>About Aorbo</ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+        <!-- Logout -->
+        <ion-item>
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          <ion-label color="danger" routerLink="/">Logout</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    
+  </ion-content>

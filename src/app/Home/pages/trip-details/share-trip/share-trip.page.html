@@ -1,0 +1,172 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Share</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="service-card" *ngFor="let record of records">
+    <!-- Logo Image -->
+    <!-- <img src="{{record.logoImage}}" alt="Logo" class="special-offer-image"  style=" width: 30px; height: 30px; margin-left:15px;margin-bottom:5px  " /> -->
+
+    <!-- Special Offer Badge Image -->
+    <img
+      *ngIf="record.specialOffer"
+      src="../../assets/Logos/offers.png"
+      alt="Special Offer"
+      style="
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 90px;
+        height: 25px;
+      "
+    />
+
+    <div class="side-section">
+      <label class="textHeading" style="margin-bottom: 5px">December 1st</label>
+      <div class="sideImg">
+        <label class="textHeading" style="margin-bottom: 5px">Onwards</label>
+        <div class="image-container">
+          <img
+            src="../../assets/icon/eye.png"
+            alt="eye Icon"
+            class="sideImgIcon"
+          />
+          <img
+            src="../../assets/Logos/gdpr.png"
+            alt="GDPR Icon"
+            class="sideImgIcon"
+          />
+        </div>
+      </div>
+      <ion-text class="view-itenary">View Itinerary</ion-text>
+    </div>
+
+    <ion-card-content>
+      <!-- <ion-grid> -->
+      <!-- <ion-row> -->
+      <!-- <ion-col size="6"> -->
+      <img
+        src="{{record.logoImage}}"
+        alt="Logo"
+        class="special-offer-image"
+        style="
+          max-width: 40px;
+          max-height: 40px;
+          margin-top: 10px;
+          margin-left: 10px;
+        "
+      />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- </ion-col> -->
+      <ion-col size="6">
+        <ion-text>{{record.serviceProvider}}</ion-text>
+      </ion-col>
+      <!-- </ion-row> -->
+      <ion-row>
+        <!-- <ion-col size="6">
+            <ion-text class="textHeading">Trek Duration:</ion-text>
+          </ion-col> -->
+        <ion-col size="10">
+          <span style="font-size: 12px; font-weight: 800">Duration: </span
+          >&nbsp;
+          <ion-text class="textHeading">{{record.trekDuration}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <!-- <ion-col size="6">
+            <ion-text class="textHeading">Pickup Date & Time:</ion-text>
+          </ion-col> -->
+        <ion-col size="10">
+          <!-- <ion-text class="textHeading">{{record.pickupDateTime}}</ion-text> -->
+          <span style="font-size: 12px; font-weight: 800">Pickup: </span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<ion-text class="textHeading"
+            >Morning 9:00 AM</ion-text
+          >
+        </ion-col>
+      </ion-row>
+      <!-- </ion-grid> -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <!-- First row of icons -->
+    <ion-row>
+      <ion-col>
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <p>Johm</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <p>Doe</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <p>John Doe</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Second row of icons -->
+    <ion-row>
+      <ion-col>
+        <ion-icon name="logo-instagram"></ion-icon>
+        <p>Instagram Chats</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-instagram"></ion-icon>
+        <p>Instagram Feed</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+        <p>Messages</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="paper-plane-outline"></ion-icon>
+        <p>Telegram</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Third row of icons -->
+    <ion-row>
+      <ion-col>
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <p>Whatsapp</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <p>Facebook</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-instagram"></ion-icon>
+        <p>Instagram</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="camera-outline"></ion-icon>
+        <p>Snapshot</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Fourth row of icons -->
+    <ion-row>
+      <ion-col>
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <p>Business Whatsapp</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="copy-outline"></ion-icon>
+        <p>Copy Link</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-linkedin"></ion-icon>
+        <p>LinkedIn</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="logo-pinterest"></ion-icon>
+        <p>Pinterest</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
