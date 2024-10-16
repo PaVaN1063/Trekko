@@ -1,93 +1,140 @@
 <ion-content>
-  <ion-toolbar>  
+  <ion-toolbar style="--background: #f8f8f8">
     <ion-title>
-      <div>
-      <label  class="textHeading">XXXXXX-XXXXXX</label><br>
-      <label>Date & Day</label>
-    </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <label class="headerTitle"
+            >{{ formData?.from }} - {{ formData?.to }}</label
+          ><br />
+          <span style="font-size: 12px"
+            >Departure Date: {{ formData?.departureDay }}</span
+          >
+        </div>
+        <div>
+          <label class="custom-values">
+            <span
+              *ngIf="formData?.custom?.length > 0"
+              style="
+                font-size: 13px;
+                background-color: rgb(69, 219, 0);
+                padding-left: 6px;
+                padding-right: 6px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                border-radius: 20px;
+              "
+            >
+              {{ formData.custom.join(', ') }}
+            </span>
+            <span *ngIf="!formData?.custom?.length"></span>
+          </label>
+        </div>
+      </div>
     </ion-title>
   </ion-toolbar>
-<br>
+
   <ion-toolbar>
     <ion-item lines="none" class="header-item">
-      <img src="../../assets/Logos/multiple-users-silhouette.png" class="headerImg" alt="Group Icon">
+      <img
+        src="../../assets/Logos/multiple-users-silhouette.png"
+        class="headerImg"
+        alt="Group Icon"
+      />
       <ion-label class="booking-label">Booking for Groups</ion-label>
-      <ion-button fill="clear" color="primary" class="know-more-btn">Know More</ion-button>
+      <ion-button fill="clear" color="primary" class="know-more-btn"
+        >Know More</ion-button
+      >
       <ion-toggle slot="end"></ion-toggle>
     </ion-item>
   </ion-toolbar>
-<br>
 
-<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-  <ion-refresher-content></ion-refresher-content>
-</ion-refresher>
-<div class="swiper-container">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide" *ngFor="let tab of tabs">
-      <ion-chip>
-        <b>
-        <img [src]="tab.icon" style="width: 20px;"/>
-        <ion-label style="margin-left: 2px;"> {{tab.title}}</ion-label>
-      </b>
-      </ion-chip>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="swiper-container" style="margin-top: 5px">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let tab of tabs">
+        <ion-chip>
+          <b>
+            <img [src]="tab.icon" style="width: 20px" />
+            <ion-label style="margin-left: 2px"> {{tab.title}}</ion-label>
+          </b>
+        </ion-chip>
+      </div>
     </div>
   </div>
-  <div class="swiper-pagination"></div>
-</div>
+  <ion-card
+    *ngFor="let record of records"
+    routerLink="/tabs/Home/trip-details"
+    style="position: relative"
+  >
+    <!-- Logo Image -->
+    <img src="{{record.logoImage}}" alt="Logo" class="special-offer-image" />
 
-<ion-card *ngFor="let record of records" routerLink="/tabs/Home/trip-details" style="position: relative;">
-  <!-- Logo Image -->
-  <img src="{{record.logoImage}}" alt="Logo" class="special-offer-image" />
+    <!-- Special Offer Badge Image -->
+    <img
+      *ngIf="record.specialOffer"
+      src="../../assets/Logos/offers.png"
+      alt="Special Offer"
+      style="
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 100px;
+        height: 30px;
+      "
+    />
 
-  <!-- Special Offer Badge Image -->
-  <img *ngIf="record.specialOffer" src="../../assets/Logos/offers.png" alt="Special Offer" 
-       style="position: absolute; top: 0px; right: 0px; width: 135px; height: 44px;" />
-
-       <div class="side-section">
-        <div class="sideImg">
-          <label class="textHeading">XXXX</label><br>
-          <label>Onwards</label>
-          <img src="../../assets/Logos/gdpr.png" alt="GDPR Icon" class="sideImgIcon">
-        </div>
-        <ion-text class="view-itenary">View Itinerary</ion-text>
+    <div class="side-section">
+      <div class="sideImg">
+        <label class="textHeading">XXXX</label><br />
+        <label>Onwards</label>
+        <img
+          src="../../assets/Logos/gdpr.png"
+          alt="GDPR Icon"
+          class="sideImgIcon"
+        />
       </div>
-      
+      <ion-text class="view-itenary">View Itinerary</ion-text>
+    </div>
 
-  <ion-card-content>
-    <ion-grid>
+    <ion-card-content>
       <ion-row>
-        <ion-col size="6">
-          <ion-text class="textHeading">Name of the Service Provider:</ion-text>
-        </ion-col>
+        <!-- <ion-col size="6">
+            <ion-text class="textHeading"
+              >Name of the Service Provider:</ion-text
+            >
+          </ion-col> -->
         <ion-col size="6">
           <ion-text>{{record.serviceProvider}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="6">
-          <ion-text>Trek Duration:</ion-text>
-        </ion-col>
+        <!-- <ion-col size="6">
+            <ion-text>Trek Duration:</ion-text>
+          </ion-col> -->
         <ion-col size="6">
           <ion-text>{{record.trekDuration}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size="6">
-          <ion-text class="textHeading">Pickup Date & Time:</ion-text>
-        </ion-col>
+        <!-- <ion-col size="6">
+            <ion-text class="textHeading">Pickup Date & Time:</ion-text>
+          </ion-col> -->
         <ion-col size="6">
           <ion-text>{{record.pickupDateTime}}</ion-text>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  </ion-card-content>
-</ion-card>
+    </ion-card-content>
+  </ion-card>
 
-
-<ion-row *ngIf="transactionData === false" class="ion-justify-content-center">
-  <ion-col>
-    <ion-img src="../../assets/illustrations/NoResultsFound.jpg" alt="Not Found"
-      style="max-width: 700px; height: auto;"></ion-img>
-  </ion-col>
-</ion-row>
+  <ion-row *ngIf="transactionData === false" class="ion-justify-content-center">
+    <ion-col>
+      <ion-img
+        src="../../assets/illustrations/NoResultsFound.jpg"
+        alt="Not Found"
+        style="max-width: 700px; height: auto"
+      ></ion-img>
+    </ion-col>
+  </ion-row>
 </ion-content>

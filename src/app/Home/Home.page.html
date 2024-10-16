@@ -8,7 +8,7 @@
   </div>
   <div class="card head-card mx-3 my-2 shadow" style="border-radius: 20px">
     <div class="card-body">
-      <form (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="onSubmit()" #tripForm="ngForm">
         <div class="mb-3">
           <label for="fromInput" class="form-label">From</label>
           <input
@@ -17,9 +17,10 @@
             id="fromInput"
             [(ngModel)]="fromDay"
             name="from"
+            required
           />
         </div>
-
+      
         <div class="mb-3">
           <label for="toInput" class="form-label">To</label>
           <input
@@ -28,9 +29,10 @@
             id="toInput"
             [(ngModel)]="toDay"
             name="to"
+            required
           />
         </div>
-
+      
         <div class="d-flex align-items-center mb-3">
           <div class="me-3" style="flex: 0 0 120px">
             <label for="departureDay" class="form-label">Departure Day</label>
@@ -40,19 +42,13 @@
               id="departureDay"
               [(ngModel)]="departureDay"
               name="departureDay"
+              required
             />
           </div>
-
+      
           <div class="d-flex flex-wrap">
             <ion-chip
-              style="
-                width: 140px;
-                font-size: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: 600;
-              "
+              style="width: 140px; font-size: 10px; display: flex; justify-content: center; align-items: center; font-weight: 600;"
               [outline]="!isWeekendTrekSelected"
               (click)="toggleWeekendTrek()"
               [ngClass]="{'selected': isWeekendTrekSelected}"
@@ -60,31 +56,24 @@
               <ion-label>Weekend Trek</ion-label>
               <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
             </ion-chip>
-
             <ion-chip
-              style="
-                width: 140px;
-                font-size: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: 600;
-              "
+              style="width: 140px; font-size: 10px; display: flex; justify-content: center; align-items: center; font-weight: 600;"
               [outline]="!isPersonalizedTrekSelected"
               (click)="togglePersonalizedTrek()"
               [ngClass]="{'selected': isPersonalizedTrekSelected}"
             >
               <ion-label>Personalized Trek</ion-label>
-              <ion-icon
-                *ngIf="isPersonalizedTrekSelected"
-                name="close"
-              ></ion-icon>
+              <ion-icon *ngIf="isPersonalizedTrekSelected" name="close"></ion-icon>
             </ion-chip>
           </div>
         </div>
-
+      
         <div class="d-grid">
-          <button type="submit" class="btn btn-warning rounded-pill">
+          <button
+            type="submit"
+            class="btn btn-warning rounded-pill"
+            [disabled]="!tripForm.valid"
+          >
             <i class="fa-solid fa-shoe-prints"></i> Search
           </button>
         </div>
@@ -225,27 +214,28 @@
     </div>
 
     <div class="weather-section">
-      <div
-        class="section-header"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
-        <h2 class="ms-3 mb-0" style="font-weight: 600; margin-top: 0">
-          Weather Alerts
-        </h2>
-        <ion-button fill="clear" size="small" routerLink="#"
-          >View More</ion-button
-        >
+      <div class="weather-cards">
+        <ion-card *ngFor="let alert of weatherAlerts1" style="height: 160px; border-radius: 20px;" 
+                  [ngStyle]="{'background-image': alert.backgroundImage, 'background-size': 'cover','background-repeat': 'no-repeat'}">
+          <div class="content" style="position: relative; height: 100%; padding: 20px;">
+            <!-- City and Time -->
+            <label style="color: white; font-size: 20px; font-weight: bold;">{{ alert.city }}</label><br>
+            <label style="color: white; font-size: 15px; font-weight: bold;">{{ alert.time }}</label><br>
+            <label style="color: white; font-size: 15px; font-weight: bold; margin-top: 60px;">{{ alert.condition }}</label>
+    
+            <!-- Temperature positioned at the top right corner -->
+            <label style="color: white; font-size: 45px; position: absolute; top: 20px; right: 20px;">
+              {{ alert.temperature }}°
+            </label>
+    
+            <!-- High/Low positioned at the bottom right corner -->
+            <label style="color: white; font-size: 15px; font-weight: bold; position: absolute; bottom: 20px; right: 20px;">
+              H:{{ alert.high }}° L:{{ alert.low }}°
+            </label>
+          </div>
+        </ion-card>
       </div>
-      <ion-card>
-        <img src="assets/illustrations/weather-alert.jpg" />
-      </ion-card>
-      <ion-card>
-        <img src="assets/illustrations/weather-alert.jpg" />
-      </ion-card>
     </div>
+    
   </div>
 </ion-content>

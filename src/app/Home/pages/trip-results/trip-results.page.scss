@@ -1,16 +1,6 @@
-
 //header
-.header label{
-  color: #000000;
+.headerTitle {
   font-weight: bold;
-}
-
-ion-item.header-item {
-  border-radius: 25px; /* Rounded corners */
-  border: 2px solid #b4b4b4; /* Border similar to your image */
-  padding: 5px 0px; /* Padding inside the item */
-  display: flex; /* Flexbox for layout */
-  align-items: center; /* Center the items vertically */
 }
 
 .headerImg {
@@ -36,52 +26,67 @@ ion-toggle {
 }
 
 // ***********************
-
-.textHeading{
-    color: black;
-    font-weight: bold;
+//swiper
+.swiper-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
+  width: 100%; /* Ensure the swiper takes full width */
+  overflow: hidden; /* Hide overflow to prevent excess movement */
 }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  //swiper
-  .swiper-container {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
-    width: 100%;  /* Ensure the swiper takes full width */
-    overflow: hidden; /* Hide overflow to prevent excess movement */
-  }
-  
-  .swiper-wrapper {
-    display: flex;
-  }
-  
-  .swiper-slide {
-    width: auto;  /* Ensure the chip fits the content only */
-    scroll-snap-align: start;  /* Aligns the slide to the start of the scroll container */
-  }
-  
-  ion-chip {
-    margin: 0 5px;  /* Control spacing between chips */
-    font-size: 16px;  /* Adjust font size if necessary */
-  }
 
-  
-  //main body
-  Ion-grid{
-    margin-top: 20px;
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  width: auto; /* Ensure the chip fits the content only */
+  scroll-snap-align: start; /* Aligns the slide to the start of the scroll container */
+}
+
+.textHeading {
+  color: black;
+  font-weight: bold;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  
-  /* Increase the size of the card */
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+//swiper
+.swiper-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
+  width: 100%; /* Ensure the swiper takes full width */
+  overflow: hidden; /* Hide overflow to prevent excess movement */
+}
+
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  width: auto; /* Ensure the chip fits the content only */
+  scroll-snap-align: start; /* Aligns the slide to the start of the scroll container */
+}
+
+ion-chip {
+  margin: 0 5px; /* Control spacing between chips */
+  font-size: 16px; /* Adjust font size if necessary */
+}
+
+//main body
+Ion-grid {
+  margin-top: 20px;
+}
+
+/* Increase the size of the card */
 ion-card {
   position: relative;
   height: 200px; /* Increased card height */
@@ -127,6 +132,6 @@ ion-card {
 /* Align and size the GDPR icon */
 .sideImgIcon {
   margin-top: 10px;
-  width: 44px;
-  height: 44px;
+  width: 25px;
+  height: 25px;
 }
