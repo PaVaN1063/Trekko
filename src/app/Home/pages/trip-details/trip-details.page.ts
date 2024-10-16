@@ -150,13 +150,14 @@ export class TripDetailsPage implements OnInit {
   getData() {
     this.records = [
       {
-        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s',
+        logoUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s',
         serviceProvider: 'Mountain Adventures',
         trekDuration: '5 Days',
         pickupDateTime: '2024-10-15 10:00 AM',
-        specialOffer: 'Special offer'
+        specialOffer: 'Special offer',
       },
-    ];  
+    ];
   }
 
   onImageLoad() {

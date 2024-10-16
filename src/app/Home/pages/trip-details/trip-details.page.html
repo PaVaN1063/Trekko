@@ -13,14 +13,16 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content  class="ion-padding"
-(ionScroll)="onScroll($event)"
-scrollEvents="true">
-<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-  <ion-refresher-content></ion-refresher-content>
-</ion-refresher>
- <!-- Title below header -->
- <!-- <div
+<ion-content
+  class="ion-padding"
+  (ionScroll)="onScroll($event)"
+  scrollEvents="true"
+>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- Title below header -->
+  <!-- <div
  class="page-title"
  style="font-weight: 600; font-size: 20px; padding-left: 15px"
 >
@@ -30,7 +32,8 @@ scrollEvents="true">
     *ngFor="let record of records"
     class="trek-card"
     style="padding: 8px; margin-bottom: 8px"
-   routerLink="passenger-info">
+    routerLink="passenger-info"
+  >
     <ion-card-content style="padding: 4px">
       <ion-grid>
         <ion-row style="margin-bottom: 0">
@@ -77,6 +80,7 @@ scrollEvents="true">
           </ion-col>
           <ion-col size="2">
             <ion-icon
+              class="share-icon"
               name="share-social-outline"
               style="font-size: 24px"
               (click)="openModal()"
