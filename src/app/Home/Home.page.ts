@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import Swiper from 'swiper';
 import { AnimationController } from '@ionic/angular';
 
@@ -7,7 +7,7 @@ import { AnimationController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements AfterViewInit {
+export class HomePage implements AfterViewInit, OnInit {
   fromDay: string = '';
   toDay: string = '';
   isWeekendTrekSelected: boolean = false;
