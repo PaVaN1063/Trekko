@@ -17,39 +17,61 @@
           <label for="toInput" class="form-label">To</label>
           <input type="text" class="form-control" id="toInput" />
         </div>
-        <div class="mb-3">
-          <label for="departureDay" class="form-label">Departure Day</label>
-          <input type="date" class="form-control" id="departureDay" />
-        </div>
-        <div class="d-flex flex-wrap mb-3">
-          <ion-chip
-            [outline]="!isWeekendTrekSelected"
-            (click)="toggleWeekendTrek()"
-            [ngClass]="{'selected': isWeekendTrekSelected}"
-          >
-            <ion-label>Weekend Trek</ion-label>
-            <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
-          </ion-chip>
+        <div class="d-flex align-items-center mb-3">
+          <div class="me-3" style="flex: 0 0 120px">
+            <!-- Adjust width as needed -->
+            <label for="departureDay" class="form-label">Departure Day</label>
+            <input type="date" class="form-control" id="departureDay" />
+          </div>
 
-          <ion-chip
-            [outline]="!isPersonalizedTrekSelected"
-            (click)="togglePersonalizedTrek()"
-            [ngClass]="{'selected': isPersonalizedTrekSelected}"
-          >
-            <ion-label>Personalized Trek</ion-label>
-            <ion-icon
-              *ngIf="isPersonalizedTrekSelected"
-              name="close"
-            ></ion-icon>
-          </ion-chip>
+          <div class="d-flex flex-wrap">
+            <ion-chip
+              style="
+                width: 140px;
+                font-size: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
+              "
+              [outline]="!isWeekendTrekSelected"
+              (click)="toggleWeekendTrek()"
+              [ngClass]="{'selected': isWeekendTrekSelected}"
+            >
+              <ion-label>Weekend Trek</ion-label>
+              <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
+            </ion-chip>
+
+            <ion-chip
+              style="
+                width: 140px;
+                font-size: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
+              "
+              [outline]="!isPersonalizedTrekSelected"
+              (click)="togglePersonalizedTrek()"
+              [ngClass]="{'selected':
+              isPersonalizedTrekSelected}"
+            >
+              <ion-label>Personalized Trek</ion-label>
+              <ion-icon
+                *ngIf="isPersonalizedTrekSelected"
+                name="close"
+              ></ion-icon>
+            </ion-chip>
+          </div>
         </div>
+
         <div class="d-grid">
           <button
             type="submit"
             class="btn btn-warning rounded-pill"
             routerLink="trip-results"
           >
-            <i class="bi bi-shoe-prints"></i> Search
+            <i class="fa-solid fa-shoe-prints"></i> Search
           </button>
         </div>
       </form>
@@ -86,10 +108,17 @@
               "
             >
               <img
+                routerLink="/tabs/Home/trip-details"
                 [src]="slide.image"
                 class=""
                 alt="{{ slide.title }}"
-                style="width: 150px; height: 90px"
+                style="
+                  width: 150px;
+                  height: 90px;
+                  border-radius: 20px;
+                  overflow: hidden;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+                "
               />
             </ion-card>
           </div>
