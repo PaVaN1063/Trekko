@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import Swiper from 'swiper';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,6 @@ export class HomePage implements AfterViewInit {
       title: 'Slide 5',
       image: 'assets/images/trek5.jpg',
     },
-   
   ];
   slides1 = [
     {
@@ -56,7 +56,6 @@ export class HomePage implements AfterViewInit {
       title: 'Slide 5',
       image: 'assets/images/trek2.jpg',
     },
-   
   ];
   slides2 = [
     {
@@ -79,8 +78,8 @@ export class HomePage implements AfterViewInit {
       title: 'Slide 5',
       image: 'assets/images/trek1.jpg',
     },
-   
   ];
+
   weatherAlerts = [
     { id: 1, title: 'Storm warning', image: 'assets/images/bus.jpg' },
     { id: 2, title: 'High winds', image: 'assets/images/bus.jpg' },
@@ -91,7 +90,28 @@ export class HomePage implements AfterViewInit {
     weekendTrek: false,
     personalizedTrek: false,
   };
-  constructor() {}
+  constructor(private animationCtrl: AnimationController) {}
+  ngOnInit() {
+    this.animateCardsSequentially();
+  }
+
+  animateCardsSequentially() {
+    const elements = document.querySelectorAll(
+      '.top-trips-card, .offers-card, .trek-shorts-card, .weather-section'
+    );
+
+    elements.forEach((el, index) => {
+      const animation = this.animationCtrl
+        .create()
+        .addElement(el)
+        .duration(500) // Duration for each animation
+        .delay(index * 300) // Delay between each card animation
+        .fromTo('transform', 'translateY(100%)', 'translateY(0)')
+        .fromTo('opacity', '0', '1');
+
+      animation.play();
+    });
+  }
   handleRefresh(event: any) {
     setTimeout(() => {
       // Any calls to load data go here
