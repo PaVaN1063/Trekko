@@ -153,12 +153,10 @@
 
 @import "~swiper/swiper-bundle.min.css";
 
-
-
-// Header Back button and Title hide 
+// Header Back button and Title hide
 .custom-toolbar {
   --background: white; /* Set background to white */
-  --box-shadow: none;  /* Remove shadow */
+  --box-shadow: none; /* Remove shadow */
   --border-color: transparent; /* Remove border (if any) */
 }
 
@@ -176,21 +174,24 @@
 .page-title {
   transition: opacity 0.3s ease;
 }
-.back-button{
+.back-button {
   font-size: 28px;
   background: transparent;
   color: rgb(218, 218, 0);
 }
 
-.custom-back-button{
+.custom-back-button {
   font-size: 18px;
   color: rgb(218, 218, 0);
 }
 .ionModelCSS {
   // width: 100%;
   // border-radius:50px;
-  --border-top-right-radius:40px;
+  --border-top-right-radius: 40px;
   // --border-top-left-radius:40px;
   width: 100%;
   top: 30%;
+}
+ion-content {
+  --background: #f5f5f5;
 }

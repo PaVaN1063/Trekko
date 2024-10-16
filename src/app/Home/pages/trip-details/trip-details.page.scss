@@ -1,168 +1,214 @@
 
-ion-slides {
-  margin-top: 20px;
-  height: 200px;
-}
+// ion-slides {
+//   margin-top: 20px;
+//   height: 200px;
+// }
 
-ion-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
+// ion-slide img {
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+//   border-radius: 8px;
+// }
 
-ion-item-divider {
-  margin: 20px 0;
-  background: transparent;
-  --inner-padding-end: 0;
-  --inner-padding-start: 0;
-  border: 0.5px solid #ccc;
-}
-.scrolling-wrapper {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  padding: 10px 0;
-}
+// ion-item-divider {
+//   margin: 20px 0;
+//   background: transparent;
+//   --inner-padding-end: 0;
+//   --inner-padding-start: 0;
+//   border: 0.5px solid #ccc;
+// }
+// .scrolling-wrapper {
+//   display: flex;
+//   overflow-x: auto;
+//   scrollbar-width: thin;
+//   padding: 10px 0;
+// }
 
-.scrolling-wrapper::-webkit-scrollbar {
-  height: 8px; /* Adjust the scrollbar height */
-}
+// .scrolling-wrapper::-webkit-scrollbar {
+//   height: 8px; /* Adjust the scrollbar height */
+// }
 
-.scrolling-wrapper::-webkit-scrollbar-thumb {
-  background: #888; /* Scrollbar color */
-  border-radius: 10px;
-}
+// .scrolling-wrapper::-webkit-scrollbar-thumb {
+//   background: #888; /* Scrollbar color */
+//   border-radius: 10px;
+// }
 
-.scrolling-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+// .scrolling-wrapper::-webkit-scrollbar-thumb:hover {
+//   background: #555;
+// }
 
-.journey_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed; /* or 'absolute' depending on your layout */
-  bottom: 0; /* Position it at the bottom */
-  left: 0; /* Ensure it stretches across the screen */
-  width: 100%; /* Full width of the screen */
-  // padding: 10px; /* Optional padding */
-  // margin-top: 10px;
-  // background-color: white; /* Optional background color */
-  // z-index: 1000; /* Ensure it's above other content */
-}
-ion-button {
-  --background: #00c410;
-  --background-hover: #9ce0be;
-  --background-activated: #88f4be;
-  --background-focused: #88f4be;
-  --color: rgb(255, 255, 255);
-  --border-radius: 50px;
-// font-weight: 600;
+// .journey_button {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: fixed; /* or 'absolute' depending on your layout */
+//   bottom: 0; /* Position it at the bottom */
+//   left: 0; /* Ensure it stretches across the screen */
+//   width: 100%; /* Full width of the screen */
+//   // padding: 10px; /* Optional padding */
+//   // margin-top: 10px;
+//   // background-color: white; /* Optional background color */
+//   // z-index: 1000; /* Ensure it's above other content */
+// }
+// ion-button {
+//   --background: #00c410;
+//   --background-hover: #9ce0be;
+//   --background-activated: #88f4be;
+//   --background-focused: #88f4be;
+//   --color: rgb(255, 255, 255);
+//   --border-radius: 50px;
+// // font-weight: 600;
 
-}
-  .start_Date{
-    font-size: 10px;
-  }
-  .onwards{
-    font-size: 10px;
-    font-weight: 800;
-    color: rgb(255, 255, 255);
-    padding: 12px;
-    background-color: rgb(129, 129, 129);
-    border-radius: 40px;
+// }
+//   .start_Date{
+//     font-size: 10px;
+//   }
+//   .onwards{
+//     font-size: 10px;
+//     font-weight: 800;
+//     color: rgb(255, 255, 255);
+//     padding: 12px;
+//     background-color: rgb(129, 129, 129);
+//     border-radius: 40px;
     
-  }
+//   }
 
-/* Styles for the first ion-card */
-.service-card {
-  padding-right: 20px;
-  height: 130px;
-  position: relative;
-  margin: 10px;
-}
+// /* Styles for the first ion-card */
+// .service-card {
+//   padding-right: 20px;
+//   height: 130px;
+//   position: relative;
+//   margin: 10px;
+// }
 
-/* Special Offer Image */
-.service-card .special-offer-image {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 40px;
-  height: 40px;
-  animation: pulse 2s infinite;
-  border-radius: 50%;
-}
+// /* Special Offer Image */
+// .service-card .special-offer-image {
+//   position: absolute;
+//   top: 5px;
+//   left: 5px;
+//   width: 40px;
+//   height: 40px;
+//   animation: pulse 2s infinite;
+//   border-radius: 50%;
+// }
 
-/* Position and Style the Side Section */
-.service-card .side-section {
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 1; /* Add this line */
-}
-
-
-/* Align Text and Icon in the Side Section */
-.service-card .sideImg {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
+// /* Position and Style the Side Section */
+// .service-card .side-section {
+//   position: absolute;
+//   top: 50px;
+//   right: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end;
+//   z-index: 1; /* Add this line */
+// }
 
 
-
-.service-card .sideImgIcon {
-  margin-right: 10px; /* Space between images */
-  width: 20px;
-  height: 20px;
-}
-
-.service-card .view-itenary {
-  margin-top: 10px;
-  color: #4779b5;
-  font-weight: bold;
-  text-align: right;
-  font-size: 10px;
-}
+// /* Align Text and Icon in the Side Section */
+// .service-card .sideImg {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end;
+// }
 
 
-.swiper-container {
-  width: 100%;
-  // height: 200px; /* Set the desired height */
-}
 
-.swiper-slide {
-  display: flex;
-  justify-content: center; /* Center the image inside the slide */
-  align-items: center;
-}
+// .service-card .sideImgIcon {
+//   margin-right: 10px; /* Space between images */
+//   width: 20px;
+//   height: 20px;
+// }
 
-.swiper-slide img {
-  width: 160px;  /* Adjust the size */
-  height: 90px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+// .service-card .view-itenary {
+//   margin-top: 10px;
+//   color: #4779b5;
+//   font-weight: bold;
+//   text-align: right;
+//   font-size: 10px;
+// }
 
-// **************************
 
-.textHeading {
-  font-size: 12px; /* Adjust font size as needed */
-  line-height: 1; /* Decrease line height to reduce space between lines */
-  margin: 0; /* Remove default margins if any */
-}
+// .swiper-container {
+//   width: 100%;
+//   // height: 200px; /* Set the desired height */
+// }
 
-.view-itenary {
-  font-size: 12px; /* Adjust this value as needed */
-  line-height: 1; /* Decrease line height for the itinerary text */
-}
+// .swiper-slide {
+//   display: flex;
+//   justify-content: center; /* Center the image inside the slide */
+//   align-items: center;
+// }
 
-.sideImgIcon{
-  width: 10px;
-}
+// .swiper-slide img {
+//   width: 160px;  /* Adjust the size */
+//   height: 90px;
+//   object-fit: cover;
+//   border-radius: 10px;
+// }
+
+// // **************************
+
+// .textHeading {
+//   font-size: 12px; /* Adjust font size as needed */
+//   line-height: 1; /* Decrease line height to reduce space between lines */
+//   margin: 0; /* Remove default margins if any */
+// }
+
+// .view-itenary {
+//   font-size: 12px; /* Adjust this value as needed */
+//   line-height: 1; /* Decrease line height for the itinerary text */
+// }
+
+// .sideImgIcon{
+//   width: 10px;
+// }
+
+// .track-container {
+//   position: relative;
+//   display: flex;
+//   justify-content: center;
+//   align-items: stretch;
+// }
+
+// .tracking-line {
+//   width: 2px;
+//   background-color: gray;
+//   height: 100%;
+//   position: relative;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+// .dot {
+//   height: 12px;
+//   width: 12px;
+//   background-color: rgb(40, 15, 206);
+//   border-radius: 50%;
+//   position: absolute;
+//   left: 50%; /* Ensure the dot is centered horizontally */
+//   transform: translateX(-50%);
+// }
+
+// .dot:nth-child(1) {
+//   top: 0%;
+// }
+
+// .dot:nth-child(2) {
+//   top: 25%;
+// }
+
+// .dot:nth-child(3) {
+//   top: 50%;
+// }
+
+// .dot:nth-child(4) {
+//   top: 75%;
+// }
+
+// .dot:nth-child(5) {
+//   top: 100%;
+// }
 
 .track-container {
   position: relative;
@@ -208,4 +254,53 @@ ion-button {
 
 .dot:nth-child(5) {
   top: 100%;
+}
+.trek-card {
+  position: relative;
+  border-radius: 15px;
+  padding: 10px;
+}
+ion-button {
+  background-color: #5ce695;
+  border-radius: 20px;
+  font-size: 14px;
+  text-transform: none;
+  position: relative;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.arrow-badge {
+  position: relative;
+  background-color: #6c5ce7; /* Purple background color */
+  padding: 5px 15px;
+  color: white;
+  border-radius: 0;
+  font-weight: bold;
+  margin-top: 5px;
+}
+// .arrow-badge::after {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   width: 0;
+//   height: 0;
+//   border-style: solid;
+//   border-width: 15px 10px 15px ;
+//   border-color: transparent white transparent transparent;
+// }
+.star-rating{
+  font-size: 22px;
+  display: flex;
+}
+.star-icon {
+  margin-right: 4px; 
+}
+
+.star-icon:last-child {
+  margin-right: 0;
 }

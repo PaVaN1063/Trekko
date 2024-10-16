@@ -13,122 +13,101 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content
-  class="ion-padding"
-  (ionScroll)="onScroll($event)"
-  scrollEvents="true"
+<ion-content  class="ion-padding"
+(ionScroll)="onScroll($event)"
+scrollEvents="true">
+<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+ <!-- Title below header -->
+ <div
+ class="page-title"
+ style="font-weight: 600; font-size: 20px; padding-left: 15px"
 >
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-  <!-- Title below header -->
-  <div
-    class="page-title"
-    style="font-weight: 600; font-size: 20px; padding-left: 15px"
+ <span>Trip Details</span>
+</div>
+  <ion-card
+    *ngFor="let record of records"
+    class="trek-card"
+    style="padding: 8px; margin-bottom: 8px"
   >
-    <span>Trip Details</span>
-  </div>
-
-  <ion-card class="service-card" *ngFor="let record of records">
-    <!-- Special Offer Badge Image -->
-    <img
-      *ngIf="record.specialOffer"
-      src="../../assets/Logos/offers.png"
-      alt="Special Offer"
-      style="
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        width: 90px;
-        height: 25px;
-      "
-    />
-
-    <div class="side-section">
-      <label class="textHeading" style="margin-bottom: 5px">December 1st</label>
-      <div class="sideImg">
-        <label class="textHeading" style="margin-bottom: 5px">Onwards</label>
-        <div class="image-container">
-          <img
-            src="../../assets/Logos/gdpr.png"
-            alt="GDPR Icon"
-            class="sideImgIcon"
-          />
-          <img
-            src="../../assets/icon/share.png"
-            alt="GDPR Icon"
-            class="sideImgIcon"
-            (click)="openModal()"
-          />
-        </div>
-      </div>
-      <ion-text class="view-itenary">View Itinerary</ion-text>
-    </div>
-
-    <ion-card-content>
-      <img
-        src="{{record.logoImage}}"
-        alt="Logo"
-        class="special-offer-image"
-        style="
-          max-width: 30px;
-          max-height: 30px;
-          margin-top: 10px;
-          margin-left: 18px;
-        "
-      />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-      <ion-col size="6">
-        <ion-text>{{record.serviceProvider}}</ion-text>
-      </ion-col>
-
-      <ion-row>
-        <ion-col size="10">
-          <span style="font-size: 12px; font-weight: 800">Duration: </span
-          >&nbsp;
-          <ion-text class="textHeading">{{record.trekDuration}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="10">
-          <!-- <ion-text class="textHeading">{{record.pickupDateTime}}</ion-text> -->
-          <span style="font-size: 12px; font-weight: 800">Pickup: </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;<ion-text class="textHeading"
-            >Morning 9:00 AM</ion-text
-          >
-        </ion-col>
-      </ion-row>
+    <ion-card-content style="padding: 4px">
+      <ion-grid>
+        <ion-row style="margin-bottom: 0">
+          <ion-col size="2" style="padding: 0">
+            <img [src]="record.logoUrl" alt="Logo" class="logo" />
+          </ion-col>
+          <ion-col size="7" style="padding: 0">
+            <p style="margin-top: 12px; font-size: 16px">
+              <b>{{record.serviceProvider}}</b>
+            </p>
+          </ion-col>
+          <ion-col size="3" style="padding: 0">
+            <img
+              *ngIf="record.specialOffer"
+              src="../../assets/Logos/offers.png"
+              alt="Special Offer"
+              style="
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 90px;
+                height: 25px;
+              "
+            />
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-bottom: 0">
+          <ion-col size="8">
+            <p style="margin: 0">{{record.trekDuration}}</p>
+          </ion-col>
+          <ion-col size="4">
+            <ion-buttons>
+              <ion-button>
+                <p>Book 5757</p>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-bottom: 0">
+          <ion-col size="10">
+            <p style="margin: 0; font-size: 14px">
+              <b>{{record.pickupDateTime}}</b>
+            </p>
+          </ion-col>
+          <ion-col size="2">
+            <ion-icon
+              name="share-social-outline"
+              style="font-size: 24px"
+              (click)="openModal()"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
+  <ion-row style="margin-bottom: 16px">
+    <ion-col size="6" style="padding: 4px">
+      <ion-card style="border-radius: 15px">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s"
+          alt="Image 1"
+        />
+      </ion-card>
+    </ion-col>
+    <ion-col size="6" style="padding: 4px">
+      <ion-card style="border-radius: 15px">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s"
+          alt="Image 2"
+        />
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
-  <div>
-    <ion-row>
-      <img
-        src="./../../../../assets/images/trek1.jpeg"
-        style="width: 160px; border-radius: 20px; max-height: 100px"
-      />&nbsp;&nbsp;
-      <img
-        src="./../../../../assets/images/trek2.jpg"
-        style="width: 160px; border-radius: 20px; max-height: 100px"
-      />
-    </ion-row>
-  </div>
-  <!-- <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" *ngFor="let image of images">
-        <ion-card>
-          <img [src]="image.img" (load)="onImageLoad()" alt="{{ image.name }}" />
-        </ion-card>
-      </div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div> -->
-
-  <!-- Tabs for Trek Route, Itinerary, Amenities, and Reviews -->
   <ion-segment [(ngModel)]="selectedTab">
     <ion-segment-button value="trekRoute">Trek Route</ion-segment-button>
-    <ion-segment-button value="itinerary">Itinerary</ion-segment-button>
+    <ion-segment-button value="Itenary">Itenary</ion-segment-button>
     <ion-segment-button value="amenities">Amenities</ion-segment-button>
     <ion-segment-button value="reviews">Reviews</ion-segment-button>
   </ion-segment>
@@ -137,9 +116,9 @@
   <div *ngIf="selectedTab === 'trekRoute'" class="boarding-points-container">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Boarding Point</ion-card-title>
+        <ion-card-title>From Destination</ion-card-title>
       </ion-card-header>
-      <ion-text style="padding-left: 25px">From Destination</ion-text>
+
       <ion-card-content>
         <ion-grid>
           <ion-row>
@@ -180,33 +159,20 @@
               <ion-row>
                 <ion-col size="12">
                   <p>
-                    <strong>Starting point</strong>
+                    <strong>Starting point</strong> (Type of transportation)
                   </p>
-                  <span style="font-size: smaller"
-                    >(Type of transportation)</span
-                  >
                 </ion-col>
                 <ion-col size="12">
-                  <p><strong>Stage 1</strong></p>
+                  <p><strong>Stages 1</strong></p>
                 </ion-col>
                 <ion-col size="12">
-                  <p>
-                    <strong>Stage 2</strong>
-                  </p>
-                  <span style="font-size: smaller"
-                    >(Type of transportation)</span
-                  >
+                  <p><strong>Stages 2</strong> (Type of transportation)</p>
                 </ion-col>
                 <ion-col size="12">
                   <p><strong>Stages 3</strong></p>
                 </ion-col>
                 <ion-col size="12">
-                  <p>
-                    <strong>Ending point</strong>
-                  </p>
-                  <span style="font-size: smaller"
-                    >(Type of transportation)</span
-                  >
+                  <p><strong>Ending point</strong> (Type of transportation)</p>
                 </ion-col>
               </ion-row>
             </ion-col>
@@ -215,11 +181,8 @@
       </ion-card-content>
     </ion-card>
   </div>
-
-  <!-- Itinerary Tab Content -->
-  <div *ngIf="selectedTab === 'itinerary'" class="itinerary-container">
-    <h2>Itinerary</h2>
-
+  <div *ngIf="selectedTab === 'Itenary'">
+    <h2>Itenary</h2>
     <ion-card>
       <ion-card-content>
         <p>
@@ -228,7 +191,6 @@
         </p>
       </ion-card-content>
     </ion-card>
-
     <ion-card>
       <ion-card-content>
         <p>
@@ -237,7 +199,6 @@
         </p>
       </ion-card-content>
     </ion-card>
-
     <ion-card>
       <ion-card-content>
         <p>
@@ -246,20 +207,73 @@
       </ion-card-content>
     </ion-card>
   </div>
-
-  <!-- Amenities Tab Content -->
   <div *ngIf="selectedTab === 'amenities'" class="amenities-container">
-    <h2>Amenities</h2>
-    <!-- Add amenities content here -->
+    <h2 style="margin-left: 25px">Amenities</h2>
+    <ion-card style="border-radius: 15px">
+      <ion-card-content>
+        <div class="photos-container" style="margin-top: 10px">
+          <h4 style="color: black; font-size: 18px">Including :</h4>
+        </div>
+        <div class="photos-container" style="margin-top: 10px">
+          <h4 style="color: black; font-size: 18px">Excluding :</h4>
+        </div>
+        <div class="photos-container" style="margin-top: 10px">
+          <h4 style="color: black; font-size: 18px">Highligths :</h4>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <!-- Reviews Tab Content -->
   <div *ngIf="selectedTab === 'reviews'" class="reviews-container">
-    <h2>Reviews</h2>
-    <!-- Add reviews content here -->
-  </div>
-
-  <div class="journey_button">
-    <ion-button routerLink="passenger-info">Start your Journey</ion-button>
+    <h2 style="margin-left: 25px">Reviews</h2>
+    <ion-card style="border-radius: 15px">
+      <ion-card-header>
+        <ion-card-title style="font-size: 25px">Customer :</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="star-rating">
+          <ion-icon
+            name="star-outline"
+            color="gold"
+            class="star-icon"
+          ></ion-icon>
+          <ion-icon
+            name="star-outline"
+            color="gold"
+            class="star-icon"
+          ></ion-icon>
+          <ion-icon
+            name="star-outline"
+            color="gold"
+            class="star-icon"
+          ></ion-icon>
+          <ion-icon
+            name="star-outline"
+            color="gold"
+            class="star-icon"
+          ></ion-icon>
+          <ion-icon
+            name="star-outline"
+            color="gold"
+            class="star-icon"
+          ></ion-icon>
+        </div>
+        <div class="comment-box" style="margin-top: 10px">
+          <h4 style="color: black; font-size: 18px">Comments :</h4>
+          <br />
+          <textarea
+            rows="3"
+            style="
+              width: 100%;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              padding: 8px;
+            "
+          ></textarea>
+        </div>
+        <div class="photos-container" style="margin-top: 10px">
+          <h4 style="color: black; font-size: 18px">Photos :</h4>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
