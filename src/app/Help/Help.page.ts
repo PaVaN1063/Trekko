@@ -7,9 +7,6 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class HelpPage {
   
-  selectedTab: string = 'trekRoute'; // Initialize with default value
-
-
   
   constructor() {}
 
