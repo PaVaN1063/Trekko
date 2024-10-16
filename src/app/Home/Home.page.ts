@@ -9,36 +9,88 @@ import Swiper from 'swiper';
 export class HomePage implements AfterViewInit {
   fromDay: string = '';
   toDay: string = '';
+  isWeekendTrekSelected: boolean = false;
+  isPersonalizedTrekSelected: boolean = false;
+
   slides = [
     {
       title: 'Slide 1',
-      image: 'assets/icons/icon-72.webp',
+      image: 'assets/images/trek1.jpg',
     },
     {
       title: 'Slide 2',
-      image: 'assets/icons/icon-72.webp',
+      image: 'assets/images/trek2.jpg',
     },
     {
       title: 'Slide 3',
-      image: 'assets/icons/icon-72.webp',
+      image: 'assets/images/trek3.jpg',
     },
     {
       title: 'Slide 4',
-      image: 'assets/icons/icon-72.webp',
+      image: 'assets/images/trek4.jpg',
     },
     {
       title: 'Slide 5',
-      image: 'assets/icons/icon-72.webp',
+      image: 'assets/images/trek5.jpg',
     },
+   
   ];
-  
+  slides1 = [
+    {
+      title: 'Slide 1',
+      image: 'assets/images/trek3.jpg',
+    },
+    {
+      title: 'Slide 2',
+      image: 'assets/images/trek4.jpg',
+    },
+    {
+      title: 'Slide 3',
+      image: 'assets/images/trek5.jpg',
+    },
+    {
+      title: 'Slide 4',
+      image: 'assets/images/trek1.jpg',
+    },
+    {
+      title: 'Slide 5',
+      image: 'assets/images/trek2.jpg',
+    },
+   
+  ];
+  slides2 = [
+    {
+      title: 'Slide 1',
+      image: 'assets/images/trek5.jpg',
+    },
+    {
+      title: 'Slide 2',
+      image: 'assets/images/trek4.jpg',
+    },
+    {
+      title: 'Slide 3',
+      image: 'assets/images/trek3.jpg',
+    },
+    {
+      title: 'Slide 4',
+      image: 'assets/images/trek2.jpg',
+    },
+    {
+      title: 'Slide 5',
+      image: 'assets/images/trek1.jpg',
+    },
+   
+  ];
   weatherAlerts = [
     { id: 1, title: 'Storm warning', image: 'assets/images/bus.jpg' },
     { id: 2, title: 'High winds', image: 'assets/images/bus.jpg' },
     { id: 3, title: 'Heavy rain', image: 'assets/images/bus.jpg' },
     // Add more alerts as needed
   ];
-
+  showClose = {
+    weekendTrek: false,
+    personalizedTrek: false,
+  };
   constructor() {}
   handleRefresh(event: any) {
     setTimeout(() => {
@@ -58,7 +110,7 @@ export class HomePage implements AfterViewInit {
     const swiper = new Swiper('.swiper-container', {
       slidesPerView: 3.5, // Display 3.25 slides
       spaceBetween: 0.2,
-      loop: true,
+      // loop: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
@@ -72,5 +124,12 @@ export class HomePage implements AfterViewInit {
         disableOnInteraction: false,
       },
     });
+  }
+  toggleWeekendTrek() {
+    this.isWeekendTrekSelected = !this.isWeekendTrekSelected;
+  }
+
+  togglePersonalizedTrek() {
+    this.isPersonalizedTrekSelected = !this.isPersonalizedTrekSelected;
   }
 }

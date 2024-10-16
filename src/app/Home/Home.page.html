@@ -3,66 +3,97 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Trip Tickets</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">From</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+  <div class="title" style="padding-left: 20px; font-weight: 500">
+    <h3 style="font-weight: 700">Trip Tickets</h3>
+  </div>
+  <div class="card head-card mx-3 my-2 shadow" style="border-radius: 20px">
+    <div class="card-body">
+      <form>
+        <div class="mb-3">
+          <label for="fromInput" class="form-label">From</label>
+          <input type="text" class="form-control" id="fromInput" />
+        </div>
+        <div class="mb-3">
+          <label for="toInput" class="form-label">To</label>
+          <input type="text" class="form-control" id="toInput" />
+        </div>
+        <div class="mb-3">
+          <label for="departureDay" class="form-label">Departure Day</label>
+          <input type="date" class="form-control" id="departureDay" />
+        </div>
+        <div class="d-flex flex-wrap mb-3">
+          <ion-chip
+            [outline]="!isWeekendTrekSelected"
+            (click)="toggleWeekendTrek()"
+            [ngClass]="{'selected': isWeekendTrekSelected}"
+          >
+            <ion-label>Weekend Trek</ion-label>
+            <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
+          </ion-chip>
 
-      <ion-item>
-        <ion-label position="floating">To</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Departure Day</ion-label>
-        <ion-input type="date" [(ngModel)]="toDay"></ion-input>
-      </ion-item>
-
-      <ion-row class="align-items">
-        <ion-col size="auto">
-          <ion-chip style="font-size:small;">Weekend Trek</ion-chip>
-        </ion-col>
-        <ion-col size="auto">
-          <ion-chip style="font-size:small;">Personalized Trek</ion-chip>
-        </ion-col>
-      </ion-row>
-      <ion-button size="small" color="warning" shape="round" expand="block" >Search <ion-icon slot="start" name="footsteps-outline"></ion-icon></ion-button>
-     
-    </ion-card-content>
-  </ion-card>
+          <ion-chip
+            [outline]="!isPersonalizedTrekSelected"
+            (click)="togglePersonalizedTrek()"
+            [ngClass]="{'selected': isPersonalizedTrekSelected}"
+          >
+            <ion-label>Personalized Trek</ion-label>
+            <ion-icon
+              *ngIf="isPersonalizedTrekSelected"
+              name="close"
+            ></ion-icon>
+          </ion-chip>
+        </div>
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-warning rounded-pill"
+            routerLink="trip-results"
+          >
+            <i class="bi bi-shoe-prints"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div class="custom-card">
     <div class="contentOfSlides">
       <div
-        class="section-header"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
+        class="d-flex justify-content-between align-items-center section-header"
+        style="margin-bottom: 0px"
       >
-        <h2 style="padding-left: 20px">Top Treks</h2>
+        <h2
+          class="ms-3 mb-0"
+          style="font-weight: 600; margin-top: 0; margin-bottom: 0"
+        >
+          Top Treks
+        </h2>
         <ion-button fill="clear" size="small" routerLink="top-trips"
           >View More</ion-button
         >
       </div>
 
-      <div class="swiper-container">
+      <div class="swiper-container" style="margin: 0">
         <div class="swiper-wrapper">
           <div class="swiper-slide" *ngFor="let slide of slides">
-            <ion-card routerLink="/tabs/Home/trip-details">
-              <ion-card-content>
-                <img [src]="slide.image" alt="{{ slide.title }}" />
-              </ion-card-content>
+            <ion-card
+              class="card"
+              routerLink="/tabs/Home/trip-details"
+              style="
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+              "
+            >
+              <img
+                [src]="slide.image"
+                class=""
+                alt="{{ slide.title }}"
+                style="width: 150px; height: 90px"
+              />
             </ion-card>
           </div>
         </div>
-        <div class="swiper-pagination"></div>
       </div>
 
       <div
@@ -71,49 +102,84 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-        
+          margin-bottom: 0px;
         "
       >
-        <h2 style="padding-left: 20px">Offers</h2>
+        <h2 class="ms-3 mb-0" style="font-weight: 600; margin-top: 0">
+          Offers
+        </h2>
         <ion-button fill="clear" size="small" routerLink="offers"
           >View More</ion-button
         >
       </div>
 
-      <div class="swiper-container">
+      <div class="swiper-container" style="margin: 0">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" *ngFor="let slide of slides">
-            <ion-card>
-              <ion-card-content>
-                <img [src]="slide.image" alt="{{ slide.title }}" />
-              </ion-card-content>
+          <!-- Iterate through each slide and make it clickable -->
+          <div class="swiper-slide" *ngFor="let slide of slides1">
+            <ion-card
+              class="card"
+              routerLink="/tabs/Home/offers"
+              style="
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+              "
+            >
+              <img
+                [src]="slide.image"
+                class=""
+                alt="{{ slide.title }}"
+                style="width: 150px; height: 90px"
+              />
             </ion-card>
           </div>
         </div>
-        <div class="swiper-pagination"></div>
       </div>
 
-     <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h2 style="padding-left: 20px">Weather Alerts</h2>
-    <ion-button fill="clear" size="small" routerLink="alerts">View More</ion-button>
-  </div>
+      <div
+        class="section-header"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0px;
+        "
+      >
+        <h2 class="ms-3 mb-0" style="font-weight: 600; margin-top: 0">
+          Trek Shorts
+        </h2>
+        <ion-button fill="clear" size="small" routerLink="offers"
+          >View More</ion-button
+        >
+      </div>
 
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" *ngFor="let alert of weatherAlerts">
-        <ion-card>
-          <ion-card-content>
-            <img [src]="alert.image" alt="{{ alert.title }}" />
-          </ion-card-content>
-        </ion-card>
+      <div class="swiper-container" style="margin: 0">
+        <div class="swiper-wrapper">
+          <!-- Iterate through each slide and make it clickable -->
+          <div class="swiper-slide" *ngFor="let slide of slides2">
+            <ion-card
+              class="card"
+              routerLink="/tabs/Home/offers"
+              style="
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+              "
+            >
+              <img
+                [src]="slide.image"
+                class=""
+                alt="{{ slide.title }}"
+                style="width: 150px; height: 90px"
+              />
+            </ion-card>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="swiper-pagination"></div>
-  </div>
 
-    </div>
-    <div>
-      
+    <div class="weather-section">
       <div
         class="section-header"
         style="
@@ -122,18 +188,19 @@
           align-items: center;
         "
       >
-        <h2 style="padding-left: 20px">Weather Alerts</h2>
+        <h2 class="ms-3 mb-0" style="font-weight: 600; margin-top: 0">
+          Weather Alerts
+        </h2>
         <ion-button fill="clear" size="small" routerLink="#"
           >View More</ion-button
         >
-        
       </div>
       <ion-card>
-         <img src="assets/illustrations/weather-alert.jpg">
+        <img src="assets/illustrations/weather-alert.jpg" />
       </ion-card>
       <ion-card>
-        <img src="assets/illustrations/weather-alert.jpg">
-     </ion-card>
+        <img src="assets/illustrations/weather-alert.jpg" />
+      </ion-card>
     </div>
   </div>
 </ion-content>

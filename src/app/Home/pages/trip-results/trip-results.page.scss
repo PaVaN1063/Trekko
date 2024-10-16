@@ -1,157 +1,132 @@
-.fixed-content {
-  position: sticky;
-  top: 0;
-  // background-color: white;
-  z-index: 10;
-  padding-bottom: 5px; /* Reduce bottom padding to bring content closer to the divider */
-}
 
-.date-day-item {
-  padding: 20px; /* Reduce padding to bring the text closer to the divider */
-  margin: 10px; /* Remove any additional margin */
-  // background-color: #8b8b8b;
-  color: #fff;
-  border-radius: 20px 20px 5px 5px;
-}
-.date_text {
-  color: white;
-}
-.date-day-label {
-  font-size: 14px; /* Adjust font size if necessary */
+//header
+.header label{
   color: #000000;
-  padding-right: 12px;
-  padding-left: 38px;
-}
-.scrollable-content {
-  padding-top: 10px; /* Add spacing at the top to separate from fixed content */
-  overflow-y: scroll;
-  height: calc(100vh - 150px); /* Adjust height based on fixed content height */
-}
-ion-title {
-  font-size: 16px; /* Adjust font size as needed */
-  font-weight: 600;
-  margin: 0;
-  padding-bottom: 2px; /* Reduce bottom padding to bring it closer to the divider */
-}
-
-.chip-container {
-  display: inline-flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 5px;
-
-  ion-chip {
-    margin-right: 8px;
-  }
-}
-
-ion-input {
-  --padding-top: 0px;
-  --padding-bottom: 0px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-ion-toolbar {
-  margin-top: 5px;
-}
-
-ion-item {
-  --ion-item-background: #fff;
-  --ion-item-border-color: #ccc;
-  border-radius: 10px;
-
-  ion-icon {
-    margin-right: 8px;
-  }
-
-  ion-toggle {
-    --handle-background: #f8f9fa;
-    --background: linear-gradient(to right, #f27121, #e94057);
-    margin-left: 8px;
-  }
-}
-
-.special-offer {
-  color: purple;
   font-weight: bold;
 }
 
-img {
-  width: 100%;
-  height: 100%;
+ion-item.header-item {
+  border-radius: 25px; /* Rounded corners */
+  border: 2px solid #b4b4b4; /* Border similar to your image */
+  padding: 5px 0px; /* Padding inside the item */
+  display: flex; /* Flexbox for layout */
+  align-items: center; /* Center the items vertically */
 }
 
-ion-searchbar {
-  color: black;
+.headerImg {
+  width: 10%;
+  height: 70%;
 }
 
-.textHeading {
-  color: black;
+.booking-label {
+  font-size: 17px; /* Adjust font size */
+  font-weight: bold;
+  color: #000;
+  margin-left: 15px; /* Space between icon and label */
+  flex: 1; /* Take up remaining space to push button and toggle to the right */
 }
 
+.know-more-btn {
+  font-size: 12px; /* Smaller button text */
+  margin-right: 10px; /* Space between button and toggle */
+}
+
+ion-toggle {
+  margin-left: 8px; /* Space between button and toggle */
+}
+
+// ***********************
+
+.textHeading{
+    color: black;
+    font-weight: bold;
+}
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  //swiper
+  .swiper-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
+    width: 100%;  /* Ensure the swiper takes full width */
+    overflow: hidden; /* Hide overflow to prevent excess movement */
+  }
+  
+  .swiper-wrapper {
+    display: flex;
+  }
+  
+  .swiper-slide {
+    width: auto;  /* Ensure the chip fits the content only */
+    scroll-snap-align: start;  /* Aligns the slide to the start of the scroll container */
+  }
+  
+  ion-chip {
+    margin: 0 5px;  /* Control spacing between chips */
+    font-size: 16px;  /* Adjust font size if necessary */
+  }
+
+  
+  //main body
+  Ion-grid{
+    margin-top: 20px;
+  }
+  
+  /* Increase the size of the card */
+ion-card {
+  position: relative;
+  height: 200px; /* Increased card height */
+  padding-right: 20px; /* Add some padding to avoid overflow */
+}
+
+/* Position the side section properly */
+.side-section {
+  position: absolute;
+  top: 50px; /* Align side section lower down in the card */
+  right: 10px; /* Align it with the special offer on the right side */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align content to the right */
+}
+
+/* Align text and icon in the side section */
+.sideImg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Aligns XXXX and Onwards to the right */
+}
+
+/* Styling for the "View Itinerary" link */
+.view-itenary {
+  margin-top: 10px; /* Space between sideImg and View Itinerary */
+  color: #4779b5;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Special offer image */
 .special-offer-image {
   position: absolute;
   top: 5px;
   left: 5px;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   animation: pulse 2s infinite;
+  border-radius: 50%;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.chip-scroll {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-ion-chip {
-  --background: #f8f9fa;
-  --color: #333;
-  --border-radius: 20px;
-  border: 1px solid #ccc;
-  margin-right: 8px;
-}
-
-ion-card {
-  margin-top: 0;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
-.booking-code {
-  font-size: 18px;
-  font-weight: bold;
-}
-.small-label {
-  color: rgb(0, 119, 255);
-  text-decoration: underline;
-  font-size: 13px;
-}
-
-.booking_title {
-  font-size: 16px;
-  font-weight: 600;
-}
-.custom-divider {
-  height: 1px; /* Set the thickness of the divider */
-  background-color: #a1a1a1; /* Set the color of the divider */
-  margin: 0 auto; /* Center the divider */
-  padding: 0; /* Remove any padding */
-  width: 90%; /* Adjust width to remove the ends, e.g., 90% of the container width */
-  display: block; /* Ensure it's treated as a block-level element */
+/* Align and size the GDPR icon */
+.sideImgIcon {
+  margin-top: 10px;
+  width: 44px;
+  height: 44px;
 }

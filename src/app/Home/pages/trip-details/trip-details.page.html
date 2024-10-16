@@ -1,17 +1,17 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar class="custom-toolbar">
-    <!-- Back Button -->
+  
     <ion-buttons slot="start">
       <button ion-button (click)="goBack()" class="back-button">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </button>
     </ion-buttons>
-    <!-- Header Title, initially hidden -->
+ 
     <ion-title class="header-title" [class.visible]="showHeaderTitle"
       >Trip Details</ion-title
     >
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content  class="ion-padding"
 (ionScroll)="onScroll($event)"
@@ -20,17 +20,17 @@ scrollEvents="true">
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
  <!-- Title below header -->
- <div
+ <!-- <div
  class="page-title"
  style="font-weight: 600; font-size: 20px; padding-left: 15px"
 >
  <span>Trip Details</span>
-</div>
+</div> -->
   <ion-card
     *ngFor="let record of records"
     class="trek-card"
     style="padding: 8px; margin-bottom: 8px"
-  >
+   routerLink="passenger-info">
     <ion-card-content style="padding: 4px">
       <ion-grid>
         <ion-row style="margin-bottom: 0">
