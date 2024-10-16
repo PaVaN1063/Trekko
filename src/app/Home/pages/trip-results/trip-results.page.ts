@@ -14,6 +14,8 @@
 
 // }
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-trip-results',
