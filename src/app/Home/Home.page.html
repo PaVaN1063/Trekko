@@ -8,20 +8,39 @@
   </div>
   <div class="card head-card mx-3 my-2 shadow" style="border-radius: 20px">
     <div class="card-body">
-      <form>
+      <form (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="fromInput" class="form-label">From</label>
-          <input type="text" class="form-control" id="fromInput" />
+          <input
+            type="text"
+            class="form-control"
+            id="fromInput"
+            [(ngModel)]="fromDay"
+            name="from"
+          />
         </div>
+
         <div class="mb-3">
           <label for="toInput" class="form-label">To</label>
-          <input type="text" class="form-control" id="toInput" />
+          <input
+            type="text"
+            class="form-control"
+            id="toInput"
+            [(ngModel)]="toDay"
+            name="to"
+          />
         </div>
+
         <div class="d-flex align-items-center mb-3">
           <div class="me-3" style="flex: 0 0 120px">
-            <!-- Adjust width as needed -->
             <label for="departureDay" class="form-label">Departure Day</label>
-            <input type="date" class="form-control" id="departureDay" />
+            <input
+              type="date"
+              class="form-control"
+              id="departureDay"
+              [(ngModel)]="departureDay"
+              name="departureDay"
+            />
           </div>
 
           <div class="d-flex flex-wrap">
@@ -53,8 +72,7 @@
               "
               [outline]="!isPersonalizedTrekSelected"
               (click)="togglePersonalizedTrek()"
-              [ngClass]="{'selected':
-              isPersonalizedTrekSelected}"
+              [ngClass]="{'selected': isPersonalizedTrekSelected}"
             >
               <ion-label>Personalized Trek</ion-label>
               <ion-icon
@@ -66,11 +84,7 @@
         </div>
 
         <div class="d-grid">
-          <button
-            type="submit"
-            class="btn btn-warning rounded-pill"
-            routerLink="trip-results"
-          >
+          <button type="submit" class="btn btn-warning rounded-pill">
             <i class="fa-solid fa-shoe-prints"></i> Search
           </button>
         </div>
@@ -78,7 +92,7 @@
     </div>
   </div>
 
-  <div class="custom-card">
+  <div class="Section-2">
     <div class="top-trips-card">
       <div
         class="d-flex justify-content-between align-items-center section-header"

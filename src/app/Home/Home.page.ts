@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import Swiper from 'swiper';
 import { AnimationController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,17 @@ import { AnimationController } from '@ionic/angular';
 export class HomePage implements AfterViewInit, OnInit {
   fromDay: string = '';
   toDay: string = '';
+  departureDay: string = '';
   isWeekendTrekSelected: boolean = false;
   isPersonalizedTrekSelected: boolean = false;
-
+  private formatDate(dateString: string): string {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const yyyy = date.getFullYear();
+    return `${dd}${mm}${yyyy}`; // Format as ddmmyyyy
+  }
   slides = [
     {
       title: 'Slide 1',
@@ -90,7 +99,7 @@ export class HomePage implements AfterViewInit, OnInit {
     weekendTrek: false,
     personalizedTrek: false,
   };
-  constructor(private animationCtrl: AnimationController) {}
+  constructor(private animationCtrl: AnimationController, private router:Router) {}
   ngOnInit() {
     this.animateCardsSequentially();
   }
@@ -152,4 +161,28 @@ export class HomePage implements AfterViewInit, OnInit {
   togglePersonalizedTrek() {
     this.isPersonalizedTrekSelected = !this.isPersonalizedTrekSelected;
   }
+
+
+  onSubmit() {
+    const customSelections: string[] = [];
+
+    if (this.isWeekendTrekSelected) {
+      customSelections.push('Weekend Trek');
+    }
+
+    if (this.isPersonalizedTrekSelected) {
+      customSelections.push('Personalized Trek');
+    }
+
+    const formData = {
+      from: this.fromDay,
+      to: this.toDay,
+      departureDay: this.formatDate(this.departureDay), // Format date as ddmmyyyy
+      custom: customSelections.length > 0 ? customSelections : null,
+    };
+
+    console.log(formData);
+    this.router.navigate(['/tabs/Home/trip-results'])
+  }
+  
 }
