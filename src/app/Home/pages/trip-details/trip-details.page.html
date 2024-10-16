@@ -1,17 +1,17 @@
-<!-- <ion-header [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar class="custom-toolbar">
-  
+    <!-- Back Button -->
     <ion-buttons slot="start">
       <button ion-button (click)="goBack()" class="back-button">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </button>
     </ion-buttons>
- 
+    <!-- Header Title, initially hidden -->
     <ion-title class="header-title" [class.visible]="showHeaderTitle"
       >Trip Details</ion-title
     >
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content  class="ion-padding"
 (ionScroll)="onScroll($event)"
@@ -20,17 +20,17 @@ scrollEvents="true">
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
  <!-- Title below header -->
- <!-- <div
+ <div
  class="page-title"
  style="font-weight: 600; font-size: 20px; padding-left: 15px"
 >
  <span>Trip Details</span>
-</div> -->
+</div>
   <ion-card
     *ngFor="let record of records"
     class="trek-card"
     style="padding: 8px; margin-bottom: 8px"
-   routerLink="passenger-info">
+  >
     <ion-card-content style="padding: 4px">
       <ion-grid>
         <ion-row style="margin-bottom: 0">
@@ -105,11 +105,15 @@ scrollEvents="true">
     </ion-col>
   </ion-row>
 
-  <ion-segment [(ngModel)]="selectedTab">
+  <ion-segment [(ngModel)]="selectedTab" scrollable>
     <ion-segment-button value="trekRoute">Trek Route</ion-segment-button>
     <ion-segment-button value="Itenary">Itenary</ion-segment-button>
     <ion-segment-button value="amenities">Amenities</ion-segment-button>
     <ion-segment-button value="reviews">Reviews</ion-segment-button>
+    <ion-segment-button value="Resorts">Resorts</ion-segment-button>
+    <ion-segment-button value="Activites">Activites</ion-segment-button>
+    <ion-segment-button value="CancelPolicy">Cancellation policy</ion-segment-button>
+    <ion-segment-button value="others">others</ion-segment-button>
   </ion-segment>
 
   <!-- Trek Route Tab Content (Boarding Points) -->
@@ -182,7 +186,7 @@ scrollEvents="true">
     </ion-card>
   </div>
   <div *ngIf="selectedTab === 'Itenary'">
-    <h2>Itenary</h2>
+    <h2 style="margin-left: 18px;color: #0054e9">Itenary</h2>
     <ion-card>
       <ion-card-content>
         <p>
@@ -208,23 +212,23 @@ scrollEvents="true">
     </ion-card>
   </div>
   <div *ngIf="selectedTab === 'amenities'" class="amenities-container">
-    <h2 style="margin-left: 25px">Amenities</h2>
+    <h2 style="margin-left: 18px;color: #0054e9;">Amenities</h2>
     <ion-card style="border-radius: 15px">
       <ion-card-content>
         <div class="photos-container" style="margin-top: 10px">
-          <h4 style="color: black; font-size: 18px">Including :</h4>
+          <h3 style="color: black; font-size: 18px">Including :</h3><br>
         </div>
         <div class="photos-container" style="margin-top: 10px">
-          <h4 style="color: black; font-size: 18px">Excluding :</h4>
+          <h3 style="color: black; font-size: 18px">Excluding :</h3><br>
         </div>
         <div class="photos-container" style="margin-top: 10px">
-          <h4 style="color: black; font-size: 18px">Highligths :</h4>
+          <h3 style="color: black; font-size: 18px">Highligths :</h3><br>
         </div>
       </ion-card-content>
     </ion-card>
   </div>
   <div *ngIf="selectedTab === 'reviews'" class="reviews-container">
-    <h2 style="margin-left: 25px">Reviews</h2>
+    <h2 style="margin-left: 18px;color: #0054e9">Reviews</h2>
     <ion-card style="border-radius: 15px">
       <ion-card-header>
         <ion-card-title style="font-size: 25px">Customer :</ion-card-title>
@@ -274,6 +278,54 @@ scrollEvents="true">
           <h4 style="color: black; font-size: 18px">Photos :</h4>
         </div>
       </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="selectedTab === 'Resorts'" >
+    <h2 style="margin-left: 18px;color: #0054e9;">Resorts</h2>
+    <ion-card style="border-radius: 15px">
+      <ion-card-content>
+        <div class="photos-container" style="margin-top: 10px">
+          <h3 style="color: black; font-size: 18px">Name :</h3><br>
+        </div>
+        <div class="photos-container" style="margin-top: 10px">
+          <h3 style="color: black; font-size: 18px">Description :</h3><br>
+        </div>
+        <div class="photos-container" style="margin-top: 10px">
+          <h3 style="color: black; font-size: 18px">Location :</h3>
+          <div class="map-container" style="margin-top: 10px;">
+            <img 
+              src="https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/07/googleMapsTricksHero.jpg" 
+              alt="Map" 
+              style="width: 100%; height: auto;">
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="selectedTab === 'Activites'" >
+    <h2 style="margin-left: 18px;color: #0054e9;">Activites</h2>
+    <ion-card style="border-radius: 15px;border: 1px solid black;">
+      <h3 style="color: black; font-size: 18px;margin-left: 15px;">Highligths :</h3>
+      <ion-card style="border-radius: 15px;border: 1px solid black;height: 90px;">
+        <ion-card-content>
+          <div class="photos-container" style="margin-top: 10px;">
+          </div>  
+        </ion-card-content>
+      </ion-card>
+      <br>      
+    </ion-card>
+  </div>
+  <div *ngIf="selectedTab === 'CancelPolicy'" >
+    <h2 style="margin-left: 18px;color: #0054e9;">Cancellation Policy</h2>
+    <ion-card style="border-radius: 15px;border: 1px solid black;">
+      <h3 style="color: black; font-size: 18px;margin-left: 15px;">Policy Details :</h3>
+      <ion-card style="border-radius: 15px;border: 1px solid black;height: 90px;">
+        <ion-card-content>
+          <div class="photos-container" style="margin-top: 10px;">
+          </div>  
+        </ion-card-content>
+      </ion-card>
+      <br>      
     </ion-card>
   </div>
 </ion-content>

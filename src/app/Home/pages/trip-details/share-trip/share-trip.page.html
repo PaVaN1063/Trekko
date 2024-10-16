@@ -8,11 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="service-card" *ngFor="let record of records">
-    <!-- Logo Image -->
-    <!-- <img src="{{record.logoImage}}" alt="Logo" class="special-offer-image"  style=" width: 30px; height: 30px; margin-left:15px;margin-bottom:5px  " /> -->
 
-    <!-- Special Offer Badge Image -->
+ <ion-card class="service-card" *ngFor="let record of records">
     <img
       *ngIf="record.specialOffer"
       src="../../assets/Logos/offers.png"
@@ -45,13 +42,10 @@
       </div>
       <ion-text class="view-itenary">View Itinerary</ion-text>
     </div>
-
     <ion-card-content>
-      <!-- <ion-grid> -->
-      <!-- <ion-row> -->
-      <!-- <ion-col size="6"> -->
+      <ion-row>
       <img
-        src="{{record.logoImage}}"
+        src="{{record.logoUrl}}"
         alt="Logo"
         class="special-offer-image"
         style="
@@ -61,55 +55,24 @@
           margin-left: 10px;
         "
       />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <!-- </ion-col> -->
       <ion-col size="6">
         <ion-text>{{record.serviceProvider}}</ion-text>
       </ion-col>
-      <!-- </ion-row> -->
+      </ion-row>
       <ion-row>
-        <!-- <ion-col size="6">
-            <ion-text class="textHeading">Trek Duration:</ion-text>
-          </ion-col> -->
         <ion-col size="10">
-          <span style="font-size: 12px; font-weight: 800">Duration: </span
-          >&nbsp;
           <ion-text class="textHeading">{{record.trekDuration}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
-        <!-- <ion-col size="6">
-            <ion-text class="textHeading">Pickup Date & Time:</ion-text>
-          </ion-col> -->
         <ion-col size="10">
-          <!-- <ion-text class="textHeading">{{record.pickupDateTime}}</ion-text> -->
-          <span style="font-size: 12px; font-weight: 800">Pickup: </span>
-          &nbsp;&nbsp;&nbsp;&nbsp;<ion-text class="textHeading"
-            >Morning 9:00 AM</ion-text
-          >
+          <b>{{record.pickupDateTime}}</b>
         </ion-col>
       </ion-row>
-      <!-- </ion-grid> -->
     </ion-card-content>
-  </ion-card>
+  </ion-card> 
 
   <ion-grid>
-    <!-- First row of icons -->
-    <ion-row>
-      <ion-col>
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <p>Johm</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <p>Doe</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <p>John Doe</p>
-      </ion-col>
-    </ion-row>
-
-    <!-- Second row of icons -->
     <ion-row>
       <ion-col>
         <ion-icon name="logo-instagram"></ion-icon>

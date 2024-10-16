@@ -1,3 +1,34 @@
-// **************************
-
-// **************************
+.contentOfSlides {
+    .section-header {
+      margin-bottom: 0; /* Remove bottom margin to decrease space */
+      padding-bottom: 5px; /* Adjust padding to control space */
+    }
+  
+    .swiper-container {
+      margin-top: 10px; /* Adjust space between header and slides */
+      margin-bottom: 10px; /* Adjust space between sections */
+    }
+  }
+  h2 {
+    font-size: 20px;
+  }
+  
+  .swiper-container {
+    width: 100%;
+    height: 250px; /* Adjust the height based on your design */
+  }
+  
+  .swiper-slide ion-card {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  
