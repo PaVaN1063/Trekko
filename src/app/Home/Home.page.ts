@@ -58,7 +58,7 @@ export class HomePage implements AfterViewInit {
     // Add more alerts as needed
   ];
 
-  constructor() {}
+  constructor( private router:Router) {}
   handleRefresh(event: any) {
     setTimeout(() => {
       // Any calls to load data go here
