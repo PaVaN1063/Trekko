@@ -1,56 +1,19 @@
-.fixed-content {
-  position: sticky;
-  top: 0;
-  // background-color: white;
-  z-index: 10;
-  padding-bottom: 5px; /* Reduce bottom padding to bring content closer to the divider */
+//header
+.headerTitle {
+  font-weight: bold;
 }
 
-.date-day-item {
-  padding: 20px; /* Reduce padding to bring the text closer to the divider */
-  margin: 10px; /* Remove any additional margin */
-  // background-color: #8b8b8b;
-  color: #fff;
-  border-radius: 20px 20px 5px 5px;
-}
-.date_text {
-  color: white;
-}
-.date-day-label {
-  font-size: 14px; /* Adjust font size if necessary */
-  color: #000000;
-  padding-right: 12px;
-  padding-left: 38px;
-}
-.scrollable-content {
-  padding-top: 10px; /* Add spacing at the top to separate from fixed content */
-  overflow-y: scroll;
-  height: calc(100vh - 150px); /* Adjust height based on fixed content height */
-}
-ion-title {
-  font-size: 16px; /* Adjust font size as needed */
-  font-weight: 600;
-  margin: 0;
-  padding-bottom: 2px; /* Reduce bottom padding to bring it closer to the divider */
+ion-item.header-item {
+  border-radius: 25px; /* Rounded corners */
+  border: 2px solid #b4b4b4; /* Border similar to your image */
+  padding: 5px 0px; /* Padding inside the item */
+  display: flex; /* Flexbox for layout */
+  align-items: center; /* Center the items vertically */
 }
 
-.chip-container {
-  display: inline-flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 5px;
-
-  ion-chip {
-    margin-right: 8px;
-  }
-}
-
-ion-input {
-  --padding-top: 0px;
-  --padding-bottom: 0px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  line-height: 1.2;
+.headerImg {
+  width: 10%;
+  height: 70%;
 }
 
 ion-toolbar {
@@ -73,60 +36,53 @@ ion-item {
   }
 }
 
-.special-offer {
-  color: purple;
-  font-weight: bold;
-}
+// ***********************
 
-img {
-  width: 100%;
-  height: 100%;
+.textHeading{
+    color: black;
+    font-weight: bold;
 }
-
-ion-searchbar {
-  color: black;
-}
-
-.textHeading {
-  color: black;
-}
-
-.special-offer-image {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 30px;
-  height: 30px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
-  50% {
-    transform: scale(1.1);
+  //swiper
+  .swiper-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
+    width: 100%;  /* Ensure the swiper takes full width */
+    overflow: hidden; /* Hide overflow to prevent excess movement */
   }
-  100% {
-    transform: scale(1);
+  
+  .swiper-wrapper {
+    display: flex;
   }
-}
+  
+  .swiper-slide {
+    width: auto;  /* Ensure the chip fits the content only */
+    scroll-snap-align: start;  /* Aligns the slide to the start of the scroll container */
+  }
+  
+  ion-chip {
+    margin: 0 5px;  /* Control spacing between chips */
+    font-size: 16px;  /* Adjust font size if necessary */
+  }
 
-.chip-scroll {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-ion-chip {
-  --background: #f8f9fa;
-  --color: #333;
-  --border-radius: 20px;
-  border: 1px solid #ccc;
-  margin-right: 8px;
-}
-
+  
+  //main body
+  Ion-grid{
+    margin-top: 20px;
+  }
+  
+  /* Increase the size of the card */
 ion-card {
   margin-top: 0;
   margin-bottom: 10px;
@@ -147,11 +103,10 @@ ion-card {
   font-size: 16px;
   font-weight: 600;
 }
-.custom-divider {
-  height: 1px; /* Set the thickness of the divider */
-  background-color: #a1a1a1; /* Set the color of the divider */
-  margin: 0 auto; /* Center the divider */
-  padding: 0; /* Remove any padding */
-  width: 90%; /* Adjust width to remove the ends, e.g., 90% of the container width */
-  display: block; /* Ensure it's treated as a block-level element */
+
+/* Align and size the GDPR icon */
+.sideImgIcon {
+  margin-top: 10px;
+  width: 44px;
+  height: 44px;
 }

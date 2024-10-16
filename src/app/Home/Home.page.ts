@@ -1,5 +1,13 @@
 import { Component, AfterViewInit } from '@angular/core';
 import Swiper from 'swiper';
+import { AnimationController } from '@ionic/angular';
+import { Router } from '@angular/router';
+export interface FormData {
+  from: string;
+  to: string;
+  departureDay: string;
+  custom: string[] | null;
+}
 
 @Component({
   selector: 'app-home',
@@ -9,6 +17,17 @@ import Swiper from 'swiper';
 export class HomePage implements AfterViewInit {
   fromDay: string = '';
   toDay: string = '';
+  departureDay: string = '';
+  isWeekendTrekSelected: boolean = false;
+  isPersonalizedTrekSelected: boolean = false;
+  private formatDate(dateString: string): string {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const yyyy = date.getFullYear();
+    return `${dd}${mm}${yyyy}`; // Format as ddmmyyyy
+  }
   slides = [
     {
       title: 'Slide 1',
@@ -31,7 +50,7 @@ export class HomePage implements AfterViewInit {
       image: 'assets/icons/icon-72.webp',
     },
   ];
-  
+
   weatherAlerts = [
     { id: 1, title: 'Storm warning', image: 'assets/images/bus.jpg' },
     { id: 2, title: 'High winds', image: 'assets/images/bus.jpg' },
@@ -73,4 +92,35 @@ export class HomePage implements AfterViewInit {
       },
     });
   }
+  toggleWeekendTrek() {
+    this.isWeekendTrekSelected = !this.isWeekendTrekSelected;
+  }
+
+  togglePersonalizedTrek() {
+    this.isPersonalizedTrekSelected = !this.isPersonalizedTrekSelected;
+  }
+
+
+  onSubmit() {
+    const customSelections: string[] = [];
+
+    if (this.isWeekendTrekSelected) {
+      customSelections.push('Weekend Trek');
+    }
+
+    if (this.isPersonalizedTrekSelected) {
+      customSelections.push('Personalized Trek');
+    }
+
+    const formData = {
+      from: this.fromDay,
+      to: this.toDay,
+      departureDay: this.formatDate(this.departureDay), // Format date as ddmmyyyy
+      custom: customSelections.length > 0 ? customSelections : null,
+    };
+
+    console.log(formData);
+    this.router.navigate(['/tabs/Home/trip-results'])
+  }
+  
 }
