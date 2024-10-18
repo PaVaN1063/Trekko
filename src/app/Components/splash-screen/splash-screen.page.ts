@@ -21,8 +21,8 @@ export class SplashScreenPage implements OnInit {
 
       if (this.progressValue >= 1) {
         clearInterval(interval);
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
       }
-    }, 10);
+    }, 5);
   }
 }
