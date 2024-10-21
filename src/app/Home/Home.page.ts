@@ -106,7 +106,7 @@ export class HomePage implements AfterViewInit, OnInit {
     this.animateCardsSequentially();
   }
 
-  animateCardsSequentially() {
+  animateCardsSequentially() { 
     const elements = document.querySelectorAll(
       '.top-trips-card, .offers-card, .trek-shorts-card, .weather-section'
     );

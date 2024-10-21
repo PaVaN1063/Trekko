@@ -33,9 +33,8 @@
     </ion-title>
   </ion-toolbar>
 
-  <ion-toolbar>
-    <ion-item lines="none" class="header-item">
-      <img
+  <div class="custom-header-2">
+    <img
         src="../../assets/Logos/multiple-users-silhouette.png"
         class="headerImg"
         alt="Group Icon"
@@ -45,8 +44,7 @@
         >Know More</ion-button
       >
       <ion-toggle slot="end"></ion-toggle>
-    </ion-item>
-  </ion-toolbar>
+  </div>
 
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -55,64 +53,62 @@
   <div class="swiper-container" style="margin-top: 5px">
     <div class="swiper-wrapper">
       <div class="swiper-slide" *ngFor="let tab of tabs">
-        <ion-chip>
-          <b>
+        <ion-chip [outline]="true">
+          <span>
             <img [src]="tab.icon" style="width: 20px" />
             <ion-label style="margin-left: 2px"> {{tab.title}}</ion-label>
-          </b>
+          </span>
         </ion-chip>
       </div>
     </div>
   </div>
 
   <ion-card
-    *ngFor="let record of records"
-    routerLink="/tabs/Home/trip-details"
-    style="position: relative"
-  >
-    <img src="{{record.logoImage}}" alt="Logo" class="special-offer-image" />
+  *ngFor="let record of records"
+  class="custom-card"
+  routerLink="/tabs/Home/trip-details"
+>
+  <div class="card-header">
+    <div class="logo-and-name">
+      <img src="{{record.logoImage}}" alt="Logo" class="service-logo" />
+      <ion-text class="service-provider">{{record.serviceProvider}}</ion-text>
+    </div>
     <img
       *ngIf="record.specialOffer"
       src="../../assets/Logos/offers.png"
       alt="Special Offer"
-      style="
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        width: 100px;
-        height: 30px;
-      "
+      class="special-offer"
     />
-    <div class="side-section">
-      <div class="sideImg">
-        <label class="textHeading">XXXX</label><br />
-        <label>Onwards</label>
-        <img
-          src="../../assets/Logos/gdpr.png"
-          alt="GDPR Icon"
-          class="sideImgIcon"
-        />
-      </div>
-      <ion-text class="view-itenary">View Itinerary</ion-text>
+  </div>
+
+  <ion-card-content class="card-content">
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="trek-duration">{{record.trekDuration}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="pickup-date-time">{{record.pickupDateTime}}</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+  <div class="side-section">
+    <br />
+    <div class="side-info">
+      <label class="price-label">XXXX</label>
+      <br />
+      <label>Onwards</label>
+      <br />
+      <img
+        src="../../assets/Logos/gdpr.png"
+        alt="GDPR Icon"
+        class="side-img-icon"
+      />
     </div>
-    <ion-card-content>
-      <ion-row>
-        <ion-col size="6">
-          <ion-text>{{record.serviceProvider}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-text>{{record.trekDuration}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-text>{{record.pickupDateTime}}</ion-text>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+    <ion-text class="view-itinerary">View Itinerary</ion-text>
+  </div>
+</ion-card>
 
   <ion-row *ngIf="transactionData === false" class="ion-justify-content-center">
     <ion-col>

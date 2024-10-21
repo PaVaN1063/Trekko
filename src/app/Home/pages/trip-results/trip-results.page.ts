@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-trip-results',
@@ -9,7 +10,7 @@ import Swiper from 'swiper';
 })
 export class TripResultsPage implements OnInit, AfterViewInit {
   records: any = [];
-  transactionData: boolean = false;
+  transactionData: boolean = false; 
   search: string = '';
   formData: any;
 
@@ -35,8 +36,9 @@ export class TripResultsPage implements OnInit, AfterViewInit {
       icon: 'assets/icon/high-rated.png',
     },
   ];
-  constructor(private router: Router) {}
+  constructor(private router: Router, private animationCtrl: AnimationController) {}
   ngOnInit() {
+    this.animateCardsSequentially();
     this.getData();
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras && navigation.extras.state) {
@@ -46,19 +48,37 @@ export class TripResultsPage implements OnInit, AfterViewInit {
       console.log('No form data received');
     }
   }
+  animateCardsSequentially() {
+    const elements = document.querySelectorAll(
+      '.custom-card' // Make sure this class matches your card class
+    );
 
+    elements.forEach((el, index) => {
+      const animation = this.animationCtrl
+        .create()
+        .addElement(el)
+        .duration(500) // Duration for each animation
+        .delay(index * 100) // Delay between each card animation
+        .fromTo('transform', 'translateY(100%)', 'translateY(0)')
+        .fromTo('opacity', '0', '1');
+
+      animation.play();
+    });
+  }
   ngAfterViewInit() {
     new Swiper('.swiper-container', {
-      slidesPerView: 'auto', // Allows the number of visible slides to adjust dynamically
-      spaceBetween: 10, // Space between chips (you can adjust this value)
-      centeredSlides: false, // Disable centering to avoid too much movement
-      freeMode: true, // Enable free mode for smooth movement without snapping
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+      centeredSlides: false,
+      freeMode: true,
     });
+    setTimeout(() => {
+      this.animateCardsSequentially();
+    }, 5);
   }
 
   handleRefresh(event: any) {
     setTimeout(() => {
-      // Any calls to load data go here
       event.target.complete();
     }, 2000);
   }

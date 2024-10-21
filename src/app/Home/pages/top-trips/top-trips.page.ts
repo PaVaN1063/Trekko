@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimationController } from '@ionic/angular';
 import Swiper from 'swiper';
 
 @Component({
@@ -7,10 +8,12 @@ import Swiper from 'swiper';
   templateUrl: './top-trips.page.html',
   styleUrls: ['./top-trips.page.scss'],
 })
-export class TopTripsPage implements OnInit {
+export class TopTripsPage implements OnInit, AfterViewInit {
   records: any = [];
   transactionData: boolean = false;
   search: string = '';
+  showHeaderTitle = false; 
+
   tabs = [
     {
       title: 'Filters',
@@ -34,23 +37,54 @@ export class TopTripsPage implements OnInit {
     },
  
   ]
-  constructor( private route: Router) { }
+  constructor( private route: Router, private animationCtrl: AnimationController) { }
   ngOnInit() {
+    this.animateCardsSequentially();
+
     this.getData()
   }
-  
+  goBack() {
+    window.history.back();
+  }
+  animateCardsSequentially() {
+    const elements = document.querySelectorAll(
+      '.custom-card'
+    );
+
+    elements.forEach((el, index) => {
+      const animation = this.animationCtrl
+        .create()
+        .addElement(el)
+        .duration(500) 
+        .delay(index * 100) 
+        .fromTo('transform', 'translateY(100%)', 'translateY(0)')
+        .fromTo('opacity', '0', '1');
+
+      animation.play();
+    });
+  }
+  onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop;
+    if (scrollTop > 50) {
+      this.showHeaderTitle = true;
+    } else {
+      this.showHeaderTitle = false;
+    }
+  }
   ngAfterViewInit() {
     new Swiper('.swiper-container', {
-      slidesPerView: 'auto',  // Allows the number of visible slides to adjust dynamically
-      spaceBetween: 10,       // Space between chips (you can adjust this value)
-      centeredSlides: false,   // Disable centering to avoid too much movement
-      freeMode: true,          // Enable free mode for smooth movement without snapping
+      slidesPerView: 'auto',  
+      spaceBetween: 10,       
+      centeredSlides: false,   
+      freeMode: true,          
     });
+    setTimeout(() => {
+      this.animateCardsSequentially();
+    }, 5);
   }
   
   handleRefresh(event: any) {
     setTimeout(() => {
-      // Any calls to load data go here
       event.target.complete();
     }, 2000);
   }

@@ -1,25 +1,54 @@
-
 //header
-.header label{
-  color: #000000;
-  font-weight: bold;
+.header-title {
+  margin: 0 10px; /* Add margin for spacing */
+  color: rgb(0, 0, 0); /* Adjust color for visibility */
+  font-weight: bold; /* Make the title bold */
 }
 
-ion-item.header-item {
-  border-radius: 25px; /* Rounded corners */
-  border: 2px solid #b4b4b4; /* Border similar to your image */
-  padding: 5px 0px; /* Padding inside the item */
-  display: flex; /* Flexbox for layout */
-  align-items: center; /* Center the items vertically */
+.custom-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  background: transparent;
+  z-index: 10;
 }
+.custom-header-2{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  background: transparent;
+  z-index: 10;
+  border: 2px solid #b4b4b4;
+  border-radius: 25px;
+  margin-bottom: 5px;
+}
+.back-button {
+  background: none;
+  border: none;
+  color: #f1c40f;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+
 
 .headerImg {
-  width: 10%;
-  height: 70%;
+  width: 20px;
+  height: 20px;
 }
 
 .booking-label {
-  font-size: 17px; /* Adjust font size */
+  font-size: 14px; /* Adjust font size */
   font-weight: bold;
   color: #000;
   margin-left: 15px; /* Space between icon and label */
@@ -27,106 +56,136 @@ ion-item.header-item {
 }
 
 .know-more-btn {
-  font-size: 12px; /* Smaller button text */
+  font-size: 10px; /* Smaller button text */
   margin-right: 10px; /* Space between button and toggle */
 }
 
 ion-toggle {
-  margin-left: 8px; /* Space between button and toggle */
+  margin-right: 8px; /* Space between button and toggle */
 }
 
 // ***********************
 
-.textHeading{
-    color: black;
-    font-weight: bold;
-}
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  //swiper
-  .swiper-container {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
-    width: 100%;  /* Ensure the swiper takes full width */
-    overflow: hidden; /* Hide overflow to prevent excess movement */
-  }
-  
-  .swiper-wrapper {
-    display: flex;
-  }
-  
-  .swiper-slide {
-    width: auto;  /* Ensure the chip fits the content only */
-    scroll-snap-align: start;  /* Aligns the slide to the start of the scroll container */
-  }
-  
-  ion-chip {
-    margin: 0 5px;  /* Control spacing between chips */
-    font-size: 16px;  /* Adjust font size if necessary */
-  }
-
-  
-  //main body
-  Ion-grid{
-    margin-top: 20px;
-  }
-  
-  /* Increase the size of the card */
-ion-card {
-  position: relative;
-  height: 200px; /* Increased card height */
-  padding-right: 20px; /* Add some padding to avoid overflow */
-}
-
-/* Position the side section properly */
-.side-section {
-  position: absolute;
-  top: 50px; /* Align side section lower down in the card */
-  right: 10px; /* Align it with the special offer on the right side */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Align content to the right */
-}
-
-/* Align text and icon in the side section */
-.sideImg {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Aligns XXXX and Onwards to the right */
-}
-
-/* Styling for the "View Itinerary" link */
-.view-itenary {
-  margin-top: 10px; /* Space between sideImg and View Itinerary */
-  color: #4779b5;
+.textHeading {
+  color: black;
   font-weight: bold;
-  text-align: right;
 }
 
-/* Special offer image */
-.special-offer-image {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 40px;
-  height: 40px;
-  animation: pulse 2s infinite;
-  border-radius: 50%;
+//swiper
+.swiper-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* Enable smooth scroll snapping */
+  width: 100%; /* Ensure the swiper takes full width */
+  overflow: hidden; /* Hide overflow to prevent excess movement */
 }
 
-/* Align and size the GDPR icon */
-.sideImgIcon {
-  margin-top: 10px;
-  width: 44px;
-  height: 44px;
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  width: auto; /* Ensure the chip fits the content only */
+  scroll-snap-align: start; /* Aligns the slide to the start of the scroll container */
+}
+
+ion-chip {
+  margin: 0 5px; /* Control spacing between chips */
+  font-size: 16px; /* Adjust font size if necessary */
+}
+
+//main body
+Ion-grid {
+  margin-top: 20px;
+}
+
+// **********************CARD*************************
+.custom-card {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  transform: translateY(20px); /* Start slightly below */
+  opacity: 0; /* Initially hidden */
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-and-name {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Adds space between logo and name */
+    }
+
+    .service-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+
+    .service-provider {
+      font-weight: bold;
+      font-size: 14px;
+      white-space: nowrap; /* Prevents text from wrapping */
+    }
+
+    .special-offer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 30px;
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+  }
+
+  .card-content {
+    padding: 10px;
+    margin-bottom: 10px;
+    .trek-duration,
+    .pickup-date-time {
+      font-size: 12px;
+    }
+  }
+
+  .side-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-right: 10px;
+
+    .side-info {
+      text-align: center;
+      margin-bottom: 8px;
+
+      .price-label {
+        font-weight: bold;
+        border: 1px solid black;
+        font-size: 16px;
+        margin-top: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 15px;
+      }
+
+      .side-img-icon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .view-itinerary {
+      color: #1e90ff;
+      font-size: 12px;
+      text-decoration: none;
+    }
+  }
 }

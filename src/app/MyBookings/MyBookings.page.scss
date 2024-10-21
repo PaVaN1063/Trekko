@@ -1,29 +1,144 @@
-
-.textHeading {
-  color: black;
+//header
+.header-title {
+  margin: 0 10px; /* Add margin for spacing */
+  color: rgb(0, 0, 0); /* Adjust color for visibility */
+  font-weight: bold; /* Make the title bold */
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-.header-content{
-  margin: 10px;
+.custom-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: transparent;
+  z-index: 10;
 }
 
-// .font-check{
-//   font-weight: bold;
+// .back-button {
+//   background: none;
+//   border: none;
+//   color: #f1c40f;
+//   font-size: 24px;
+//   display: flex;
+//   align-items: center;
 // }
 
-.font-check {
-  text-shadow: 0.5px 0.5px 0 #000000;
+.custom-dropdown-toggle {
+  background-color: transparent !important; /* Keep the background transparent */
+  border: 1px solid rgba(0, 0, 0, 0.125); /* Maintain the outline color */
+  border-radius: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #000;
 }
 
+.custom-dropdown-toggle:focus {
+  box-shadow: none; /* Remove the focus outline */
+  color: #000;
+}
+.dropdown-menu {
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Light border around the dropdown */
+  border-radius: 0.25rem; /* Rounded corners for dropdown menu */
+  margin-top: 5px;
+}
 
+.dropdown-item {
+  color: #333; /* Change text color */
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+  }
+}
+
+// **********************CARD*************************
+.custom-card {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-and-name {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Adds space between logo and name */
+    }
+
+    .service-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+
+    .service-provider {
+      font-weight: bold;
+      font-size: 14px;
+      white-space: nowrap; /* Prevents text from wrapping */
+    }
+
+    .special-offer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 30px;
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+  }
+
+  .card-content {
+    padding: 10px;
+
+    .trek-duration,
+    .pickup-date-time {
+      font-size: 12px;
+    }
+  }
+
+  .side-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-right: 10px;
+
+    .side-info {
+      text-align: center;
+      margin-bottom: 8px;
+
+      .price-label {
+        font-weight: bold;
+        border: 1px solid black;
+        font-size: 16px;
+        margin-top: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 15px;
+      }
+
+      .side-img-icon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .view-itinerary {
+      color: #1e90ff;
+      font-size: 12px;
+      text-decoration: none;
+    }
+  }
+}
