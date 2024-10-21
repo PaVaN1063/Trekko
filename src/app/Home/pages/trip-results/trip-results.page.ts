@@ -1,19 +1,4 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-trip-results',
-//   templateUrl: './trip-results.page.html',
-//   styleUrls: ['./trip-results.page.scss'],
-// })
-// export class TripResultsPage implements OnInit {
-//   services: any[] = [];
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';
 
@@ -22,7 +7,7 @@ import Swiper from 'swiper';
   templateUrl: './trip-results.page.html',
   styleUrls: ['./trip-results.page.scss'],
 })
-export class TripResultsPage implements OnInit {
+export class TripResultsPage implements OnInit, AfterViewInit {
   records: any = [];
   transactionData: boolean = false;
   search: string = '';

@@ -5,6 +5,7 @@ import { IonModal, ToastController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { ApiService } from '../service/api.service';
 import { apis } from '../service/api';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,8 @@ import { apis } from '../service/api';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  isModalOpen = false;
+
   @ViewChild(IonModal) modal: IonModal | any;
   loginForm: FormGroup;
   countdown: number = 60;
@@ -23,6 +26,8 @@ export class LoginPage {
   otp4: string = '';
   otp5: string = '';
   otp6: string = '';
+  isFocused: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -33,7 +38,16 @@ export class LoginPage {
       phoneno: ['', [Validators.required]],
     });
   }
-
+  
+  validateNumeric(event: any) {
+    const pattern = /^[0-9]*$/;
+    let inputChar = String.fromCharCode(event.inputType === 'deleteContentBackward' ? 0 : event.target.value);
+    
+    if (!pattern.test(inputChar)) {
+      event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    }
+  }
+  
   sendOtp() {
     this.openOtpDialog();
     this.startCountdown(); // Start the countdown
@@ -72,6 +86,7 @@ export class LoginPage {
     this.sendOtp(); // Resend OTP and restart the countdown
   }
   openOtpDialog() {
+    this.isModalOpen = true;
     this.modal.present();
   }
 
@@ -87,6 +102,7 @@ export class LoginPage {
     this.router.navigate(['tabs/Home']);
   }
   onWillDismiss(event: Event) {
+    this.isModalOpen = false;
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm') {
       console.log(`OTP confirmed: ${ev.detail.data}`);

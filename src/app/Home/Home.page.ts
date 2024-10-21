@@ -11,7 +11,7 @@ export interface FormData {
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['Home.page.scss'],  
 })
 export class HomePage implements AfterViewInit, OnInit {
   from: string = '';

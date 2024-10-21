@@ -1,15 +1,15 @@
 
 
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';
 
 @Component({
-  selector: 'app-MyBookings',
+  selector: 'app-mybookings',
   templateUrl: 'MyBookings.page.html',
   styleUrls: ['MyBookings.page.scss']
 })
-export class MyBookingsPage  {
+export class MyBookingsPage implements OnInit  {
  
   records: any = [];
   transactionData: boolean = false;

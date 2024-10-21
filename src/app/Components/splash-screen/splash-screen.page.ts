@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './splash-screen.page.html',
   styleUrls: ['./splash-screen.page.scss'],
 })
-export class SplashScreenPage implements OnInit {
+export class SplashScreenPage implements OnInit, AfterViewInit {
   progressValue: number = 0;
 
   constructor(private router: Router) {}
@@ -21,8 +21,16 @@ export class SplashScreenPage implements OnInit {
 
       if (this.progressValue >= 1) {
         clearInterval(interval);
-        // this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       }
-    }, 5);
+    }, 20);
+  }
+
+  ngAfterViewInit() {
+    const bgLogo = document.querySelector('.animated-bg');
+    const logo = document.querySelector('.animated-logo');
+
+    bgLogo?.classList.add('start-animation');
+    logo?.classList.add('start-animation');
   }
 }

@@ -1,9 +1,16 @@
 ion-content {
   --background: linear-gradient(to right, #51bbfd, #3136b9);
+  overflow-y: hidden;
 }
 
+.empty-space {
+  height: 50px;
+  width: 100%;
+  background: transparent;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
 .content-wrapper {
-  margin-top: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,18 +19,95 @@ ion-content {
   gap: 40px;
 }
 
-.logo {
-  width: 200px;
-  height: auto;
-}
-
 .custom-progress-bar {
   width: 60%;
   height: 10px;
   border-radius: 50px;
 }
 
+@keyframes jiggle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.05);
+  }
+  20% {
+    transform: scale(0.95);
+  }
+  30% {
+    transform: scale(1.02);
+  }
+  40% {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFadeOut {
+  0% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
 .splash-image {
-  width: 450px;
+  width: 80%;
   height: auto;
+  animation: jiggle 1s ease forwards, zoomIn 0.5s ease forwards 1s;
+}
+
+.logo-bg {
+  background: linear-gradient(to right, #fed900, #f3fb00);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  animation: slideUpFadeOut 1.5s ease forwards 0.5s;
+}
+
+.logo {
+  width: 50%;
+  height: auto;
+  animation: zoomInOut 1.5s ease forwards 0.5s;
 }
