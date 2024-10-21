@@ -1,13 +1,14 @@
-<ion-header>
-  <ion-toolbar class="custom-toolbar">
-    <ion-title>Trek Booking Details</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">X</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content >
+<ion-content class="content">
+  <div class="custom-toolbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+    <h4 style="margin-right: 10px;">Trek Booking Details</h4>
+    <ion-buttons slot="start" (click)="dismissModal()">
+      <ion-button>X</ion-button>
+    </ion-buttons>   
+  </div>
+  
+
+  
   <ion-list>
     <ion-item lines="none"> 
       <ion-label>

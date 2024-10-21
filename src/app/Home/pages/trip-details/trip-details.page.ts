@@ -153,7 +153,7 @@ export class TripDetailsPage implements OnInit {
         logoUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s',
         serviceProvider: 'Mountain Adventures',
-        trekDuration: '5 Days',
+        trekDuration: '5 Days 4 Nights',
         pickupDateTime: '2024-10-15 10:00 AM',
         specialOffer: 'Special offer',
       },
