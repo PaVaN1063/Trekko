@@ -10,6 +10,7 @@ ion-item.header-item {
   display: flex; /* Flexbox for layout */
   align-items: center; /* Center the items vertically */
 }
+
 .headerImg {
   width: 20px;
   height: 20px;
@@ -32,6 +33,19 @@ ion-toggle {
   margin-right: 8px; /* Space between button and toggle */
 }
 
+.custom-header-2 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center; 
+  padding: 0 20px; 
+  background: transparent;
+  z-index: 10;
+  border: 2px solid #b4b4b4;
+  border-radius: 25px;
+}
 
 // ***********************
 
@@ -69,20 +83,6 @@ ion-toggle {
   scroll-snap-align: start; /* Aligns the slide to the start of the scroll container */
 }
 
-.custom-header-2 {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  background: transparent;
-  z-index: 10;
-  border: 2px solid #b4b4b4;
-  border-radius: 25px;
-  margin-bottom: 5px;
-}
 // **********************CARD*************************
 .custom-card {
   position: relative;

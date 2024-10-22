@@ -1,39 +1,45 @@
-.custom-toolbar {
-  --background: white;  /* Set header background to white */
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  --border-color: transparent; /* Remove any border */
+.content{
+  --background:white;
+  }
+.trek-card {
+  position: relative; /* Make the card the positioned container */
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 10px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
 }
 
 .special-offer-badge {
-    font-size: 10px;
-    background-color: #d8a1e6; /* Adjust color as per your theme */
-  }
-  
-  .itinerary-link {
-    font-size: 14px;
-    color: #3366cc;
-  }
-  
-  .logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-  
-  ion-icon {
-    font-size: 30px;
-    margin-bottom: 5px;
-  }
-  
-  ion-col {
-    text-align: center;
-  }
-  
-  ion-card {
-    padding: 15px;
-    margin-bottom: 10px;
-  }
-  
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+}
+
+.gdpr-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+
+.price-label {
+  padding: 6px;
+  margin-top: 30px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 15px;
+}
+
   // *******************************************
 
 

@@ -1,214 +1,138 @@
-<ion-header [translucent]="true">
-  <ion-toolbar class="custom-toolbar">
-    <!-- Back Button -->
-    <ion-buttons slot="start">
-      <button ion-button (click)="goBack()" class="back-button">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </button>
-    </ion-buttons>
-    <!-- Header Title, initially hidden -->
-    <ion-title class="header-title" [class.visible]="showHeaderTitle"
-      >Passenger Details</ion-title
-    >
-  </ion-toolbar>
-</ion-header>
-
-<ion-content (ionScroll)="onScroll($event)" scrollEvents="true">
-  <div
-    class="page-title"
-    style="font-weight: 600; font-size: 20px; padding-left: 15px"
-  >
-    <span>Passenger Details</span>
+<ion-content class="ion-padding">
+  <div class="custom-header">
+    <button class="back-button" (click)="goBack()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <h4 style="margin-bottom: 20px;">Passenger Details</h4>
   </div>
 
-  <!-- Section: Dates (From Day and To Day) -->
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="5">
-          <ion-item>
-            <ion-label position="floating">From Day</ion-label><br />
-            <ion-input placeholder="XXXXXXXXXX" readonly></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="2" class="text-center">
-          <ion-label>→</ion-label>
-        </ion-col>
-        <ion-col size="5">
-          <ion-item>
-            <ion-label position="floating">To Day</ion-label><br />
-            <ion-input placeholder="XXXXXXXXXX" readonly></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+  <!-- Date Information -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="text-center">
+      <label>From Day</label>
+      <p class="font-weight-bold text-muted">{{ formData.fromDay }}XXXX</p>
+    </div>
+    <div class="mx-3">
+      <img src="assets/icon/right-arrow.png" alt="Arrow" class="arrow-icon" />
+    </div>
+    <div class="text-center">
+      <label>To Day</label>
+      <p class="font-weight-bold text-muted">{{ formData.toDay }}XXXX</p>
+    </div>
+  </div>
 
-  <!-- Section: Contact Details -->
-  <ion-card>
-    <ion-item>
-      <ion-label>Contact Details</ion-label>
-    </ion-item>
+  <!-- Contact Details -->
+  <div class="card">
+    <div class="card-body">
+      <h5>Contact Details</h5>
+      <p>Trip details will be sent to</p>
 
-    <ion-item>
-      <ion-label position="floating">Email ID</ion-label><br />
-      <ion-input placeholder="Enter Email"></ion-input>
-    </ion-item>
+      <!-- Email -->
+      <div class="form-group mb-3">
+        <input type="email" class="form-control rounded-pill" placeholder="Enter Email ID" [(ngModel)]="formData.emailId">
+      </div>
 
-    <ion-item>
-      <ion-label position="floating">Phone Number</ion-label><br />
-      <ion-input placeholder="Enter Phone"></ion-input>
-    </ion-item>
+      <!-- Phone Number -->
+      <div class="form-group mb-3">
+        <input type="tel" class="form-control rounded-pill" placeholder="Enter Phone Number" [(ngModel)]="formData.phoneNumber">
+      </div>
 
-    <ion-item>
-      <ion-label position="floating">State of Residency</ion-label><br />
-      <ion-input placeholder="Select State"></ion-input>
-    </ion-item>
+      <!-- State of Residency -->
+      <div class="form-group mb-3">
+        <input type="text" class="form-control rounded-pill" placeholder="Enter State" [(ngModel)]="formData.stateOfResidency">
+      </div>
+      <p>Required for GST Tax invoicing</p>
 
-    <ion-item lines="none">
-      <ion-icon
-        name="logo-whatsapp"
-        slot="start"
-        size="large"
-        color="success"
-      ></ion-icon>
-      <ion-label>Send booking & trip updates on Whatsapp</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
-    </ion-item>
-  </ion-card>
+      <!-- WhatsApp Booking Update Toggle -->
+      <ion-item lines="none">
+        <ion-icon name="logo-whatsapp" slot="start" size="large" color="success"></ion-icon>
+        <ion-label>Send booking & trip updates on WhatsApp</ion-label>
+        <ion-toggle slot="end" [(ngModel)]="formData.sendUpdatesOnWhatsapp"></ion-toggle>
+      </ion-item>
+    </div>
+  </div>
 
-  <!-- Section: Passenger Details -->
-  <ion-card>
-    <ion-item>
-      <ion-label>Passenger Details</ion-label>
-    </ion-item>
+  <!-- Passenger Details -->
+  <h5>Passenger Details</h5>
 
-    <ion-item class="spaced-input">
-      <ion-label position="floating">Name</ion-label><br />
-      <ion-input placeholder="Enter Name"></ion-input>
-    </ion-item>
+  <div *ngFor="let passenger of formData.passengers; let i = index">
+    <p>Person {{ i + 1 }} <span class="choose-btn-new">Choose</span></p>
 
-    <ion-item>
-      <ion-label>Age</ion-label><br />
-      <ion-input placeholder="Enter Age"></ion-input>
-    </ion-item>
+    <div class="card" style="border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); margin-bottom: 30px;">
+      <div class="card-body">
+        <!-- Passenger Name -->
+        <div class="form-group mb-3">
+          <input type="text" class="form-control rounded-pill" [(ngModel)]="passenger.name" placeholder="Enter Name">
+        </div>
 
-    <ion-item>
-      <ion-segment>
-        <ion-segment-button value="male">
-          <ion-label>Male</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="female">
-          <ion-label>Female</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </ion-item>
-  </ion-card>
+        <!-- Passenger Age -->
+        <div class="form-group mb-3">
+          <label>Age</label>
+          <input type="number" class="form-control rounded-pill" [(ngModel)]="passenger.age" placeholder="Enter Age">
+        </div>
 
-  <!-- Section: Free Cancellation -->
-  <ion-card>
-    <ion-item lines="none">
-      <ion-label>Free Cancellation</ion-label>
-      <ion-icon name="alarm-outline" slot="end"></ion-icon>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label class="small-text"
-        >Valid till 1 day before the Departure</ion-label
-      >
-    </ion-item>
+        <!-- Gender Selection -->
+        <div class="form-group mb-3">
+          <label>Gender</label>
+          <div class="btn-group d-flex">
+            <button type="button" class="btn btn-outline-secondary flex-fill rounded-pill"
+              [class.active]="passenger.gender === 'Male'" (click)="passenger.gender = 'Male'">Male</button>
+            <button type="button" class="btn btn-outline-secondary flex-fill rounded-pill"
+              [class.active]="passenger.gender === 'Female'" (click)="passenger.gender = 'Female'">Female</button>
+          </div>
+        </div>
 
-    <ion-list>
-      <ion-radio-group>
-        <ion-item>
-          <ion-label>Add Free Cancellation</ion-label>
-          <ion-radio slot="start" value="add"></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-label>Don’t add Free Cancellation</ion-label>
-          <ion-radio slot="start" value="no-add"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-    </ion-list>
-  </ion-card>
+        <!-- Remove Passenger -->
+        <div *ngIf="i > 0" class="d-flex align-items-center">
+          <ion-icon name="trash" color="danger" class="mr-2" (click)="removePassenger(i)"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Section: Aorbo Insurance Program -->
-  <ion-card>
-    <ion-item lines="none">
-      <ion-label>Aorbo Insurance Program</ion-label>
-    </ion-item>
+  <!-- Add Adult Button -->
+  <button class="btn btn-primary" (click)="addPassenger()">Add Adult</button>
 
-    <ion-item>
-      <ion-textarea placeholder="Insurance details..."></ion-textarea>
-    </ion-item>
-  </ion-card>
+  <!-- Free Cancellation Section -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>Free Cancellation</span>
+      <i class="bi bi-alarm"></i>
+    </div>
+    <div class="card-body">
+      <p class="small text-muted">Valid till 1 day before the Departure</p>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="cancellation" value="add" [(ngModel)]="formData.freeCancellation">
+        <label class="form-check-label">Add Free Cancellation</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="cancellation" value="no-add" [(ngModel)]="formData.freeCancellation">
+        <label class="form-check-label">Don’t add Free Cancellation</label>
+      </div>
+    </div>
+  </div>
 
-  <!-- Section: Terms & Conditions -->
-  <ion-card>
-    <ion-item lines="none">
-      <ion-label color="primary">Terms & Conditions</ion-label>
-    </ion-item>
+  <!-- Aorbo Insurance Program Section -->
+  <div class="card">
+    <div class="card-header">Aorbo Insurance Program</div>
+    <div class="card-body">
+      <textarea class="form-control" placeholder="Insurance details..." [(ngModel)]="formData.insuranceDetails"></textarea>
+    </div>
+  </div>
 
-    <ion-item>
-      <ion-textarea
-        placeholder="Terms and Conditions details..."
-      ></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Amount</ion-label>
-      <ion-input value="XXXX" readonly></ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label class="small-text">Tax excluded</ion-label>
-    </ion-item>
-  </ion-card>
+  <!-- Terms & Conditions Section -->
+  <div class="card">
+    <div class="card-header text-primary">Terms & Conditions</div>
+    <div class="card-body">
+      <textarea class="form-control mb-3" placeholder="Terms and Conditions details..." [(ngModel)]="formData.termsAndConditions"></textarea>
+      <label for="amount" class="form-label">Amount</label>
+      <input type="text" class="form-control mb-3" id="amount" [(ngModel)]="formData.amount" readonly>
+      <p class="small text-muted">Tax excluded</p>
+    </div>
+  </div>
 
   <!-- Pay Now Button -->
-  <ion-footer>
-    <ion-toolbar>
-      <ion-button
-        expand="block"
-        color="success"
-        routerLink="/tabs/Home/payment-info"
-        >Pay Now</ion-button
-      >
-    </ion-toolbar>
-  </ion-footer>
+  <div class="fixed-bottom">
+    <button class="btn btn-success btn-lg w-100" (click)="payNow()">Pay Now</button>
+  </div>
 </ion-content>
-
-<!-- CSS to Adjust Spacing -->
-<style>
-  .text-center {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  ion-label.small-text {
-    font-size: 12px;
-    color: #666;
-  }
-
-  ion-footer {
-    padding-bottom: 20px;
-  }
-
-  /* Spacing for the input fields */
-  .spaced-input ion-input {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  /* Adjust segment for better spacing */
-  ion-segment {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  /* Space between sections */
-  ion-card {
-    margin-bottom: 15px;
-  }
-</style>

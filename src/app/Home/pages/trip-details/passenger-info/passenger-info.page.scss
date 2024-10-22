@@ -1,4 +1,81 @@
-.custom-back-button{
-    font-size: 18px;
-    color: rgb(218, 218, 0);
+.custom-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  z-index: 10;
+}
+
+.text-muted {
+  color: #999;
+}
+
+.arrow-icon {
+  width: 30px; /* Adjust size as per your need */
+}
+
+
+.rounded-pill {
+  border-radius: 50px !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+.border {
+  border: 1px solid #ddd !important;
+  border-radius: 28px;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+ion-content {
+  --padding-start: 15px;
+  --padding-end: 15px;
+}
+
+ion-toolbar {
+  --background: #f8f9fa;
+}
+
+.font-weight-bold {
+  font-weight: bold !important;
+  font-size: 1.2rem;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0;
+}
+
+.choose-btn-new {
+  display: inline-block;
+  margin-left: 200px;
+  padding: 5px 5px;
+  border: 2px solid #4cf039;
+  color: #00ff55d3;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+
+.card-mb-3 {
+  box-shadow: 0 0 12px black;
 }

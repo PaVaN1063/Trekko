@@ -1,120 +1,58 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-passenger-info',
-//   templateUrl: './passenger-info.page.html',
-//   styleUrls: ['./passenger-info.page.scss'],
-// })
-// export class PassengerInfoPage implements OnInit {
-//   fromDay: string = 'XXXXXXXXXXX';
-//   toDay: string = 'XXXXXXXXXXX';
-//   emailId: string = '';
-//   phoneNumber: string = '';
-//   stateOfResidency: string = '';
-//   sendUpdatesOnWhatsapp: boolean = false;
-//   constructor() { }
-
-//   onFromDayChange(event: any) {
-//     this.fromDay = event.detail.value;
-//   }
-
-//   onToDayChange(event: any) {
-//     this.toDay = event.detail.value;
-//   }
-
-//   onEmailIdChange(event: any) {
-//     this.emailId = event.detail.value;
-//   }
-
-//   onPhoneNumberChange(event: any) {
-//     this.phoneNumber = event.detail.value;
-//   }
-
-//   onStateOfResidencyChange(event: any) {
-//     this.stateOfResidency = event.detail.value;
-//   }
-
-//   onSendUpdatesOnWhatsappChange(event: any) {
-//     this.sendUpdatesOnWhatsapp = event.detail.checked;
-//   }
-
-//   ngOnInit() {
-//   }
-
-// }
-
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-passenger-info',
   templateUrl: './passenger-info.page.html',
   styleUrls: ['./passenger-info.page.scss'],
 })
-export class PassengerInfoPage implements OnInit {
-  // Existing properties
-  fromDay: string = '';
-  toDay: string = '';
-  emailId: string = '';
-  phoneNumber: string = '';
-  stateOfResidency: string = '';
-  sendUpdatesOnWhatsapp: boolean = false;
+export class PassengerInfoPage {
+  formData = {
+    fromDay: '',
+    toDay: '',
+    emailId: '',
+    phoneNumber: '',
+    stateOfResidency: '',
+    sendUpdatesOnWhatsapp: false,
+    freeCancellation: false,
+    insuranceDetails: '',
+    termsAndConditions: '',
+    amount: 0,
+    passengers: [{ name: '', age: 0, gender: '' }]
+  };
 
-  // New properties
-  amount: number = 0;
-  accNum: string = '';
-  showHeaderTitle = false; // Initially hide the header title
-
-  constructor() {}
-
-  // Lifecycle hook
-  ngOnInit() {
-    // Initialization logic if needed
+  addPassenger() {
+    this.formData.passengers.push({ name: '', age: 0, gender: '' });
   }
-  goBack() {
-    window.history.back();
-  }
-  
-  onScroll(event: any) {
-    const scrollTop = event.detail.scrollTop;
 
-    if (scrollTop > 50) {
-      // When scrolled more than 50px, show the header title
-      this.showHeaderTitle = true;
-    } else {
-      // Hide the header title when scrolled back up
-      this.showHeaderTitle = false;
+  removePassenger(index: number) {
+    if (this.formData.passengers.length > 1) {
+      this.formData.passengers.splice(index, 1);
     }
   }
 
-  handleRefresh(event: any) {
-    // Handle the pull-to-refresh action here
-    setTimeout(() => {
-      event.target.complete();
-    }, 2000);
-  }
-  // Methods to handle changes
-  onFromDayChange(event: any) {
-    this.fromDay = event.detail.value;
-  }
-
-  onToDayChange(event: any) {
-    this.toDay = event.detail.value;
-  }
-
-  onEmailIdChange(event: any) {
-    this.emailId = event.detail.value;
-  }
-
-  onPhoneNumberChange(event: any) {
-    this.phoneNumber = event.detail.value;
-  }
-
-  onStateOfResidencyChange(event: any) {
-    this.stateOfResidency = event.detail.value;
-  }
-
-  onSendUpdatesOnWhatsappChange(event: any) {
-    this.sendUpdatesOnWhatsapp = event.detail.checked;
+  payNow() {
+    const formData = {
+      passengerDetails: this.formData.passengers,
+      contactDetails: {
+        emailId: this.formData.emailId,
+        phoneNumber: this.formData.phoneNumber,
+        stateOfResidency: this.formData.stateOfResidency,
+        sendUpdatesOnWhatsapp: this.formData.sendUpdatesOnWhatsapp,
+      },
+      dateDetails: {
+        fromDay: this.formData.fromDay,
+        toDay: this.formData.toDay,
+      },
+      freeCancellation: this.formData.freeCancellation,
+      insuranceDetails: this.formData.insuranceDetails,
+      termsAndConditions: this.formData.termsAndConditions,
+    };
+  
+    console.log(formData);
   }
   
+
+  goBack() {
+    window.history.back();
+  }
 }

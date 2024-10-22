@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swiper from 'swiper';
 import { ShareTripPage } from './share-trip/share-trip.page';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trip-details',
@@ -13,7 +14,10 @@ export class TripDetailsPage implements OnInit {
   ngOnInit() {
     console.log('Page opended');
   }
-  constructor(private modalController: ModalController) {
+  constructor(
+    private modalController: ModalController,
+    private router: Router
+  ) {
     this.getData();
   }
   selectedSegment = 'Trip Route';
@@ -156,6 +160,7 @@ export class TripDetailsPage implements OnInit {
         trekDuration: '5 Days 4 Nights',
         pickupDateTime: '2024-10-15 10:00 AM',
         specialOffer: 'Special offer',
+        bookingNumber: 1001,
       },
     ];
   }

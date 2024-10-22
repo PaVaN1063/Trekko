@@ -1,210 +1,82 @@
-// ion-slides {
-//   margin-top: 20px;
-//   height: 200px;
-// }
+.custom-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  z-index: 10;
+}
+.trek-card {
+  position: relative; /* Make the card the positioned container */
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 10px;
+}
 
-// ion-slide img {
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-//   border-radius: 8px;
-// }
+.logo {
+  width: 50px;
+  height: 50px;
+}
 
-// ion-item-divider {
-//   margin: 20px 0;
-//   background: transparent;
-//   --inner-padding-end: 0;
-//   --inner-padding-start: 0;
-//   border: 0.5px solid #ccc;
-// }
-// .scrolling-wrapper {
-//   display: flex;
-//   overflow-x: auto;
-//   scrollbar-width: thin;
-//   padding: 10px 0;
-// }
+.special-offer-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+}
 
-// .scrolling-wrapper::-webkit-scrollbar {
-//   height: 8px; /* Adjust the scrollbar height */
-// }
+.gdpr-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
 
-// .scrolling-wrapper::-webkit-scrollbar-thumb {
-//   background: #888; /* Scrollbar color */
-//   border-radius: 10px;
-// }
+.share-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
 
-// .scrolling-wrapper::-webkit-scrollbar-thumb:hover {
-//   background: #555;
-// }
+.btn-success {
+  margin-top: 20px;
+  font-size: 12px;
+  border-radius: 20px;
+  transition: transform 0.5s ease-in-out;
+  animation: pulse 2s infinite; /* Infinite pulse animation */
+}
 
-// .journey_button {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   position: fixed; /* or 'absolute' depending on your layout */
-//   bottom: 0; /* Position it at the bottom */
-//   left: 0; /* Ensure it stretches across the screen */
-//   width: 100%; /* Full width of the screen */
-//   // padding: 10px; /* Optional padding */
-//   // margin-top: 10px;
-//   // background-color: white; /* Optional background color */
-//   // z-index: 1000; /* Ensure it's above other content */
-// }
-// ion-button {
-//   --background: #00c410;
-//   --background-hover: #9ce0be;
-//   --background-activated: #88f4be;
-//   --background-focused: #88f4be;
-//   --color: rgb(255, 255, 255);
-//   --border-radius: 50px;
-// // font-weight: 600;
+@keyframes pulse {
+  0% {
+    transform: scale(1); /* Normal size */
+  }
+  50% {
+    transform: scale(1.1); /* Slightly bigger */
+  }
+  100% {
+    transform: scale(1); /* Back to normal size */
+}
+}
 
-// }
-//   .start_Date{
-//     font-size: 10px;
-//   }
-//   .onwards{
-//     font-size: 10px;
-//     font-weight: 800;
-//     color: rgb(255, 255, 255);
-//     padding: 12px;
-//     background-color: rgb(129, 129, 129);
-//     border-radius: 40px;
+/* Adjustments for alignment */
+.d-flex {
+  gap: 5px;
+}
 
-//   }
+.mt-2 {
+  margin-top: 4px !important; /* Reduce margin between rows */
+}
 
-// /* Styles for the first ion-card */
-// .service-card {
-//   padding-right: 20px;
-//   height: 130px;
-//   position: relative;
-//   margin: 10px;
-// }
+/* Reduce card padding to minimize height */
+.card-body {
+  padding: 8px !important; /* Adjust this value to further reduce height */
+}
 
-// /* Special Offer Image */
-// .service-card .special-offer-image {
-//   position: absolute;
-//   top: 5px;
-//   left: 5px;
-//   width: 40px;
-//   height: 40px;
-//   animation: pulse 2s infinite;
-//   border-radius: 50%;
-// }
 
-// /* Position and Style the Side Section */
-// .service-card .side-section {
-//   position: absolute;
-//   top: 50px;
-//   right: 10px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-end;
-//   z-index: 1; /* Add this line */
-// }
-
-// /* Align Text and Icon in the Side Section */
-// .service-card .sideImg {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-end;
-// }
-
-// .service-card .sideImgIcon {
-//   margin-right: 10px; /* Space between images */
-//   width: 20px;
-//   height: 20px;
-// }
-
-// .service-card .view-itenary {
-//   margin-top: 10px;
-//   color: #4779b5;
-//   font-weight: bold;
-//   text-align: right;
-//   font-size: 10px;
-// }
-
-// .swiper-container {
-//   width: 100%;
-//   // height: 200px; /* Set the desired height */
-// }
-
-// .swiper-slide {
-//   display: flex;
-//   justify-content: center; /* Center the image inside the slide */
-//   align-items: center;
-// }
-
-// .swiper-slide img {
-//   width: 160px;  /* Adjust the size */
-//   height: 90px;
-//   object-fit: cover;
-//   border-radius: 10px;
-// }
-
-// // **************************
-
-// .textHeading {
-//   font-size: 12px; /* Adjust font size as needed */
-//   line-height: 1; /* Decrease line height to reduce space between lines */
-//   margin: 0; /* Remove default margins if any */
-// }
-
-// .view-itenary {
-//   font-size: 12px; /* Adjust this value as needed */
-//   line-height: 1; /* Decrease line height for the itinerary text */
-// }
-
-// .sideImgIcon{
-//   width: 10px;
-// }
-
-// .track-container {
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: stretch;
-// }
-
-// .tracking-line {
-//   width: 2px;
-//   background-color: gray;
-//   height: 100%;
-//   position: relative;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-
-// .dot {
-//   height: 12px;
-//   width: 12px;
-//   background-color: rgb(40, 15, 206);
-//   border-radius: 50%;
-//   position: absolute;
-//   left: 50%; /* Ensure the dot is centered horizontally */
-//   transform: translateX(-50%);
-// }
-
-// .dot:nth-child(1) {
-//   top: 0%;
-// }
-
-// .dot:nth-child(2) {
-//   top: 25%;
-// }
-
-// .dot:nth-child(3) {
-//   top: 50%;
-// }
-
-// .dot:nth-child(4) {
-//   top: 75%;
-// }
-
-// .dot:nth-child(5) {
-//   top: 100%;
-// }
-
+// **********************Segement************************
 .track-container {
   position: relative;
   display: flex;
