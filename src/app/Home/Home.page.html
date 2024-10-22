@@ -4,11 +4,12 @@
   </ion-refresher>
   <div
     class="advertise-space"
-    style="background-color: transparent; height: 30px"
+    style="background-color: transparent; height: 50px"
   ></div>
   <div class="title" style="padding-left: 20px; font-weight: 500">
     <h3 style="font-weight: 500">Trip Tickets</h3>
   </div>
+  <div class="cards-tripTickets">
   <div
     class="card head-card mx-1 my-1 shadow"
     style="border-radius: 20px; padding: 10px"
@@ -46,88 +47,55 @@
             style="font-size: 14px; padding: 8px"
           />
         </div>
-
-        <div class="d-flex align-items-center mb-2">
-          <!-- Increased margin-bottom -->
-          <div class="me-2" style="flex: 0 0 60px; position: relative">
-            <label for="departureDay" class="form-label" style="font-size: 14px"
-              >Departure Day</label
-            >
-
-            <!-- Calendar Icon -->
-            <img
-              src="../../assets/icon/calendar.png"
-              alt="Calendar Icon"
-              style="
-                position: absolute;
-                top: 36px;
-                left: 10px;
-                width: 25px;
-                height: 25px;
-                z-index: 1;
-              "
-            />
-
-            <!-- Input Field with reduced width and padding -->
-            <input
-              type="date"
-              class="form-control"
-              id="departureDay"
-              [(ngModel)]="departureDay"
-              name="departureDay"
-              required
-              style="
-                font-size: 14px;
-                padding: 8px 8px 8px 40px; /* Extra padding to make space for the icon */
-                width: 150px; /* Adjust the width */
-                appearance: none; /* Remove the default icon */
-                -webkit-appearance: none; /* Remove the default icon (Safari and Chrome) */
-                -moz-appearance: textfield; /* Firefox fix */
-                background: none; /* Remove any default background */
-              "
-            />
-          </div>
-
-          <div class="d-flex justify-content-between" style="margin-top: 25px">
-            <ion-chip
-              style="
-                width: 110px;
-                height: auto;
-                font-size: 8px;
-                padding: 5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              "
-              [outline]="!isWeekendTrekSelected"
-              (click)="toggleWeekendTrek()"
-              [ngClass]="{'selected': isWeekendTrekSelected}"
-            >
-              <ion-label>Weekend Trek</ion-label>
-              <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
-            </ion-chip>
-            <ion-chip
-              style="
-                width: 110px;
-                font-size: 8px;
-                padding: 5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              "
-              [outline]="!isPersonalizedTrekSelected"
-              (click)="togglePersonalizedTrek()"
-              [ngClass]="{'selected': isPersonalizedTrekSelected}"
-            >
-              <ion-label>Personalized Trek</ion-label>
-              <ion-icon
-                *ngIf="isPersonalizedTrekSelected"
-                name="close"
-              ></ion-icon>
-            </ion-chip>
+        <div class="departure-container mb-2">
+          <label for="departureDay" class="form-label" style="font-size: 14px;">Departure Day</label>
+        
+          <div class="d-flex align-items-center">
+            <div class="position-relative me-2">
+              <!-- Calendar Icon -->
+              <img
+                src="../../assets/icon/calendar.png"
+                alt="Calendar Icon"
+                class="calendar-icon"
+              />
+        
+              <!-- Input Field for Date -->
+              <input
+                type="date"
+                class="form-control"
+                id="departureDay"
+                [(ngModel)]="departureDay"
+                name="departureDay"
+                required
+              />
+            </div>
+        
+            <div class="trek-chips d-flex align-items-center">
+              <ion-chip
+                class="custom-chip"
+                [outline]="!isWeekendTrekSelected"
+                (click)="toggleWeekendTrek()"
+                [ngClass]="{'selected': isWeekendTrekSelected}"
+              >
+                <ion-label>Weekend Trek</ion-label>
+                <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
+              </ion-chip>
+              
+              <ion-chip
+                class="custom-chip"
+                [outline]="!isPersonalizedTrekSelected"
+                (click)="togglePersonalizedTrek()"
+                [ngClass]="{'selected': isPersonalizedTrekSelected}"
+              >
+                <ion-label>Personalized Trek</ion-label>
+                <ion-icon *ngIf="isPersonalizedTrekSelected" name="close"></ion-icon>
+              </ion-chip>
+            </div>
+            
           </div>
         </div>
-
+        
+        
         <div class="d-grid">
           <button
             type="submit"
@@ -141,14 +109,14 @@
       </form>
     </div>
   </div>
-
+</div>
   <div class="Section-2">
     <div class="top-trips-card" style="padding: 0">
       <div
         class="d-flex justify-content-between align-items-center section-header"
         style="margin-bottom: 0; padding: 5px 0"
       >
-        <h2 class="ms-3 mb-0" style="font-size: 14px; margin: 0">Top Treks</h2>
+        <h2 class="ms-3 mb-0" style="font-size: 16px; margin: 0">Top Treks</h2>
         <ion-button
           fill="clear"
           size="small"
@@ -162,16 +130,16 @@
         <div class="swiper-wrapper">
           <div
             class="swiper-slide"
-            *ngFor="let slide of slides; let i = index"
+            *ngFor="let slide of slides1; let i = index"
             [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
-            style="margin-right: 10px; padding-right: 0px"
+            style="margin-right: 2px; padding-right: 0px"
           >
             <ion-card
               class="card"
               routerLink="/tabs/Home/trip-details"
               style="
-                width: 100px;
-                height: 100px;
+                width: 30vw; /* Make width responsive */
+                height: 30vw; /* Keep height proportional */
                 border-radius: 20px;
                 overflow: hidden;
                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
@@ -183,8 +151,8 @@
                 [src]="slide.image"
                 alt="{{ slide.title }}"
                 style="
-                  width: 100px;
-                  height: 100px;
+                  width: 30vw;
+                  height: 30vw;
                   border-radius: 20px;
                   overflow: hidden;
                   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
@@ -207,7 +175,7 @@
           padding: 5px 0;
         "
       >
-        <h2 class="ms-3 mb-0" style="font-size: 14px; margin: 0">Offers</h2>
+        <h2 class="ms-3 mb-0" style="font-size: 16px; margin: 0">Offers</h2>
         <ion-button
           fill="clear"
           size="small"
@@ -218,36 +186,40 @@
       </div>
 
       <div class="swiper-container" style="margin: 0">
-        <div class="swiper-wrapper" style="padding-right: 20px">
-          <div
-            class="swiper-slide"
-            *ngFor="let slide of slides1; let i = index"
-            [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
-            style="margin-right: 10px; padding-right: 0px"
-          >
-            <ion-card
-              class="card"
-              routerLink="/tabs/Home/offers"
-              style="
-                width: 100px;
-                height: 100px;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                margin: 0;
-              "
+        <div class="swiper-container" style="margin: 0">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide"
+              *ngFor="let slide of slides2; let i = index"
+              [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
+              style="margin-right: 2px; padding-right: 0px"
             >
-              <img
-                [src]="slide.image"
-                alt="{{ slide.title }}"
+              <ion-card
+                class="card"
+                routerLink="/tabs/Home/trip-details"
                 style="
-                  width: 100px;
-                  height: 100px;
+                  width: 30vw; /* Make width responsive */
+                  height: 30vw; /* Keep height proportional */
                   border-radius: 20px;
                   overflow: hidden;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+                  margin: 0;
                 "
-              />
-            </ion-card>
+              >
+                <img
+                  routerLink="/tabs/Home/trip-details"
+                  [src]="slide.image"
+                  alt="{{ slide.title }}"
+                  style="
+                    width: 30vw;
+                    height: 30vw;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+                  "
+                />
+              </ion-card>
+            </div>
           </div>
         </div>
       </div>
@@ -264,7 +236,7 @@
           padding: 5px 0;
         "
       >
-        <h2 class="ms-3 mb-0" style="font-size: 14px; margin: 0">
+        <h2 class="ms-3 mb-0" style="font-size: 16px; margin: 0">
           Trek Shorts
         </h2>
         <ion-button
@@ -277,19 +249,19 @@
       </div>
 
       <div class="swiper-container" style="margin: 0">
-        <div class="swiper-wrapper" style="padding-right: 20px">
+        <div class="swiper-wrapper">
           <div
             class="swiper-slide"
-            *ngFor="let slide of slides2; let i = index"
+            *ngFor="let slide of slides; let i = index"
             [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
-            style="margin-right: 10px; padding-right: 0px"
+            style="margin-right: 2px; padding-right: 0px"
           >
             <ion-card
               class="card"
-              routerLink="/tabs/Home/offers"
+              routerLink="/tabs/Home/trip-details"
               style="
-                width: 100px;
-                height: 100px;
+                width: 30vw; /* Make width responsive */
+                height: 30vw; /* Keep height proportional */
                 border-radius: 20px;
                 overflow: hidden;
                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
@@ -297,13 +269,15 @@
               "
             >
               <img
+                routerLink="/tabs/Home/trip-details"
                 [src]="slide.image"
                 alt="{{ slide.title }}"
                 style="
-                  width: 100px;
-                  height: 100px;
+                  width: 30vw;
+                  height: 30vw;
                   border-radius: 20px;
                   overflow: hidden;
+                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
                 "
               />
             </ion-card>

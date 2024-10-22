@@ -140,7 +140,7 @@ export class HomePage implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     const swiper = new Swiper('.swiper-container', {
       slidesPerView: 3, // Display 3.25 slides
-      spaceBetween: 0.2,
+      spaceBetween: 2,  // Further decreased space between slides
       // loop: true,
       pagination: {
         el: '.swiper-pagination',
@@ -156,6 +156,8 @@ export class HomePage implements AfterViewInit, OnInit {
       },
     });
   }
+  
+  
   toggleWeekendTrek() {
     this.isWeekendTrekSelected = !this.isWeekendTrekSelected;
   }

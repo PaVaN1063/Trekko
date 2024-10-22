@@ -1,39 +1,149 @@
-.departure-container {
-  position: relative;
-}
+.cards-tripTickets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
 
-.calendar-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
- 
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack vertically on smaller screens */
+    gap: 12px;
+  }
 
+  .card {
+    width: 100%; /* Adjust card width */
+
+    @media (max-width: 768px) {
+      width: 100%; /* Full width on smaller screens */
+    }
+
+    border-radius: 20px;
+    padding: 10px;
+  }
+}
 
 .custom-chip {
-  width: 80px;  // Adjust as per your need
-  height: 20px;  // Custom height
-  font-size: 10px;
-  padding: 0;  // Remove internal padding
+  width: 110px;
+  font-size: 12px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;  // Optional: Adjust for rounded corners
+  margin-right: 5px;
 
-  ion-label {
-    padding: 0;
-    margin: 0;
-    line-height: 1;  // Ensure label fits well
+  @media (max-width: 768px) {
+    width: 100px;
+    font-size: 10px; /* Decrease font size */
+    margin-bottom: 10px; /* Create space for stacking */
   }
 
-  ion-icon {
-    font-size: 12px;  // Adjust icon size
-    margin-left: 4px;  // Add space between label and icon
+  @media (min-width: 1200px) {
+    width: 120px; /* Increase size for larger screens */
+    font-size: 14px;
   }
 
   &.selected {
-    background-color: #d1e7dd;  // Example selected color
+    background-color: #d1e7dd;
     color: #0f5132;
+  }
+}
+
+.departure-container {
+  position: relative;
+
+  // Label styles
+  .form-label {
+    margin-bottom: 0.5rem; // Spacing between label and input
+  }
+
+  .d-flex {
+    align-items: center; // Vertically align items
+  }
+
+  input[type="date"] {
+    font-size: 14px;
+    padding: 8px 8px 8px 50px; // Space for the calendar icon
+    width: 150px; // Fixed width for the input to keep alignment consistent
+
+    @media (max-width: 768px) {
+      font-size: 12px; // Smaller font size for mobile
+      width: 90%; // Full width for mobile
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 16px; // Increase font size for larger screens
+      width: 150px; // Fixed width for larger screens
+    }
+  }
+
+  .calendar-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px; // Position the icon inside the input field
+    transform: translateY(-50%);
+    width: 25px; // Default icon size
+    height: 25px;
+
+    @media (max-width: 768px) {
+      width: 30px; // Smaller icon for mobile
+      height: 30px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 40px; // Larger icon for desktop
+      height: 40px;
+    }
+  }
+
+  .trek-chips {
+    margin-left: 10px; // Space between the input and chips
+    display: flex;
+    align-items: center; // Center the chips vertically
+  }
+}
+
+.trek-chips {
+  // Default flex properties
+  display: flex; // Set to flexbox
+  flex-direction: row; // Default to row for wider screens
+  align-items: center; // Center align items
+  flex-wrap: wrap; // Allow chips to wrap if necessary
+  gap: 8px; // Add spacing between chips
+
+  @media (max-width: 364px) {
+    flex-direction: column; // Stack chips vertically on smaller screens
+    align-items: flex-start; // Align items to start (left)
+    
+  }
+}
+
+.custom-chip {
+  width: 150px; // Custom width for larger screens
+  height: auto; // Allow height to adjust automatically
+  font-size: 10px; // Base font size
+  padding: 5px 10px; // Padding on left and right
+
+  @media (max-width: 768px) {
+    width: 100px; // Smaller width for mobile
+    font-size: 8px; // Smaller font size on mobile
+  }
+
+  @media (min-width: 1200px) {
+    width: 120px; // Larger width for desktop
+    font-size: 12px; // Larger font size on desktop
+  }
+}
+
+.swiper-container .card {
+  width: 30vw; /* Responsive width */
+  height: 30vw; /* Keep height proportional */
+
+  @media (max-width: 768px) {
+    width: 40vw;
+    height: 40vw;
+  }
+
+  @media (max-width: 480px) {
+    width: 50vw;
+    height: 50vw;
   }
 }
