@@ -3,10 +3,8 @@
     <button class="back-button" (click)="goBack()">
       <ion-icon name="chevron-back-outline"></ion-icon>
     </button>
-    <h4 style="margin-bottom: 20px;">Passenger Details</h4>
+    <h4 style="margin-bottom: 20px">Passenger Information</h4>
   </div>
-
-  <!-- Date Information -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="text-center">
       <label>From Day</label>
@@ -20,119 +18,198 @@
       <p class="font-weight-bold text-muted">{{ formData.toDay }}XXXX</p>
     </div>
   </div>
-
-  <!-- Contact Details -->
   <div class="card">
     <div class="card-body">
       <h5>Contact Details</h5>
       <p>Trip details will be sent to</p>
-
-      <!-- Email -->
       <div class="form-group mb-3">
-        <input type="email" class="form-control rounded-pill" placeholder="Enter Email ID" [(ngModel)]="formData.emailId">
+        <input
+          type="email"
+          class="form-control rounded-pill"
+          placeholder="Enter Email ID"
+          [(ngModel)]="formData.emailId"
+        />
       </div>
-
-      <!-- Phone Number -->
       <div class="form-group mb-3">
-        <input type="tel" class="form-control rounded-pill" placeholder="Enter Phone Number" [(ngModel)]="formData.phoneNumber">
+        <input
+          type="tel"
+          class="form-control rounded-pill"
+          placeholder="Enter Phone Number"
+          [(ngModel)]="formData.phoneNumber"
+        />
       </div>
-
-      <!-- State of Residency -->
       <div class="form-group mb-3">
-        <input type="text" class="form-control rounded-pill" placeholder="Enter State" [(ngModel)]="formData.stateOfResidency">
+        <input
+          type="text"
+          class="form-control rounded-pill"
+          placeholder="Enter State"
+          [(ngModel)]="formData.stateOfResidency"
+        />
       </div>
       <p>Required for GST Tax invoicing</p>
-
-      <!-- WhatsApp Booking Update Toggle -->
       <ion-item lines="none">
-        <ion-icon name="logo-whatsapp" slot="start" size="large" color="success"></ion-icon>
+        <ion-icon
+          name="logo-whatsapp"
+          slot="start"
+          size="large"
+          color="success"
+        ></ion-icon>
         <ion-label>Send booking & trip updates on WhatsApp</ion-label>
-        <ion-toggle slot="end" [(ngModel)]="formData.sendUpdatesOnWhatsapp"></ion-toggle>
+        <ion-toggle
+          slot="end"
+          [(ngModel)]="formData.sendUpdatesOnWhatsapp"
+        ></ion-toggle>
       </ion-item>
     </div>
   </div>
-
-  <!-- Passenger Details -->
-  <h5>Passenger Details</h5>
+  <h4>Passenger Details</h4>
 
   <div *ngFor="let passenger of formData.passengers; let i = index">
-    <p>Person {{ i + 1 }} <span class="choose-btn-new">Choose</span></p>
-
-    <div class="card" style="border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); margin-bottom: 30px;">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <p class="h6 mb-0">Person {{ i + 1 }}</p>
+      <div class="d-flex align-items-center">
+        <div *ngIf="i > 0" class="mr-2">
+          <ion-icon
+            name="trash"
+            color="danger"
+            class="remove-icon"
+            (click)="removePassenger(i)"
+          ></ion-icon>
+        </div>
+        <button class="btn btn-outline-success choose-btn">Choose</button>
+      </div>
+    </div>
+  
+    <div class="card passenger-card">
       <div class="card-body">
-        <!-- Passenger Name -->
         <div class="form-group mb-3">
-          <input type="text" class="form-control rounded-pill" [(ngModel)]="passenger.name" placeholder="Enter Name">
+          <input
+            type="text"
+            class="form-control rounded-pill name-input"
+            [(ngModel)]="passenger.name"
+            placeholder="Name"
+          />
         </div>
-
-        <!-- Passenger Age -->
-        <div class="form-group mb-3">
-          <label>Age</label>
-          <input type="number" class="form-control rounded-pill" [(ngModel)]="passenger.age" placeholder="Enter Age">
-        </div>
-
-        <!-- Gender Selection -->
-        <div class="form-group mb-3">
-          <label>Gender</label>
-          <div class="btn-group d-flex">
-            <button type="button" class="btn btn-outline-secondary flex-fill rounded-pill"
-              [class.active]="passenger.gender === 'Male'" (click)="passenger.gender = 'Male'">Male</button>
-            <button type="button" class="btn btn-outline-secondary flex-fill rounded-pill"
-              [class.active]="passenger.gender === 'Female'" (click)="passenger.gender = 'Female'">Female</button>
+        <div class="row mb-3 align-items-center">
+          <div class="col-4">
+            <input
+              type="number"
+              class="form-control rounded-pill age-input"
+              [(ngModel)]="passenger.age"
+              placeholder="Age"
+            />
+          </div>
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-pill w-100"
+              [class.active]="passenger.gender === 'Male'"
+              (click)="passenger.gender = 'Male'"
+            >
+              Male
+            </button>
+          </div>
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-pill w-100"
+              [class.active]="passenger.gender === 'Female'"
+              (click)="passenger.gender = 'Female'"
+            >
+              Female
+            </button>
           </div>
         </div>
-
-        <!-- Remove Passenger -->
-        <div *ngIf="i > 0" class="d-flex align-items-center">
-          <ion-icon name="trash" color="danger" class="mr-2" (click)="removePassenger(i)"></ion-icon>
-        </div>
       </div>
     </div>
   </div>
+  
 
   <!-- Add Adult Button -->
-  <button class="btn btn-primary" (click)="addPassenger()">Add Adult</button>
+  <div class="d-flex justify-content-end mt-3">
+    <button class="btn btn-primary add-adult-btn" (click)="addPassenger()">
+      ADD ADULT
+    </button>
+  </div>
 
-  <!-- Free Cancellation Section -->
-  <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <span>Free Cancellation</span>
+  <div>
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="title">Free Cancellation</span> <!-- Added class for bold title -->
       <i class="bi bi-alarm"></i>
     </div>
-    <div class="card-body">
+    <div>
       <p class="small text-muted">Valid till 1 day before the Departure</p>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="cancellation" value="add" [(ngModel)]="formData.freeCancellation">
-        <label class="form-check-label">Add Free Cancellation</label>
+  
+      <div class="form-check option-container d-flex justify-content-between align-items-center">
+        <label class="form-check-label mb-0">Add Free Cancellation</label>
+        <input
+          class="form-check-input"
+          type="radio"
+          name="cancellation"
+          value="add"
+          [(ngModel)]="formData.freeCancellation"
+        />
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="cancellation" value="no-add" [(ngModel)]="formData.freeCancellation">
-        <label class="form-check-label">Don’t add Free Cancellation</label>
+  
+      <div class="form-check option-container d-flex justify-content-between align-items-center">
+        <label class="form-check-label mb-0">Don’t add Free Cancellation</label>
+        <input
+          class="form-check-input"
+          type="radio"
+          name="cancellation"
+          value="no-add"
+          [(ngModel)]="formData.freeCancellation"
+        />
       </div>
     </div>
   </div>
-
-  <!-- Aorbo Insurance Program Section -->
-  <div class="card">
-    <div class="card-header">Aorbo Insurance Program</div>
+  <div>
+    <h2 class="insurance-header">Aorbo Insurance Program</h2>
     <div class="card-body">
-      <textarea class="form-control" placeholder="Insurance details..." [(ngModel)]="formData.insuranceDetails"></textarea>
+      <textarea
+        class="form-control"
+        placeholder="Insurance details..."
+        [(ngModel)]="formData.insuranceDetails"
+        rows="4"
+      ></textarea>
     </div>
   </div>
-
-  <!-- Terms & Conditions Section -->
-  <div class="card">
-    <div class="card-header text-primary">Terms & Conditions</div>
-    <div class="card-body">
-      <textarea class="form-control mb-3" placeholder="Terms and Conditions details..." [(ngModel)]="formData.termsAndConditions"></textarea>
-      <label for="amount" class="form-label">Amount</label>
-      <input type="text" class="form-control mb-3" id="amount" [(ngModel)]="formData.amount" readonly>
-      <p class="small text-muted">Tax excluded</p>
+ 
+  <div>
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="terms-header">Terms and Conditions</span> <!-- Updated class for title -->
+      <i class="bi bi-alarm"></i>
+    </div>
+    <div>
+  
+      <div class="form-check terms-option d-flex justify-content-between align-items-center">
+        <label class="form-check-label mb-0">I agree to the terms and conditions...</label> <!-- Updated label -->
+        <input
+          class="form-check-input"
+          type="radio"
+          name="terms"
+          value="agree"
+          [(ngModel)]="formData.termsAndConditions"
+        />
+      </div>
+  
+      <div class="form-check terms-option d-flex justify-content-between align-items-center">
+        <label class="form-check-label mb-0">I agree to the Aorbo terms and conditions...</label> <!-- Updated label -->
+        <input
+          class="form-check-input"
+          type="radio"
+          name="terms"
+          value="agreeAorbo"
+          [(ngModel)]="formData.termsAndConditions"
+        />
+      </div>
     </div>
   </div>
-
-  <!-- Pay Now Button -->
+       
+  
   <div class="fixed-bottom">
-    <button class="btn btn-success btn-lg w-100" (click)="payNow()">Pay Now</button>
+    <button class="btn btn-success btn-lg w-100" (click)="payNow()">
+      Pay Now
+    </button>
   </div>
 </ion-content>

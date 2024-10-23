@@ -1,43 +1,5 @@
-.custom-header {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  // justify-content: space-between;
-  align-items: center;
-  background: transparent;
-  z-index: 10;
-}
-
-.text-muted {
-  color: #999;
-}
-
 .arrow-icon {
-  width: 30px; /* Adjust size as per your need */
-}
-
-
-.rounded-pill {
-  border-radius: 50px !important;
-}
-
-.shadow-sm {
-  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
-}
-
-.border {
-  border: 1px solid #ddd !important;
-  border-radius: 28px;
-}
-
-.d-flex {
-  display: flex !important;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
+  width: 30px;
 }
 
 ion-content {
@@ -55,6 +17,7 @@ ion-toolbar {
 }
 
 .card {
+  margin-top: 10px;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
@@ -64,18 +27,131 @@ ion-toolbar {
   border-radius: 15px 15px 0 0;
 }
 
-.choose-btn-new {
-  display: inline-block;
-  margin-left: 200px;
-  padding: 5px 5px;
-  border: 2px solid #4cf039;
-  color: #00ff55d3;
-  font-weight: bold;
+.card-mb-3 {
+  box-shadow: 0 0 12px black;
+}
+
+.passenger-card {
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+}
+
+.name-input {
+  border: 1px solid #ddd;
+}
+
+.choose-btn {
+  font-size: 14px;
+  border-radius: 15px;
+  padding: 5px 15px;
+}
+
+.add-adult-btn {
+  font-size: 12px;
+  border-radius: 15px;
+  position: relative;
+  bottom: 10px;
+  margin-bottom: 0px;
+}
+
+.remove-icon {
   cursor: pointer;
-  background-color: #ffffff;
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.option-container {
+  background-color: #f9f9f9; /* Light background color to mimic an input field */
+  border: 1px solid #ccc; /* Softer border */
+  border-radius: 25px; /* Slightly less rounded */
+  padding: 8px; /* Increased padding for better spacing */
+  margin-bottom: 10px;
+  transition: border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.form-check-label {
+  padding: 3px 10px; /* Reduced padding */
+  font-weight: normal; /* Ensure labels are not bold */
+}
+
+.form-check {
+  display: flex; /* Ensure flex display for proper alignment */
+  align-items: center; /* Vertically center items */
+}
+
+.form-check-input {
+  border-radius: 50%;
+  margin-top: -3px; /* Move the radio button up slightly */
+  margin-right: 10px;
+  transform: scale(1.2); /* Increase the size of the radio button */
+  width: 1em; /* Adjust width */
+  height: 1em; /* Adjust height */
+}
+
+/* New styles to adjust the position of titles */
+.d-flex {
+  margin-left: 15px; /* Move the title and subtitle to the right */
+}
+
+.small.text-muted {
+  margin-left: 15px; /* Align subtitle with the title */
+}
+
+.title {
+  font-weight: bold; /* Make the title bold */
+}
+
+.insurance-header{
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-control {
+  border-radius: 15px; /* Set border radius to 2px */
 }
 
 
-.card-mb-3 {
-  box-shadow: 0 0 12px black;
+
+/* Styling for the terms header */
+.terms-header {
+  margin-left: 15px; /* Move the header to the right */
+  font-weight: bold; /* Ensure it's bold */
+  color: rgb(19, 98, 216);
+}
+
+/* Styling for each option under terms */
+.terms-option {
+  background-color: #f9f9f9; /* Light background color to mimic an input field */
+  border: 1px solid #ccc; /* Softer border */
+  border-radius: 25px; /* Slightly less rounded */
+  padding: 8px; /* Increased padding for better spacing */
+  margin-bottom: 10px; /* Space between options */
+  transition: border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.form-check-label {
+  padding: 3px 10px; /* Reduced padding */
+  font-weight: normal; /* Ensure labels are not bold */
+}
+
+.form-check {
+  display: flex; /* Ensure flex display for proper alignment */
+  align-items: center; /* Vertically center items */
+}
+
+/* Styling for the radio button */
+.form-check-input {
+  border-radius: 50%;
+  margin-top: -3px; /* Move the radio button up slightly */
+  margin-right: 10px;
+  transform: scale(1.2); /* Increase the size of the radio button */
+  width: 1em; /* Adjust width */
+  height: 1em; /* Adjust height */
+}
+
+/* Global d-flex class alignment */
+.d-flex {
+  margin-left: 15px; /* Apply consistent left margin */
 }

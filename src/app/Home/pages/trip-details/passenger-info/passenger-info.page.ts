@@ -17,11 +17,11 @@ export class PassengerInfoPage {
     insuranceDetails: '',
     termsAndConditions: '',
     amount: 0,
-    passengers: [{ name: '', age: 0, gender: '' }]
+    passengers: [{ name: '', age: '', gender: '' }]
   };
 
   addPassenger() {
-    this.formData.passengers.push({ name: '', age: 0, gender: '' });
+    this.formData.passengers.push({ name: '', age: '', gender: '' });
   }
 
   removePassenger(index: number) {
@@ -50,7 +50,6 @@ export class PassengerInfoPage {
   
     console.log(formData);
   }
-  
 
   goBack() {
     window.history.back();
