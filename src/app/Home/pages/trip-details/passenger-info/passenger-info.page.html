@@ -1,10 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Passenger Information</ion-title>
+  </ion-toolbar>
+</ion-header> 
+  
 <ion-content class="ion-padding">
-  <div class="custom-header">
-    <button class="back-button" (click)="goBack()">
-      <ion-icon name="chevron-back-outline"></ion-icon>
-    </button>
-    <h4 style="margin-bottom: 20px">Passenger Information</h4>
-  </div>
+
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="text-center">
       <label>From Day</label>
@@ -79,7 +85,7 @@
         <button class="btn btn-outline-success choose-btn">Choose</button>
       </div>
     </div>
-  
+
     <div class="card passenger-card">
       <div class="card-body">
         <div class="form-group mb-3">
@@ -123,7 +129,6 @@
       </div>
     </div>
   </div>
-  
 
   <!-- Add Adult Button -->
   <div class="d-flex justify-content-end mt-3">
@@ -134,13 +139,16 @@
 
   <div>
     <div class="d-flex justify-content-between align-items-center">
-      <span class="title">Free Cancellation</span> <!-- Added class for bold title -->
+      <span class="title">Free Cancellation</span>
+      <!-- Added class for bold title -->
       <i class="bi bi-alarm"></i>
     </div>
     <div>
       <p class="small text-muted">Valid till 1 day before the Departure</p>
-  
-      <div class="form-check option-container d-flex justify-content-between align-items-center">
+
+      <div
+        class="form-check option-container d-flex justify-content-between align-items-center"
+      >
         <label class="form-check-label mb-0">Add Free Cancellation</label>
         <input
           class="form-check-input"
@@ -150,8 +158,10 @@
           [(ngModel)]="formData.freeCancellation"
         />
       </div>
-  
-      <div class="form-check option-container d-flex justify-content-between align-items-center">
+
+      <div
+        class="form-check option-container d-flex justify-content-between align-items-center"
+      >
         <label class="form-check-label mb-0">Don’t add Free Cancellation</label>
         <input
           class="form-check-input"
@@ -166,50 +176,68 @@
   <div>
     <h2 class="insurance-header">Aorbo Insurance Program</h2>
     <div class="card-body">
-      <textarea
-        class="form-control"
-        placeholder="Insurance details..."
-        [(ngModel)]="formData.insuranceDetails"
-        rows="4"
-      ></textarea>
+      <div class="d-flex justify-content-center">
+        <textarea
+          class="form-control w-80"
+          placeholder="Insurance details..."
+          [(ngModel)]="formData.insuranceDetails"
+          rows="4"
+        ></textarea>
+      </div>
     </div>
   </div>
- 
-  <div>
+
+  <div class="terms-container mt-2">
     <div class="d-flex justify-content-between align-items-center">
-      <span class="terms-header">Terms and Conditions</span> <!-- Updated class for title -->
+      <span class="terms-header">Terms and Conditions</span>
       <i class="bi bi-alarm"></i>
     </div>
     <div>
-  
-      <div class="form-check terms-option d-flex justify-content-between align-items-center">
-        <label class="form-check-label mb-0">I agree to the terms and conditions...</label> <!-- Updated label -->
+      <div
+        class="form-check terms-option d-flex justify-content-between align-items-center"
+      >
+        <label class="form-check-label mb-0"
+          >I agree to the terms and conditions...</label
+        >
         <input
           class="form-check-input"
-          type="radio"
+          type="checkbox"
           name="terms"
           value="agree"
-          [(ngModel)]="formData.termsAndConditions"
+          [(ngModel)]="formData.termsAndConditions.agree"
         />
       </div>
-  
-      <div class="form-check terms-option d-flex justify-content-between align-items-center">
-        <label class="form-check-label mb-0">I agree to the Aorbo terms and conditions...</label> <!-- Updated label -->
+
+      <div
+        class="form-check terms-option d-flex justify-content-between align-items-center"
+      >
+        <label class="form-check-label mb-0"
+          >I agree to the Aorbo terms and conditions...</label
+        >
         <input
           class="form-check-input"
-          type="radio"
+          type="checkbox"
           name="terms"
           value="agreeAorbo"
-          [(ngModel)]="formData.termsAndConditions"
+          [(ngModel)]="formData.termsAndConditions.agreeAorbo"
         />
       </div>
     </div>
   </div>
-       
-  
-  <div class="fixed-bottom">
-    <button class="btn btn-success btn-lg w-100" (click)="payNow()">
-      Pay Now
-    </button>
+
+  <div
+    class="d-flex justify-content-between align-items-start amount-container p-3"
+  >
+    <div>
+      <label class="mb-0">Account</label>
+      <p class="small text-muted mb-0">Tax excluded</p>
+    </div>
+    <div class="text-right">
+      <label class="mb-0 total-price">{{ formData.amount }}.00</label>
+    </div>
+  </div>
+
+  <div class="pay-now-container">
+    <button class="btn pay-now-btn" (click)="payNow()">Pay Now</button>
   </div>
 </ion-content>

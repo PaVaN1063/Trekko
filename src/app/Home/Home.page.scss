@@ -61,8 +61,8 @@
 
   input[type="date"] {
     font-size: 14px;
-    padding: 8px 8px 8px 50px; // Space for the calendar icon
-    width: 150px; // Fixed width for the input to keep alignment consistent
+    padding: 8px 8px 8px 35px; // Space for the calendar icon
+    width: 120px; // Fixed width for the input to keep alignment consistent
 
     @media (max-width: 768px) {
       font-size: 12px; // Smaller font size for mobile
@@ -80,12 +80,12 @@
     top: 50%;
     left: 10px; // Position the icon inside the input field
     transform: translateY(-50%);
-    width: 25px; // Default icon size
-    height: 25px;
+    width: 20px; // Default icon size
+    height: 20px;
 
     @media (max-width: 768px) {
-      width: 30px; // Smaller icon for mobile
-      height: 30px;
+      width: 20px; // Smaller icon for mobile
+      height: 20px;
     }
 
     @media (min-width: 1200px) {

@@ -15,21 +15,27 @@ export class PassengerInfoPage {
     sendUpdatesOnWhatsapp: false,
     freeCancellation: false,
     insuranceDetails: '',
-    termsAndConditions: '',
+    termsAndConditions: {
+      agree: false,        // For "I agree to the terms and conditions..."
+      agreeAorbo: false    // For "I agree to the Aorbo terms and conditions..."
+    },
     amount: 0,
     passengers: [{ name: '', age: '', gender: '' }]
   };
 
+  // Adds a new passenger to the list
   addPassenger() {
     this.formData.passengers.push({ name: '', age: '', gender: '' });
   }
 
+  // Removes a passenger if there is more than one
   removePassenger(index: number) {
     if (this.formData.passengers.length > 1) {
       this.formData.passengers.splice(index, 1);
     }
   }
 
+  // Processes the form data for payment
   payNow() {
     const formData = {
       passengerDetails: this.formData.passengers,
@@ -45,12 +51,17 @@ export class PassengerInfoPage {
       },
       freeCancellation: this.formData.freeCancellation,
       insuranceDetails: this.formData.insuranceDetails,
-      termsAndConditions: this.formData.termsAndConditions,
+      termsAndConditions: {
+        agree: this.formData.termsAndConditions.agree,         // Terms and conditions agreement
+        agreeAorbo: this.formData.termsAndConditions.agreeAorbo // Aorbo terms agreement
+      }
     };
-  
+
+    // Log form data for debugging purposes
     console.log(formData);
   }
 
+  // Navigate back to the previous page
   goBack() {
     window.history.back();
   }

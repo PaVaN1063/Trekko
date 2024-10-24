@@ -1,3 +1,19 @@
+ion-toolbar{
+  --background:#f5f5f5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+
+}
+ion-title{
+  font-weight: normal;
+  font-size: 14px;
+}
+ion-icon{
+  font-size: 25px;
+  color: #dada00;
+}
+.header-title{
+  color: black;
+}
 .arrow-icon {
   width: 30px;
 }
@@ -7,9 +23,6 @@ ion-content {
   --padding-end: 15px;
 }
 
-ion-toolbar {
-  --background: #f8f9fa;
-}
 
 .font-weight-bold {
   font-weight: bold !important;
@@ -47,12 +60,24 @@ ion-toolbar {
   padding: 5px 15px;
 }
 
+// .add-adult-btn {
+//   font-size: 12px;
+//   border-radius: 15px;
+//   position: relative;
+//   bottom: 10px;
+//   margin-bottom: 0px;
+// }
+
 .add-adult-btn {
-  font-size: 12px;
-  border-radius: 15px;
-  position: relative;
-  bottom: 10px;
-  margin-bottom: 0px;
+  font-size: 12px;            
+  border-radius: 10px;       
+  background-color: #dfdfdf;    
+  color: #407dda;   
+  font-weight: bold;    
+  position: relative;         
+  bottom: 10px;              
+  margin-bottom: 0px;       
+  border: 1px solid rgb(37, 37, 37); 
 }
 
 .remove-icon {
@@ -63,44 +88,44 @@ ion-toolbar {
 }
 
 .option-container {
-  background-color: #f9f9f9; /* Light background color to mimic an input field */
-  border: 1px solid #ccc; /* Softer border */
-  border-radius: 25px; /* Slightly less rounded */
-  padding: 8px; /* Increased padding for better spacing */
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc;
+  border-radius: 25px; 
+  padding: 8px; 
   margin-bottom: 10px;
-  transition: border-color 0.3s; /* Smooth transition for hover effect */
+  transition: border-color 0.3s; 
 }
 
 .form-check-label {
-  padding: 3px 10px; /* Reduced padding */
-  font-weight: normal; /* Ensure labels are not bold */
+  padding: 3px 10px;
+  font-weight: normal; 
 }
 
 .form-check {
-  display: flex; /* Ensure flex display for proper alignment */
-  align-items: center; /* Vertically center items */
+  display: flex; 
+  align-items: center; 
 }
 
 .form-check-input {
   border-radius: 50%;
-  margin-top: -3px; /* Move the radio button up slightly */
+  margin-top: -3px; 
   margin-right: 10px;
-  transform: scale(1.2); /* Increase the size of the radio button */
-  width: 1em; /* Adjust width */
-  height: 1em; /* Adjust height */
+  transform: scale(1.2);
+  width: 1em; 
+  height: 1em; 
 }
 
-/* New styles to adjust the position of titles */
+
 .d-flex {
-  margin-left: 15px; /* Move the title and subtitle to the right */
+  margin-left: 15px; 
 }
 
 .small.text-muted {
-  margin-left: 15px; /* Align subtitle with the title */
+  margin-left: 15px;
 }
 
 .title {
-  font-weight: bold; /* Make the title bold */
+  font-weight: bold;
 }
 
 .insurance-header{
@@ -109,49 +134,73 @@ ion-toolbar {
 }
 
 .form-control {
-  border-radius: 15px; /* Set border radius to 2px */
+  border-radius: 15px; 
 }
 
 
-
-/* Styling for the terms header */
 .terms-header {
-  margin-left: 15px; /* Move the header to the right */
-  font-weight: bold; /* Ensure it's bold */
-  color: rgb(19, 98, 216);
+  margin-left: 15px; 
+  font-weight: bold; 
+  color: #1362d8;
 }
 
-/* Styling for each option under terms */
+
 .terms-option {
-  background-color: #f9f9f9; /* Light background color to mimic an input field */
-  border: 1px solid #ccc; /* Softer border */
-  border-radius: 25px; /* Slightly less rounded */
-  padding: 8px; /* Increased padding for better spacing */
-  margin-bottom: 10px; /* Space between options */
-  transition: border-color 0.3s; /* Smooth transition for hover effect */
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc; 
+  border-radius: 25px; 
+  padding: 8px; 
+  margin-bottom: 10px; 
+  transition: border-color 0.3s;
 }
 
 .form-check-label {
-  padding: 3px 10px; /* Reduced padding */
-  font-weight: normal; /* Ensure labels are not bold */
+  padding: 3px 10px; 
+  font-weight: normal; 
 }
 
 .form-check {
-  display: flex; /* Ensure flex display for proper alignment */
-  align-items: center; /* Vertically center items */
+  display: flex;
+  align-items: center;
 }
 
-/* Styling for the radio button */
+
 .form-check-input {
   border-radius: 50%;
-  margin-top: -3px; /* Move the radio button up slightly */
+  margin-top: -3px;
   margin-right: 10px;
-  transform: scale(1.2); /* Increase the size of the radio button */
-  width: 1em; /* Adjust width */
-  height: 1em; /* Adjust height */
+  transform: scale(1.2); 
+  width: 1em; 
+  height: 1em; 
 }
 
-/* Global d-flex class alignment */
+
 .d-flex {
-  margin-left: 15px; /* Apply consistent left margin */
+  margin-left: 15px; 
+}
+.amount-container {
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc;
+  border-radius: 20px; 
+  margin-bottom: 15px;
+}
+.amount-container p.small {
+  margin-left: 0; 
+}
+.total-price{
+  color: rgb(19, 98, 216);
+  font-weight: bold;
+}
+.pay-now-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+}
+
+.pay-now-btn {
+  width: 80%; /* 80% of screen width */
+  border-radius: 25px; /* Border radius for rounded corners */
+  font-size: 1.2rem; /* Adjust font size */
+  background-color: rgb(30, 255, 0);
+  color: rgb(58, 58, 58);
+  font-weight: bold;
 }
