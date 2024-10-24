@@ -13,9 +13,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 5px 10px;
   background: transparent;
   z-index: 10;
+  margin-bottom: 0;
 }
 
 // .back-button {
@@ -58,87 +59,101 @@
   position: relative;
   border-radius: 25px;
   overflow: hidden;
+margin-bottom: 0;
 
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .logo-and-name {
-      display: flex;
-      align-items: center;
-      gap: 10px; /* Adds space between logo and name */
-    }
-
-    .service-logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-left: 10px;
-      margin-top: 10px;
-      margin-bottom: 2px;
-    }
-
+.departure-bookingId{
+  margin-bottom: 10px;
+}
+.content-rows{
+  line-height: 12px;
+}
     .service-provider {
       font-weight: bold;
-      font-size: 14px;
-      white-space: nowrap; /* Prevents text from wrapping */
+      font-size: 16px; 
     }
 
-    .special-offer {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100px;
-      height: 30px;
-      margin-top: 5px;
-      margin-right: 10px;
+    .booking-id {
+      font-size: 12px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .date-time {
+      font-size: 12px;
+      color: #666; /* Slightly gray as per the image */
     }
   }
 
   .card-content {
-    padding: 10px;
+    padding: 5px 15px;
+    margin-top: 0; 
     margin-bottom: 10px;
-    .trek-duration,
+
+    .trek-duration {
+      font-size: 14px;
+      color: #666; /* Trek duration in gray */
+    }
+
     .pickup-date-time {
-      font-size: 12px;
+      font-size: 14px;
+      font-weight: bold; /* Matches the bold style */
     }
   }
 
   .side-section {
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 10px;
+    right: 15px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    margin-right: 10px;
-
-    .side-info {
-      text-align: center;
-      margin-bottom: 8px;
-
-      .price-label {
-        font-weight: bold;
-        border: 1px solid black;
-        font-size: 16px;
-        margin-top: 10px;
-        padding-left: 5px;
-        padding-right: 5px;
-        border-radius: 15px;
-      }
-
-      .side-img-icon {
-        width: 30px;
-        height: 30px;
-      }
-    }
-
-    .view-itinerary {
+    flex-direction: column; /* Aligns the items vertically */
+    align-items: flex-end; /* Align items to the right */
+  
+    .view-ticket {
       color: #1e90ff;
-      font-size: 12px;
-      text-decoration: none;
+      font-size: 14px;
     }
+  
+    
   }
-}
+  .status-section {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top: 0;
+    margin-bottom: 0;
+  }
+  
+  .status {
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 5px 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 30px;
+    line-height: 10px;
+  }
+  
+  /* Define colors for each status */
+  .incoming-status {
+    background-color: #d1e7dd; /* Light green */
+    color: #198754;            /* Green text */
+    border: 1px solid #198754;  /* Green border */
+  }
+  
+  .completed-status {
+    background-color: #d0e3ff; /* Light blue */
+    color: #0d6efd;            /* Blue text */
+    border: 1px solid #0d6efd;  /* Blue border */
+  }
+  
+  .cancelled-status {
+    background-color: #fff3cd; /* Light yellow */
+    color: #ffc107;            /* Yellow text */
+    border: 1px solid #ffc107;  /* Yellow border */
+  }
+  
+  .rejected-status {
+    background-color: #f8d7da; /* Light red */
+    color: #dc3545;            /* Red text */
+    border: 1px solid #dc3545;  /* Red border */
+  }
+  

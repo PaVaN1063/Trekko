@@ -1,6 +1,6 @@
 <ion-content>
   <div class="custom-header">
-    <h5 >Trek Bookings</h5>
+    <h5>Trek Bookings</h5>
     <!-- Right-end Dropdown -->
     <div class="dropdown">
       <button
@@ -21,7 +21,6 @@
         <li><a class="dropdown-item" href="#">Completed</a></li>
         <li><a class="dropdown-item" href="#">Cancelled</a></li>
         <li><a class="dropdown-item" href="#">Rejected</a></li>
-
       </ul>
     </div>
   </div>
@@ -29,55 +28,56 @@
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card
-    *ngFor="let record of records"
-    routerLink="/tabs/Home/trip-details"
-    class="custom-card"
-  >
-    <div class="card-header">
-      <div class="logo-and-name">
-        <img src="{{record.logoImage}}" alt="Logo" class="service-logo" />
-        <ion-text class="service-provider">{{record.serviceProvider}}</ion-text>
+  <div *ngFor="let record of records">
+    <ion-card
+      routerLink="/tabs/Home/trip-details"
+      class="custom-card"
+    >
+      <ion-card-content class="card-content">
+        <ion-row class="departure-bookingId">
+          <ion-col size="8">
+            <ion-text class="date-time">Departure Date & Time</ion-text>
+          </ion-col>
+          <ion-col size="4"><p class="booking-id">Booking ID: XXXXXX</p></ion-col>
+        </ion-row>
+        <ion-row class="content-rows">
+          <ion-col size="12">
+            <ion-text class="service-provider">{{ record.serviceProvider }}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="content-rows">
+          <ion-col size="12">
+            <ion-text class="trek-duration">{{ record.trekDuration }}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="content-rows">
+          <ion-col size="12">
+            <ion-text class="pickup-date-time">{{ record.pickupDateTime }}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+  
+      <div class="side-section">
+        <ion-text class="view-ticket">View Ticket</ion-text>
       </div>
-      <img
-        *ngIf="record.specialOffer"
-        src="../../assets/Logos/offers.png"
-        alt="Special Offer"
-        class="special-offer"
-      />
+    </ion-card>
+    
+    <div class="status-section">
+      <ion-text 
+        class="status"
+        [ngClass]="{
+          'incoming-status': record.status === 'Incoming',
+          'completed-status': record.status === 'Completed',
+          'cancelled-status': record.status === 'Cancelled',
+          'rejected-status': record.status === 'Rejected'
+        }"
+      >
+        {{ record.status }}
+      </ion-text>
     </div>
-
-    <ion-card-content class="card-content">
-      <ion-row>
-        <ion-col size="12">
-          <ion-text class="trek-duration">{{record.trekDuration}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <ion-text class="pickup-date-time"
-            >{{record.pickupDateTime}}</ion-text
-          >
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-    <div class="side-section">
-      <br />
-      <div class="side-info">
-        <label class="price-label">XXXX</label>
-        <br />
-        <label>Onwards</label>
-        <br />
-        <img
-          src="../../assets/Logos/gdpr.png"
-          alt="GDPR Icon"
-          class="side-img-icon"
-        />
-      </div>
-      <ion-text class="view-itinerary">View Itinerary</ion-text>
-    </div>
-  </ion-card>
-
+    
+  </div>
+  
   <ion-row *ngIf="transactionData === false" class="ion-justify-content-center">
     <ion-col>
       <ion-img
