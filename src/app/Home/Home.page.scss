@@ -46,92 +46,79 @@
     color: #0f5132;
   }
 }
-
 .departure-container {
-  position: relative;
-
-  // Label styles
-  .form-label {
-    margin-bottom: 0.5rem; // Spacing between label and input
-  }
-
-  .d-flex {
-    align-items: center; // Vertically align items
-  }
-
-  input[type="date"] {
-    font-size: 14px;
-    padding: 8px 8px 8px 35px; // Space for the calendar icon
-    width: 120px; // Fixed width for the input to keep alignment consistent
-
-    @media (max-width: 768px) {
-      font-size: 12px; // Smaller font size for mobile
-      width: 90%; // Full width for mobile
+    position: relative;
+  
+    .form-label {
+      font-size: 12px; /* Smaller label font */
+      margin-bottom: 0.3rem; /* Decreased margin */
     }
-
-    @media (min-width: 1200px) {
-      font-size: 16px; // Increase font size for larger screens
-      width: 150px; // Fixed width for larger screens
+  
+    input[type="date"] {
+      font-size: 12px; /* Smaller font size */
+      padding: 6px 8px 6px 25px; /* Reduced padding */
+      width: 80px; /* Smaller width for the input */
+      margin-right: 0;
+  
+      @media (max-width: 768px) {
+        font-size: 10px;
+        width: 90%; /* Full width for mobile */
+      }
+  
+      @media (min-width: 1200px) {
+        font-size: 14px; /* Larger font size for desktops */
+        width: 130px;
+      }
     }
-  }
-
-  .calendar-icon {
-    position: absolute;
-    top: 50%;
-    left: 10px; // Position the icon inside the input field
-    transform: translateY(-50%);
-    width: 20px; // Default icon size
-    height: 20px;
-
-    @media (max-width: 768px) {
-      width: 20px; // Smaller icon for mobile
-      height: 20px;
-    }
-
-    @media (min-width: 1200px) {
-      width: 40px; // Larger icon for desktop
-      height: 40px;
+  
+    .calendar-icon {
+      position: absolute;
+      top: 50%;
+      left: 8px; /* Adjust position */
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+  
+      @media (max-width: 768px) {
+        width: 16px;
+        height: 16px;
+      }
+  
+      @media (min-width: 1200px) {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
-
+  
   .trek-chips {
-    margin-left: 10px; // Space between the input and chips
     display: flex;
-    align-items: center; // Center the chips vertically
+    flex-direction: row;
+    align-items: center;
+    gap: 3px; /* Closer spacing between chips */
+    margin-left: 8px; /* Reduced margin */
+  
+    @media (max-width: 364px) {
+      flex-direction: row; /* Ensure side-by-side alignment on small screens */
+    }
   }
-}
-
-.trek-chips {
-  // Default flex properties
-  display: flex; // Set to flexbox
-  flex-direction: row; // Default to row for wider screens
-  align-items: center; // Center align items
-  flex-wrap: wrap; // Allow chips to wrap if necessary
-  gap: 8px; // Add spacing between chips
-
-  @media (max-width: 364px) {
-    flex-direction: column; // Stack chips vertically on smaller screens
-    align-items: flex-start; // Align items to start (left)
-    
+  
+  .custom-chip {
+    width: 100px;
+    font-size: 10px;
+    padding: 2px;
+  
+    @media (max-width: 768px) {
+      width: 90px;
+      font-size: 8px;
+    }
+  
+    @media (min-width: 1200px) {
+      width: 120px;
+      font-size: 12px;
+    }
   }
-}
-
-.custom-chip {
-  width: 150px; // Custom width for larger screens
-  height: auto; // Allow height to adjust automatically
-  font-size: 10px; // Base font size
-  padding: 5px 10px; // Padding on left and right
-
-  @media (max-width: 768px) {
-    width: 100px; // Smaller width for mobile
-    font-size: 8px; // Smaller font size on mobile
-  }
-
-  @media (min-width: 1200px) {
-    width: 120px; // Larger width for desktop
-    font-size: 12px; // Larger font size on desktop
-  }
-}
+  
 
 .swiper-container .card {
   width: 30vw; /* Responsive width */
