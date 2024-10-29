@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Swiper from 'swiper';
 import { ShareTripPage } from './share-trip/share-trip.page';
 import { ModalController } from '@ionic/angular';
@@ -10,7 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./trip-details.page.scss'],
 })
 export class TripDetailsPage implements OnInit {
+  @ViewChild('tabHeader', { static: false }) tabHeader!: ElementRef;
+
   tab: any;
+  selectedTab: string = 'trekRoute'; // Initialize with default value
+
+  selectedSegment = 'Trip Route';
   ngOnInit() {
     console.log('Page opended');
   }
@@ -20,7 +25,6 @@ export class TripDetailsPage implements OnInit {
   ) {
     this.getData();
   }
-  selectedSegment = 'Trip Route';
   handleRefresh(event: any) {
     setTimeout(() => {
       // Any calls to load data go here
@@ -136,18 +140,6 @@ export class TripDetailsPage implements OnInit {
 
   showHeaderTitle = false; // Initially hide the header title
 
-  onScroll(event: any) {
-    const scrollTop = event.detail.scrollTop;
-
-    if (scrollTop > 50) {
-      // When scrolled more than 50px, show the header title
-      this.showHeaderTitle = true;
-    } else {
-      // Hide the header title when scrolled back up
-      this.showHeaderTitle = false;
-    }
-  }
-
   records: any = [];
   transactionData: boolean = false;
   search: string = '';
@@ -168,5 +160,32 @@ export class TripDetailsPage implements OnInit {
   onImageLoad() {
     console.log('Image loaded successfully');
   }
-  selectedTab: string = 'trekRoute'; // Initialize with default value
+  onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop; // Get the scroll position
+    const segments = document.querySelectorAll('.section'); // Get all section elements
+
+    let activeSectionId = ''; // Variable to store the currently active section ID
+
+    segments.forEach((section: Element) => {
+      const { offsetTop, clientHeight } = section as HTMLElement;
+
+      // Check if the section is at the top of the viewport
+      if (scrollTop >= offsetTop && scrollTop < offsetTop + clientHeight) {
+        activeSectionId = section.id; // Set the active section ID
+      }
+    });
+
+    // Update the selected tab based on the active section
+    if (activeSectionId) {
+      this.selectedTab = activeSectionId;
+    }
+  }
+
+  scrollToSection(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      this.selectedTab = sectionId; // Update selected tab when clicking on segment
+    }
+  }
 }

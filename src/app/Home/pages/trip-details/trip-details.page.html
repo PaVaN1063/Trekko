@@ -84,241 +84,247 @@
     </ion-col>
   </ion-row>
 
-  <ion-segment [(ngModel)]="selectedTab" scrollable>
-    <ion-segment-button value="trekRoute">Trek Route</ion-segment-button>
-    <ion-segment-button value="Itenary">Itenary</ion-segment-button>
-    <ion-segment-button value="amenities">Amenities</ion-segment-button>
-    <ion-segment-button value="reviews">Reviews</ion-segment-button>
-    <ion-segment-button value="Resorts">Resorts</ion-segment-button>
-    <ion-segment-button value="Activites">Activites</ion-segment-button>
-    <ion-segment-button value="CancelPolicy"
-      >Cancellation policy</ion-segment-button
-    >
-    <ion-segment-button value="others">others</ion-segment-button>
+  <ion-segment #tabHeader [(ngModel)]="selectedTab" scrollable>
+    <ion-segment-button value="trekRoute" (click)="scrollToSection('trekRoute')">Trek Route</ion-segment-button>
+    <ion-segment-button value="Itenary" (click)="scrollToSection('Itenary')">Itenary</ion-segment-button>
+    <ion-segment-button value="amenities" (click)="scrollToSection('amenities')">Amenities</ion-segment-button>
+    <ion-segment-button value="reviews" (click)="scrollToSection('reviews')">Reviews</ion-segment-button>
+    <ion-segment-button value="Resorts" (click)="scrollToSection('Resorts')">Resorts</ion-segment-button>
+    <ion-segment-button value="Activites" (click)="scrollToSection('Activites')">Activites</ion-segment-button>
+    <ion-segment-button value="CancelPolicy" (click)="scrollToSection('CancelPolicy')">Cancellation Policy</ion-segment-button>
   </ion-segment>
 
-  <!-- Trek Route Tab Content (Boarding Points) -->
-  <div *ngIf="selectedTab === 'trekRoute'" class="boarding-points-container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>From Destination</ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-grid>
-          <ion-row>
-            <!-- Left side content (Times) -->
-            <ion-col size="5">
-              <ion-row>
-                <ion-col size="12">
-                  <p><strong>Approx Departure time</strong></p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Approx reaching time</strong></p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Approx reaching time</strong></p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Approx Departure time</strong></p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Approx reaching time</strong></p>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-
-            <!-- Tracking Line -->
-            <ion-col size="2" class="track-container">
-              <div class="tracking-line">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-              </div>
-            </ion-col>
-
-            <!-- Right side content (Stages) -->
-            <ion-col size="5">
-              <ion-row>
-                <ion-col size="12">
-                  <p>
-                    <strong>Starting point</strong> (Type of transportation)
-                  </p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Stages 1</strong></p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Stages 2</strong> (Type of transportation)</p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Stages 3</strong></p>
-                </ion-col>
-                <ion-col size="12">
-                  <p><strong>Ending point</strong> (Type of transportation)</p>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div *ngIf="selectedTab === 'Itenary'">
-    <h2 style="margin-left: 18px; color: #0054e9">Itenary</h2>
-    <ion-card>
-      <ion-card-content>
-        <p>
-          <strong>Day 1 Activity:</strong> Visit to the first campsite, trekking
-          activities.
-        </p>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content>
-        <p>
-          <strong>Day 2 Activity:</strong> Exploring the mountain, outdoor
-          activities.
-        </p>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-content>
-        <p>
-          <strong>Day 3 Activity:</strong> Return trek and campsite farewell.
-        </p>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div *ngIf="selectedTab === 'amenities'" class="amenities-container">
-    <h2 style="margin-left: 18px; color: #0054e9">Amenities</h2>
-    <ion-card style="border-radius: 15px">
-      <ion-card-content>
-        <div class="photos-container" style="margin-top: 10px">
-          <h3 style="color: black; font-size: 18px">Including :</h3>
-          <br />
-        </div>
-        <div class="photos-container" style="margin-top: 10px">
-          <h3 style="color: black; font-size: 18px">Excluding :</h3>
-          <br />
-        </div>
-        <div class="photos-container" style="margin-top: 10px">
-          <h3 style="color: black; font-size: 18px">Highligths :</h3>
-          <br />
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div *ngIf="selectedTab === 'reviews'" class="reviews-container">
-    <h2 style="margin-left: 18px; color: #0054e9">Reviews</h2>
-    <ion-card style="border-radius: 15px">
-      <ion-card-header>
-        <ion-card-title style="font-size: 25px">Customer :</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="star-rating">
-          <ion-icon
-            name="star-outline"
-            color="gold"
-            class="star-icon"
-          ></ion-icon>
-          <ion-icon
-            name="star-outline"
-            color="gold"
-            class="star-icon"
-          ></ion-icon>
-          <ion-icon
-            name="star-outline"
-            color="gold"
-            class="star-icon"
-          ></ion-icon>
-          <ion-icon
-            name="star-outline"
-            color="gold"
-            class="star-icon"
-          ></ion-icon>
-          <ion-icon
-            name="star-outline"
-            color="gold"
-            class="star-icon"
-          ></ion-icon>
-        </div>
-        <div class="comment-box" style="margin-top: 10px">
-          <h4 style="color: black; font-size: 18px">Comments :</h4>
-          <br />
-          <textarea
-            rows="3"
-            style="
-              width: 100%;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-              padding: 8px;
-            "
-          ></textarea>
-        </div>
-        <div class="photos-container" style="margin-top: 10px">
-          <h4 style="color: black; font-size: 18px">Photos :</h4>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div *ngIf="selectedTab === 'Resorts'">
-    <h2 style="margin-left: 18px; color: #0054e9">Resorts</h2>
-    <ion-card style="border-radius: 15px">
-      <ion-card-content>
-        <div class="photos-container" style="margin-top: 10px">
-          <h3 style="color: black; font-size: 18px">Name :</h3>
-          <br />
-        </div>
-        <div class="photos-container" style="margin-top: 10px">
-          <h3 style="color: black; font-size: 18px">Description :</h3>
-          <br />
-        </div>
-        <div class="photos-container" style="margin-top: 10px">
-          <h3 style="color: black; font-size: 18px">Location :</h3>
-          <div class="map-container" style="margin-top: 10px">
-            <img
-              src="https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/07/googleMapsTricksHero.jpg"
-              alt="Map"
-              style="width: 100%; height: auto"
-            />
+  <div (ionScroll)="onScroll($event)" class="segment-content">
+    <div id="trekRoute" class="section">
+      <h2>Trek Route</h2>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>From Destination</ion-card-title>
+        </ion-card-header>
+  
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <!-- Left side content (Times) -->
+              <ion-col size="5">
+                <ion-row>
+                  <ion-col size="12">
+                    <p><strong>Approx Departure time</strong></p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Approx reaching time</strong></p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Approx reaching time</strong></p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Approx Departure time</strong></p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Approx reaching time</strong></p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+  
+              <!-- Tracking Line -->
+              <ion-col size="2" class="track-container">
+                <div class="tracking-line">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </ion-col>
+  
+              <!-- Right side content (Stages) -->
+              <ion-col size="5">
+                <ion-row>
+                  <ion-col size="12">
+                    <p>
+                      <strong>Starting point</strong> (Type of transportation)
+                    </p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Stages 1</strong></p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Stages 2</strong> (Type of transportation)</p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Stages 3</strong></p>
+                  </ion-col>
+                  <ion-col size="12">
+                    <p><strong>Ending point</strong> (Type of transportation)</p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  
+    <div id="Itenary" class="section">
+      <h2>Itenary</h2>
+      <ion-card>
+        <ion-card-content>
+          <p>
+            <strong>Day 1 Activity:</strong> Visit to the first campsite, trekking
+            activities.
+          </p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <p>
+            <strong>Day 2 Activity:</strong> Exploring the mountain, outdoor
+            activities.
+          </p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-content>
+          <p>
+            <strong>Day 3 Activity:</strong> Return trek and campsite farewell.
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  
+    <div id="amenities" class="section">
+      <h2>Amenities</h2>
+      <ion-card style="border-radius: 15px">
+        <ion-card-content>
+          <div class="photos-container" style="margin-top: 10px">
+            <h3 style="color: black; font-size: 18px">Including :</h3>
+            <br />
           </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div *ngIf="selectedTab === 'Activites'">
-    <h2 style="margin-left: 18px; color: #0054e9">Activites</h2>
-    <ion-card style="border-radius: 15px; border: 1px solid black">
-      <h3 style="color: black; font-size: 18px; margin-left: 15px">
-        Highligths :
-      </h3>
-      <ion-card
-        style="border-radius: 15px; border: 1px solid black; height: 90px"
-      >
-        <ion-card-content>
-          <div class="photos-container" style="margin-top: 10px"></div>
+          <div class="photos-container" style="margin-top: 10px">
+            <h3 style="color: black; font-size: 18px">Excluding :</h3>
+            <br />
+          </div>
+          <div class="photos-container" style="margin-top: 10px">
+            <h3 style="color: black; font-size: 18px">Highligths :</h3>
+            <br />
+          </div>
         </ion-card-content>
       </ion-card>
-      <br />
-    </ion-card>
-  </div>
-  <div *ngIf="selectedTab === 'CancelPolicy'">
-    <h2 style="margin-left: 18px; color: #0054e9">Cancellation Policy</h2>
-    <ion-card style="border-radius: 15px; border: 1px solid black">
-      <h3 style="color: black; font-size: 18px; margin-left: 15px">
-        Policy Details :
-      </h3>
-      <ion-card
-        style="border-radius: 15px; border: 1px solid black; height: 90px"
-      >
+    </div>
+  
+    <div id="reviews" class="section">
+      <h2>Reviews</h2>
+      <ion-card style="border-radius: 15px">
+        <ion-card-header>
+          <ion-card-title style="font-size: 25px">Customer :</ion-card-title>
+        </ion-card-header>
         <ion-card-content>
-          <div class="photos-container" style="margin-top: 10px"></div>
+          <div class="star-rating">
+            <ion-icon
+              name="star-outline"
+              color="gold"
+              class="star-icon"
+            ></ion-icon>
+            <ion-icon
+              name="star-outline"
+              color="gold"
+              class="star-icon"
+            ></ion-icon>
+            <ion-icon
+              name="star-outline"
+              color="gold"
+              class="star-icon"
+            ></ion-icon>
+            <ion-icon
+              name="star-outline"
+              color="gold"
+              class="star-icon"
+            ></ion-icon>
+            <ion-icon
+              name="star-outline"
+              color="gold"
+              class="star-icon"
+            ></ion-icon>
+          </div>
+          <div class="comment-box" style="margin-top: 10px">
+            <h4 style="color: black; font-size: 18px">Comments :</h4>
+            <br />
+            <textarea
+              rows="3"
+              style="
+                width: 100%;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 8px;
+              "
+            ></textarea>
+          </div>
+          <div class="photos-container" style="margin-top: 10px">
+            <h4 style="color: black; font-size: 18px">Photos :</h4>
+          </div>
         </ion-card-content>
       </ion-card>
-      <br />
-    </ion-card>
+    </div>
+  
+    <div id="Resorts" class="section" >
+      <h2>Resorts</h2>
+      <ion-card style="border-radius: 15px">
+        <ion-card-content>
+          <div class="photos-container" style="margin-top: 10px">
+            <h3 style="color: black; font-size: 18px">Name :</h3>
+            <br />
+          </div>
+          <div class="photos-container" style="margin-top: 10px">
+            <h3 style="color: black; font-size: 18px">Description :</h3>
+            <br />
+          </div>
+          <div class="photos-container" style="margin-top: 10px">
+            <h3 style="color: black; font-size: 18px">Location :</h3>
+            <div class="map-container" style="margin-top: 10px">
+              <img
+                src="https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/07/googleMapsTricksHero.jpg"
+                alt="Map"
+                style="width: 100%; height: auto"
+              />
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  
+    <div id="Activites" class="section">
+      <h2>Activites</h2>
+      <ion-card style="border-radius: 15px; border: 1px solid black">
+        <h3 style="color: black; font-size: 18px; margin-left: 15px">
+          Highligths :
+        </h3>
+        <ion-card
+          style="border-radius: 15px; border: 1px solid black; height: 90px"
+        >
+          <ion-card-content>
+            <div class="photos-container" style="margin-top: 10px"></div>
+          </ion-card-content>
+        </ion-card>
+        <br />
+      </ion-card>
+    </div>
+  
+    <div id="CancelPolicy" class="section">
+      <h2>Cancellation Policy</h2>
+      <ion-card style="border-radius: 15px; border: 1px solid black">
+        <h3 style="color: black; font-size: 18px; margin-left: 15px">
+          Policy Details :
+        </h3>
+        <ion-card
+          style="border-radius: 15px; border: 1px solid black; height: 90px"
+        >
+          <ion-card-content>
+            <div class="photos-container" style="margin-top: 10px"></div>
+          </ion-card-content>
+        </ion-card>
+        <br />
+      </ion-card>
+    </div>
+  
   </div>
 </ion-content>

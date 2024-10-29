@@ -171,3 +171,14 @@ ion-button {
 .star-icon:last-child {
   margin-right: 1;
 }
+
+
+.segment-content {
+  height: 400px; /* Set your desired height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc; /* Optional: add a border */
+  border-radius: 8px; /* Optional: rounded corners */
+}
+.section {
+  padding: 16px; /* Add padding to sections */
+}
