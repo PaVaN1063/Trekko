@@ -2,113 +2,116 @@
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+ <div class="Section-1">
   <div
-    class="advertise-space"
-    style="background-color: transparent; height: 50px"
-  ></div>
-  <div class="title" style="padding-left: 20px; font-weight: 500">
-    <h3 style="font-weight: 500">Trip Tickets</h3>
-  </div>
-  
-  <div class="cards-tripTickets">
-  <div
-    class="card head-card mx-1 my-1 shadow"
-    style="border-radius: 20px; padding: 10px"
-  >
-    <div class="card-body">
-      <form (ngSubmit)="onSubmit()" #tripForm="ngForm">
-        <div class="mb-2">
-          <label for="fromInput" class="form-label" style="font-size: 14px"
-            >From</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="fromInput"
-            [(ngModel)]="from"
-            name="from"
-            required
-            style="font-size: 14px; padding: 8px"
-          />
-        </div>
+  class="advertise-space"
+  style="background-color: transparent; height: 80px"
+></div>
+<div class="title" style="padding-left: 20px; font-weight: 500">
+  <h3 style="font-weight: 500">Trip Tickets</h3>
+</div>
 
-        <div class="mb-2">
-          <label for="toInput" class="form-label" style="font-size: 14px"
-            >To</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="toInput"
-            [(ngModel)]="to"
-            name="to"
-            required
-            style="font-size: 14px; padding: 8px"
-          />
-        </div>
-        <div class="departure-container mb-2">
-          <label for="departureDay" class="form-label" style="font-size: 14px;">Departure Day</label>
-        
-          <div class="d-flex align-items-center">
-            <div class="position-relative">
-              <!-- Calendar Icon -->
-              <img
-                src="../../assets/icon/calendar.png"
-                alt="Calendar Icon"
-                class="calendar-icon"
-              />
-        
-              <!-- Input Field for Date -->
-              <input
-                type="date"
-                class="form-control"
-                id="departureDay"
-                [(ngModel)]="departureDay"
-                name="departureDay"
-                required
-              />
-            </div>
-        
-            <div class="trek-chips d-flex align-items-center">
-              <ion-chip
-                class="custom-chip"
-                [outline]="!isWeekendTrekSelected"
-                (click)="toggleWeekendTrek()"
-                [ngClass]="{'selected': isWeekendTrekSelected}"
-              >
-                <ion-label>Weekend Trek</ion-label>
-                <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
-              </ion-chip>
-              
-              <ion-chip
-                class="custom-chip"
-                [outline]="!isPersonalizedTrekSelected"
-                (click)="togglePersonalizedTrek()"
-                [ngClass]="{'selected': isPersonalizedTrekSelected}"
-              >
-                <ion-label>Personalized Trek</ion-label>
-                <ion-icon *ngIf="isPersonalizedTrekSelected" name="close"></ion-icon>
-              </ion-chip>
-            </div>
-            
+<div class="cards-tripTickets">
+<div
+  class="card head-card mx-1 my-1 shadow"
+  style="border-radius: 20px; padding: 10px"
+>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #tripForm="ngForm">
+      <div class="mb-2">
+        <label for="fromInput" class="form-label" style="font-size: 14px"
+          >From</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="fromInput"
+          [(ngModel)]="from"
+          name="from"
+          required
+          style="font-size: 14px; padding: 8px"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="toInput" class="form-label" style="font-size: 14px"
+          >To</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="toInput"
+          [(ngModel)]="to"
+          name="to"
+          required
+          style="font-size: 14px; padding: 8px"
+        />
+      </div>
+      <div class="departure-container mb-2">
+        <label for="departureDay" class="form-label" style="font-size: 14px;">Departure Day</label>
+      
+        <div class="d-flex align-items-center">
+          <div class="position-relative">
+            <!-- Calendar Icon -->
+            <img
+              src="../../assets/icon/calendar.png"
+              alt="Calendar Icon"
+              class="calendar-icon"
+            />
+      
+            <!-- Input Field for Date -->
+            <input
+              type="date"
+              class="form-control"
+              id="departureDay"
+              [(ngModel)]="departureDay"
+              name="departureDay"
+              required
+            />
           </div>
+      
+          <div class="trek-chips d-flex align-items-center">
+            <ion-chip
+              class="custom-chip"
+              [outline]="!isWeekendTrekSelected"
+              (click)="toggleWeekendTrek()"
+              [ngClass]="{'selected': isWeekendTrekSelected}"
+            >
+              <ion-label>Weekend Trek</ion-label>
+              <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
+            </ion-chip>
+            
+            <ion-chip
+              class="custom-chip"
+              [outline]="!isPersonalizedTrekSelected"
+              (click)="togglePersonalizedTrek()"
+              [ngClass]="{'selected': isPersonalizedTrekSelected}"
+            >
+              <ion-label>Personalized Trek</ion-label>
+              <ion-icon *ngIf="isPersonalizedTrekSelected" name="close"></ion-icon>
+            </ion-chip>
+          </div>
+          
         </div>
-        
-        
-        <div class="d-grid">
-          <button
-            type="submit"
-            class="btn btn-warning rounded-pill"
-            [disabled]="!tripForm.valid"
-            style="font-size: 14px; padding: 6px 12px"
-          >
-            <i class="fa-solid fa-shoe-prints"></i> Search
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      
+      
+      <div class="d-grid">
+        <button
+          type="submit"
+          class="btn btn-warning rounded-pill"
+          [disabled]="!tripForm.valid"
+          style="font-size: 14px; padding: 6px 12px"
+        >
+          <i class="fa-solid fa-shoe-prints"></i> Search
+        </button>
+      </div>
+    </form>
   </div>
 </div>
+</div>
+ </div>
+ 
   <div class="Section-2">
     <div class="top-trips-card" style="padding: 0">
       <div

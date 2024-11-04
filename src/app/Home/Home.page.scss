@@ -1,124 +1,141 @@
-.cards-tripTickets {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 16px;
-
-  @media (max-width: 768px) {
-    flex-direction: column; /* Stack vertically on smaller screens */
-    gap: 12px;
-  }
-
-  .card {
-    width: 100%; /* Adjust card width */
+.Section-1 {
+  .cards-tripTickets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
 
     @media (max-width: 768px) {
-      width: 100%; /* Full width on smaller screens */
+      flex-direction: column; /* Stack vertically on smaller screens */
+      gap: 12px;
     }
 
-    border-radius: 20px;
-    padding: 10px;
-  }
-}
+    .card {
+      width: 100%; /* Adjust card width */
+      border-radius: 20px;
+      padding: 10px;
 
-.custom-chip {
-  width: 110px;
-  font-size: 12px;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 5px;
+      @media (max-width: 768px) {
+        padding: 8px; /* Adjust padding for smaller screens */
+      }
 
-  @media (max-width: 768px) {
-    width: 100px;
-    font-size: 10px; /* Decrease font size */
-    margin-bottom: 10px; /* Create space for stacking */
+      @media (max-width: 480px) {
+        padding: 6px; /* Further adjust padding for very small screens */
+      }
+    }
   }
 
-  @media (min-width: 1200px) {
-    width: 120px; /* Increase size for larger screens */
-    font-size: 14px;
+  .custom-chip {
+    width: 110px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      font-size: 10px; /* Decrease font size */
+      margin-bottom: 10px; /* Create space for stacking */
+      padding: 2px; /* Ensure consistent padding for smaller screens */
+    }
+
+    @media (max-width: 480px) {
+      width: 90px; /* Adjust size for very small screens */
+      font-size: 9px; /* Further decrease font size */
+    }
+
+    @media (min-width: 1200px) {
+      width: 120px; /* Increase size for larger screens */
+      font-size: 14px;
+      padding: 4px; /* Adjust padding if needed for larger screens */
+    }
+
+    &.selected {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      width: 120px;
+    }
   }
 
-  &.selected {
-    background-color: #d1e7dd;
-    color: #0f5132;
-  }
-}
-.departure-container {
+  .departure-container {
     position: relative;
-  
+
     .form-label {
       font-size: 12px; /* Smaller label font */
       margin-bottom: 0.3rem; /* Decreased margin */
-    }
-  
-    input[type="date"] {
-      font-size: 12px; /* Smaller font size */
-      padding: 6px 8px 6px 25px; /* Reduced padding */
-      width: 80px; /* Smaller width for the input */
-      margin-right: 0;
-  
+
       @media (max-width: 768px) {
-        font-size: 10px;
-        width: 90%; /* Full width for mobile */
+        font-size: 11px; /* Decrease label font size on smaller screens */
       }
-  
+
+      @media (max-width: 480px) {
+        font-size: 10px; /* Further decrease label font size */
+      }
+    }
+
+    input[type="date"] {
+      font-size: 12px; /* Default font size */
+      padding: 6px 8px 6px 25px; /* Reduced padding */
+      width: 80px; /* Default width */
+
+      @media (max-width: 768px) {
+        font-size: 10px; /* Decrease font size */
+        width: 90%; /* Full width for tablets */
+      }
+
+      @media (max-width: 480px) {
+        font-size: 9px; /* Further decrease font size */
+        width: 100%; /* Ensure full width on very small screens */
+      }
+
       @media (min-width: 1200px) {
         font-size: 14px; /* Larger font size for desktops */
-        width: 130px;
+        width: 130px; /* Increase width for larger screens */
       }
     }
-  
+
     .calendar-icon {
       position: absolute;
       top: 50%;
       left: 8px; /* Adjust position */
       transform: translateY(-50%);
-      width: 18px;
+      width: 18px; /* Default icon size */
       height: 18px;
-  
+
       @media (max-width: 768px) {
-        width: 16px;
+        width: 16px; /* Decrease icon size */
         height: 16px;
       }
-  
+
+      @media (max-width: 480px) {
+        width: 14px; /* Further decrease icon size */
+        height: 14px;
+      }
+
       @media (min-width: 1200px) {
-        width: 24px;
+        width: 24px; /* Increase icon size for larger screens */
         height: 24px;
       }
     }
   }
-  
+
   .trek-chips {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 3px; /* Closer spacing between chips */
     margin-left: 8px; /* Reduced margin */
-  
-    @media (max-width: 364px) {
+
+    @media (max-width: 768px) {
       flex-direction: row; /* Ensure side-by-side alignment on small screens */
     }
-  }
-  
-  .custom-chip {
-    width: 100px;
-    font-size: 10px;
-    padding: 2px;
-  
-    @media (max-width: 768px) {
-      width: 90px;
-      font-size: 8px;
-    }
-  
-    @media (min-width: 1200px) {
-      width: 120px;
-      font-size: 12px;
+
+    @media (max-width: 480px) {
+      gap: 2px; /* Adjust gap for very small screens */
     }
   }
-  
+}
 
 .swiper-container .card {
   width: 30vw; /* Responsive width */
