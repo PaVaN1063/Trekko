@@ -10,8 +10,8 @@ export interface FormData {
 }
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['Home.page.scss'],  
+  templateUrl: './Home.page.html',
+  styleUrls: ['./Home.page.scss'],
 })
 export class HomePage implements AfterViewInit, OnInit {
   from: string = '';

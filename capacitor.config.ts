@@ -4,7 +4,6 @@ const config: CapacitorConfig = {
   appId: 'io.aorbo.starter',
   appName: 'Aorbo',
   webDir: 'www',
-  bundledWebRuntime: false,
   plugins: {
     SplashScreen: {
       launchShowDuration: 3000,      // Duration in milliseconds (3 seconds)

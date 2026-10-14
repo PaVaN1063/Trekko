@@ -57,8 +57,6 @@ export class PassengerInfoPage {
       }
     };
 
-    // Log form data for debugging purposes
-    console.log(formData);
   }
 
   // Navigate back to the previous page

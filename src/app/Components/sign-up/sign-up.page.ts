@@ -4,6 +4,7 @@ import { ApiService } from '../service/api.service';
 import { ToastController } from '@ionic/angular';
 import { apis } from '../service/api';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -60,10 +61,8 @@ export class SignUpPage implements OnInit {
       roleId: 1
     };
     try {
-      console.log(body);
-      
       const endpoint = apis.postRegistration; 
-      const response = await this.service.postApi(endpoint, body).toPromise();
+      const response = await firstValueFrom(this.service.postApi(endpoint, body));
       // const response = "Hi Hello"
       // this.presentToast(response);
 

@@ -10,7 +10,7 @@ export class ProfilePage implements OnInit {
 goBack() {
 this.router.navigate(['/tabs/account'])}
   
-  profileImage: string = '/src/assets/images/profileman.png'; // Default image
+  profileImage: string = 'assets/images/profileman.png'; // Default image
   toDay: string; // Declare toDay property for date input
 
   constructor(private router: Router) { 
