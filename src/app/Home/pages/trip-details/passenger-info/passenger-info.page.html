@@ -1,243 +1,125 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Passenger Information</ion-title>
-  </ion-toolbar>
-</ion-header> 
-  
-<ion-content class="ion-padding">
+<ion-content class="ab-page" [fullscreen]="true">
+  <ab-header [back]="true" title="Traveller details" [subtitle]="trek.name + ' · ' + (trek.departure | date: 'EEE, d MMM' : '+0530')"></ab-header>
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="text-center">
-      <label>From Day</label>
-      <p class="font-weight-bold text-muted">{{ formData.fromDay }}XXXX</p>
-    </div>
-    <div class="mx-3">
-      <img src="assets/icon/right-arrow.png" alt="Arrow" class="arrow-icon" />
-    </div>
-    <div class="text-center">
-      <label>To Day</label>
-      <p class="font-weight-bold text-muted">{{ formData.toDay }}XXXX</p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5>Contact Details</h5>
-      <p>Trip details will be sent to</p>
-      <div class="form-group mb-3">
-        <input
-          type="email"
-          class="form-control rounded-pill"
-          placeholder="Enter Email ID"
-          [(ngModel)]="formData.emailId"
-        />
+  <form class="ab-body" #f="ngForm" (ngSubmit)="f.valid && gendersFilled && payNow()">
+    <!-- Trip summary -->
+    <section class="trip panel rise">
+      <div>
+        <small>Departs</small>
+        <strong>{{ trek.departure | date: 'EEE, d MMM' : '+0530' }}</strong>
+        <span class="muted">{{ trek.departure | date: 'h:mm a' : '+0530' }} · {{ trek.pickupCity }}</span>
       </div>
-      <div class="form-group mb-3">
-        <input
-          type="tel"
-          class="form-control rounded-pill"
-          placeholder="Enter Phone Number"
-          [(ngModel)]="formData.phoneNumber"
-        />
+      <span class="trip__line"><ion-icon name="bus"></ion-icon></span>
+      <div class="trip__end">
+        <small>Returns</small>
+        <strong>{{ trek.returnBy.split(' · ')[0] }}</strong>
+        <span class="muted">{{ trek.returnBy.split(' · ')[1] }} · {{ trek.pickupCity }}</span>
       </div>
-      <div class="form-group mb-3">
-        <input
-          type="text"
-          class="form-control rounded-pill"
-          placeholder="Enter State"
-          [(ngModel)]="formData.stateOfResidency"
-        />
-      </div>
-      <p>Required for GST Tax invoicing</p>
-      <ion-item lines="none">
-        <ion-icon
-          name="logo-whatsapp"
-          slot="start"
-          size="large"
-          color="success"
-        ></ion-icon>
-        <ion-label>Send booking & trip updates on WhatsApp</ion-label>
-        <ion-toggle
-          slot="end"
-          [(ngModel)]="formData.sendUpdatesOnWhatsapp"
-        ></ion-toggle>
-      </ion-item>
-    </div>
-  </div>
-  <h4>Passenger Details</h4>
+    </section>
 
-  <div *ngFor="let passenger of formData.passengers; let i = index">
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <p class="h6 mb-0">Person {{ i + 1 }}</p>
-      <div class="d-flex align-items-center">
-        <div *ngIf="i > 0" class="mr-2">
-          <ion-icon
-            name="trash"
-            color="danger"
-            class="remove-icon"
-            (click)="removePassenger(i)"
-          ></ion-icon>
+    <!-- Travellers -->
+    <section class="section rise" style="--i: 1">
+      <div class="section-head">
+        <h2>Travellers</h2>
+        <span class="muted seats">{{ trek.seatsLeft }} seats left</span>
+      </div>
+
+      <article class="panel pax" *ngFor="let p of formData.passengers; let i = index">
+        <div class="pax__head">
+          <span class="pax__num">{{ i + 1 }}</span>
+          <strong>{{ i === 0 ? 'Primary traveller' : 'Traveller ' + (i + 1) }}</strong>
+          <button type="button" class="pax__remove" *ngIf="formData.passengers.length > 1" (click)="removePassenger(i)" [attr.aria-label]="'Remove traveller ' + (i + 1)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
         </div>
-        <button class="btn btn-outline-success choose-btn">Choose</button>
-      </div>
-    </div>
-
-    <div class="card passenger-card">
-      <div class="card-body">
-        <div class="form-group mb-3">
-          <input
-            type="text"
-            class="form-control rounded-pill name-input"
-            [(ngModel)]="passenger.name"
-            placeholder="Name"
-          />
+        <div class="field-row field-row--name">
+          <label class="field">
+            <span>Full name</span>
+            <input [name]="'name' + i" [(ngModel)]="p.name" required minlength="2" placeholder="As on ID proof" autocomplete="name" />
+          </label>
+          <label class="field">
+            <span>Age</span>
+            <input [name]="'age' + i" [(ngModel)]="p.age" required type="number" inputmode="numeric" min="8" max="75" placeholder="Age" />
+          </label>
         </div>
-        <div class="row mb-3 align-items-center">
-          <div class="col-4">
-            <input
-              type="number"
-              class="form-control rounded-pill age-input"
-              [(ngModel)]="passenger.age"
-              placeholder="Age"
-            />
-          </div>
-          <div class="col">
-            <button
-              type="button"
-              class="btn btn-outline-secondary rounded-pill w-100"
-              [class.active]="passenger.gender === 'Male'"
-              (click)="passenger.gender = 'Male'"
-            >
-              Male
-            </button>
-          </div>
-          <div class="col">
-            <button
-              type="button"
-              class="btn btn-outline-secondary rounded-pill w-100"
-              [class.active]="passenger.gender === 'Female'"
-              (click)="passenger.gender = 'Female'"
-            >
-              Female
-            </button>
-          </div>
+        <div class="gender" role="radiogroup" aria-label="Gender">
+          <button type="button" *ngFor="let g of genders" class="chip" [class.is-on]="p.gender === g" (click)="p.gender = g" role="radio" [attr.aria-checked]="p.gender === g">{{ g }}</button>
         </div>
+      </article>
+
+      <button type="button" class="btn-ghost add" (click)="addPassenger()" [disabled]="formData.passengers.length >= trek.seatsLeft">
+        <ion-icon name="person-add-outline"></ion-icon>Add traveller
+      </button>
+    </section>
+
+    <!-- Contact -->
+    <section class="section rise" style="--i: 2">
+      <div class="section-head"><h2>Where should we send the ticket?</h2></div>
+      <div class="panel">
+        <label class="field">
+          <span>Email</span>
+          <input name="email" type="email" [(ngModel)]="formData.emailId" required email placeholder="you@example.com" autocomplete="email" />
+        </label>
+        <label class="field">
+          <span>Mobile number</span>
+          <input name="phone" type="tel" inputmode="numeric" [(ngModel)]="formData.phoneNumber" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit number" autocomplete="tel-national" />
+        </label>
+        <label class="field">
+          <span>State of residence (for GST invoice)</span>
+          <select name="state" [(ngModel)]="formData.stateOfResidency" required>
+            <option value="" disabled>Select state</option>
+            <option *ngFor="let s of states" [value]="s">{{ s }}</option>
+          </select>
+        </label>
+        <label class="toggle-row">
+          <ion-icon name="logo-whatsapp" class="wa"></ion-icon>
+          <span>Send ticket and trip updates on WhatsApp</span>
+          <ion-toggle name="wa" [(ngModel)]="formData.sendUpdatesOnWhatsapp" aria-label="WhatsApp updates"></ion-toggle>
+        </label>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Add Adult Button -->
-  <div class="d-flex justify-content-end mt-3">
-    <button class="btn btn-primary add-adult-btn" (click)="addPassenger()">
-      ADD ADULT
-    </button>
-  </div>
+    <!-- Add-ons -->
+    <section class="section rise" style="--i: 3">
+      <div class="section-head"><h2>Add-ons</h2></div>
+      <label class="addon panel" [class.on]="formData.freeCancellation">
+        <input type="checkbox" name="freeCancel" [(ngModel)]="formData.freeCancellation" />
+        <div>
+          <strong>Free cancellation</strong>
+          <small class="muted">Full refund up to 24 hours before departure.</small>
+        </div>
+        <b>+{{ addOnPrices.freeCancellation | inr }}<small>/person</small></b>
+      </label>
+      <label class="addon panel" [class.on]="formData.insurance">
+        <input type="checkbox" name="insurance" [(ngModel)]="formData.insurance" />
+        <div>
+          <strong>Trek insurance</strong>
+          <small class="muted">Covers medical evacuation and injuries up to ₹2 lakh.</small>
+        </div>
+        <b>+{{ addOnPrices.insurance | inr }}<small>/person</small></b>
+      </label>
+    </section>
 
-  <div>
-    <div class="d-flex justify-content-between align-items-center">
-      <span class="title">Free Cancellation</span>
-      <!-- Added class for bold title -->
-      <i class="bi bi-alarm"></i>
-    </div>
-    <div>
-      <p class="small text-muted">Valid till 1 day before the Departure</p>
-
-      <div
-        class="form-check option-container d-flex justify-content-between align-items-center"
-      >
-        <label class="form-check-label mb-0">Add Free Cancellation</label>
-        <input
-          class="form-check-input"
-          type="radio"
-          name="cancellation"
-          value="add"
-          [(ngModel)]="formData.freeCancellation"
-        />
-      </div>
-
-      <div
-        class="form-check option-container d-flex justify-content-between align-items-center"
-      >
-        <label class="form-check-label mb-0">Don’t add Free Cancellation</label>
-        <input
-          class="form-check-input"
-          type="radio"
-          name="cancellation"
-          value="no-add"
-          [(ngModel)]="formData.freeCancellation"
-        />
-      </div>
-    </div>
-  </div>
-  <div>
-    <h2 class="insurance-header">Aorbo Insurance Program</h2>
-    <div class="card-body">
-      <div class="d-flex justify-content-center">
-        <textarea
-          class="form-control w-80"
-          placeholder="Insurance details..."
-          [(ngModel)]="formData.insuranceDetails"
-          rows="4"
-        ></textarea>
-      </div>
-    </div>
-  </div>
-
-  <div class="terms-container mt-2">
-    <div class="d-flex justify-content-between align-items-center">
-      <span class="terms-header">Terms and Conditions</span>
-      <i class="bi bi-alarm"></i>
-    </div>
-    <div>
-      <div
-        class="form-check terms-option d-flex justify-content-between align-items-center"
-      >
-        <label class="form-check-label mb-0"
-          >I agree to the terms and conditions...</label
-        >
-        <input
-          class="form-check-input"
-          type="checkbox"
-          name="terms"
-          value="agree"
-          [(ngModel)]="formData.termsAndConditions.agree"
-        />
-      </div>
-
-      <div
-        class="form-check terms-option d-flex justify-content-between align-items-center"
-      >
-        <label class="form-check-label mb-0"
-          >I agree to the Aorbo terms and conditions...</label
-        >
-        <input
-          class="form-check-input"
-          type="checkbox"
-          name="terms"
-          value="agreeAorbo"
-          [(ngModel)]="formData.termsAndConditions.agreeAorbo"
-        />
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="d-flex justify-content-between align-items-start amount-container p-3"
-  >
-    <div>
-      <label class="mb-0">Account</label>
-      <p class="small text-muted mb-0">Tax excluded</p>
-    </div>
-    <div class="text-right">
-      <label class="mb-0 total-price">{{ formData.amount }}.00</label>
-    </div>
-  </div>
-
-  <div class="pay-now-container">
-    <button class="btn pay-now-btn" (click)="payNow()">Pay Now</button>
-  </div>
+    <!-- Terms -->
+    <section class="section terms">
+      <label class="check">
+        <input type="checkbox" name="agree" [(ngModel)]="formData.termsAndConditions.agree" required />
+        <span>I'm fit for a {{ trek.difficulty.toLowerCase() }} trek and agree to the operator's <a href="#">trek rules</a>.</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" name="agreeTrekko" [(ngModel)]="formData.termsAndConditions.agreeTrekko" required />
+        <span>I agree to Trekko's <a href="#">booking terms</a> and <a href="#">cancellation policy</a>.</span>
+      </label>
+    </section>
+  </form>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="action-bar">
+    <div class="action-bar__price">
+      <small>{{ formData.passengers.length }} {{ formData.passengers.length === 1 ? 'traveller' : 'travellers' }}</small>
+      <strong>{{ total | inr }}</strong>
+    </div>
+    <button type="button" class="btn-cta" [disabled]="f.invalid || !gendersFilled" (click)="payNow()">Continue to pay</button>
+  </div>
+</ion-footer>

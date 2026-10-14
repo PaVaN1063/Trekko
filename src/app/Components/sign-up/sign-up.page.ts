@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../service/api.service';
-import { ToastController } from '@ionic/angular';
-import { apis } from '../service/api';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { firstValueFrom } from 'rxjs';
+import { ApiService } from '../service/api.service';
+import { apis } from '../service/api';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
   styleUrls: ['./sign-up.page.scss'],
 })
-export class SignUpPage implements OnInit {
-  signupForm: FormGroup; // Explicitly define as FormGroup
+export class SignUpPage {
+  signupForm: FormGroup;
+  submitting = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,77 +21,60 @@ export class SignUpPage implements OnInit {
     private toastController: ToastController,
     private router: Router
   ) {
-    // Initialize signupForm with an empty FormGroup
-    this.signupForm = this.formBuilder.group({}); // Initialize here
-  }
-
-  ngOnInit() {
     this.signupForm = this.formBuilder.group({
-      fullName: ['', [Validators.required]],
+      fullName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      mobileNumber: ['', [
-        Validators.required,
-        Validators.pattern(/^[0-9]{10}$/)
-      ]],
-      terms: [false, Validators.requiredTrue]
+      mobileNumber: ['', [Validators.required, Validators.pattern(/^[6-9][0-9]{9}$/)]],
+      terms: [false, Validators.requiredTrue],
     });
   }
 
-  async onSubmit() {
-    if (this.signupForm.valid) {
-      const response = await this.postMethod();
-      // Check if the response status is true or false and display the appropriate message
-      if (response.status) {
-        this.presentToast(response.message); // success message
-      } else {
-        this.presentToast(response.message); // error message
-      }
-      this.router.navigate(["/"])
-    } else {
-      console.log('Form is invalid');
-      this.presentToast('Please fill in the form correctly.');
+  showError(name: string): boolean {
+    const ctrl = this.signupForm.get(name);
+    return !!ctrl && ctrl.touched && ctrl.invalid;
+  }
+
+  digitsOnly(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const digits = input.value.replace(/\D/g, '').slice(0, 10);
+    if (digits !== input.value) {
+      input.value = digits;
+      this.signupForm.get('mobileNumber')?.setValue(digits);
     }
   }
-  
-  async postMethod() {
+
+  async onSubmit() {
+    if (this.signupForm.invalid) {
+      this.signupForm.markAllAsTouched();
+      if (this.signupForm.get('terms')?.invalid) {
+        this.presentToast('Please accept the Terms of Use to continue.');
+      }
+      return;
+    }
+
+    this.submitting = true;
     const data = this.signupForm.value;
     const body = {
       fullName: data.fullName,
       email: data.email,
       phoneNumber: data.mobileNumber,
-      roleId: 1
+      roleId: 1,
     };
-    try {
-      console.log(body);
-      
-      const endpoint = apis.postRegistration; 
-      const response = await this.service.postApi(endpoint, body).toPromise();
-      // const response = "Hi Hello"
-      // this.presentToast(response);
 
-      this.presentToast(response.message);
-      // Return the response from the API (assumes response includes a status and message)
-      return response; 
-      
-      
-    } catch (error) {
-      console.error('Error:', error);
-      // Return a default error response if an exception occurs
-      return { status: false, message: 'An error occurred. Please try again.' };
+    try {
+      const response = await firstValueFrom(this.service.postApi(apis.postRegistration, body));
+      await this.presentToast(response?.message ?? 'Account created. Log in with your mobile number.', 'toast-green');
+      this.signupForm.reset({ terms: false });
+      this.router.navigate(['/login']);
+    } catch {
+      await this.presentToast("We couldn't create your account. Check your connection and try again.");
+    } finally {
+      this.submitting = false;
     }
   }
-  
 
-  async presentToast(message: string, duration: number = 5000) {
-    const toast = await this.toastController.create({
-      message,
-      duration,
-      position: 'top',
-      cssClass: 'toast-green' // Add the custom class for green color
-    });
-    toast.present();
-    this.signupForm.reset();
-    this.router.navigate(['/login']);
+  private async presentToast(message: string, cssClass = '') {
+    const toast = await this.toastController.create({ message, duration: 3500, position: 'top', cssClass });
+    await toast.present();
   }
-  
 }

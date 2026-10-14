@@ -1,226 +1,788 @@
 /*
- * App Global CSS
+ * Trekko design system
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Colors: the original Trekko palette (sky → indigo gradient, sun yellow,
+ *         leaf green, gold tab bar).
+ * Type:   Bricolage Grotesque for headings and numbers, Figtree for text.
+ * Motif:  topographic contour lines over the brand gradient.
+ * Motion: one short entrance per screen (.rise) and press feedback (.tap).
  */
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
-
-// Garet Font 
-@font-face {
-  font-family: 'Garet';
-  src: url('assets/font/Garet/Garet-Book.woff2') format('woff2'),
-       url('assets/font/Garet/Garet-Book.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Garet';
-  src: url('assets/font/Garet/Garet-Heavy.woff2') format('woff2'),
-       url('assets/font/Garet/Garet-Heavy.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-}
-
-/* Apply Garet as the default font */
+// ---------------------------------------------------------------------------
+// Tokens
+// ---------------------------------------------------------------------------
 :root {
-  --ion-font-family: 'Garet', sans-serif;
+  --ab-sky: #51bbfd;
+  --ab-blue: #4b7ef0;
+  --ab-indigo: #3136b9;
+  --ab-sun: #f0e94c;
+  --ab-gold: #f1c40f;
+  --ab-logo: #f8eb4d;
+  --ab-black: #161616;
+  --ab-leaf: #15a21f;
+  --ab-ink: #14163a;
+  --ab-muted: #6b6f8a;
+  --ab-line: #e3e6f3;
+  --ab-mist: #f3f5fb;
+  --ab-card: #ffffff;
+  --ab-danger: #e5484d;
+  --ab-link: #3a4fd8;
+
+  --ab-gradient: linear-gradient(160deg, var(--ab-sky) 0%, var(--ab-blue) 45%, var(--ab-indigo) 100%);
+  --ab-cta: var(--ab-black);
+
+  --ab-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+  --ab-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ab-radius-lg: 24px;
+  --ab-radius: 16px;
+  --ab-radius-sm: 12px;
+  --ab-shadow: 0 6px 20px rgba(20, 22, 58, 0.08);
+  --ab-shadow-lift: 0 12px 28px rgba(20, 22, 58, 0.14);
+
+  --ion-font-family: var(--ab-body);
+  --ion-background-color: var(--ab-mist);
+  --ion-text-color: var(--ab-ink);
+  --ion-color-primary: #3a4fd8;
+  --ion-color-primary-rgb: 58, 79, 216;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #3346be;
+  --ion-color-primary-tint: #4e61dc;
+
+  color-scheme: light;
 }
 
-
-// Poppins Font
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-.poppins-thin {
-  font-family: "Poppins", sans-serif;
-  font-weight: 100;
-  font-style: normal;
+body {
+  font-family: var(--ab-body);
+  color: var(--ab-ink);
+  -webkit-font-smoothing: antialiased;
 }
 
-.poppins-extralight {
-  font-family: "Poppins", sans-serif;
-  font-weight: 200;
-  font-style: normal;
+h1, h2, h3, h4, .display {
+  font-family: var(--ab-display);
+  letter-spacing: -0.01em;
+  color: inherit;
 }
 
-.poppins-light {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-style: normal;
+a {
+  color: var(--ab-link);
 }
 
-.poppins-regular {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+:focus-visible {
+  outline: 3px solid rgba(75, 126, 240, 0.55);
+  outline-offset: 2px;
 }
 
-.poppins-medium {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal;
+// ---------------------------------------------------------------------------
+// Motion
+// ---------------------------------------------------------------------------
+@keyframes ab-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 }
 
-.poppins-semibold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  font-style: normal;
+@keyframes ab-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); }
+  100% { transform: scale(1); }
 }
 
-.poppins-bold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+@keyframes ab-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-6%); }
 }
 
-.poppins-extrabold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 800;
-  font-style: normal;
+/* Staggered entrance: set --i on each element (0, 1, 2…) */
+.rise {
+  animation: ab-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
 }
 
-.poppins-black {
-  font-family: "Poppins", sans-serif;
-  font-weight: 900;
-  font-style: normal;
+/* Press feedback for anything tappable */
+.tap {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    transform: scale(0.97);
+  }
 }
 
-.poppins-thin-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 100;
-  font-style: italic;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.poppins-extralight-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 200;
-  font-style: italic;
+// ---------------------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------------------
+.ab-page {
+  --background: var(--ab-mist);
 }
 
-.poppins-light-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-style: italic;
+/* Light surface that overlaps the bottom of the header */
+.ab-body {
+  position: relative;
+  margin-top: -22px;
+  padding: 22px 16px calc(28px + env(safe-area-inset-bottom));
+  background: var(--ab-mist);
+  border-radius: var(--ab-radius-lg) var(--ab-radius-lg) 0 0;
 }
 
-.poppins-regular-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: italic;
+.section {
+  margin-top: 26px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
-.poppins-medium-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: italic;
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  a, button {
+    border: 0;
+    background: none;
+    padding: 0;
+    font: 600 13px var(--ab-body);
+    color: var(--ab-link);
+    text-decoration: none;
+  }
 }
 
-.poppins-semibold-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  font-style: italic;
+.panel {
+  background: var(--ab-card);
+  border-radius: var(--ab-radius);
+  box-shadow: var(--ab-shadow);
+  padding: 16px;
 }
 
-.poppins-bold-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: italic;
+.muted {
+  color: var(--ab-muted);
 }
 
-.poppins-extrabold-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 800;
-  font-style: italic;
+.rail {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 -16px;
+  padding: 2px 16px 10px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
 }
 
-.poppins-black-italic {
-  font-family: "Poppins", sans-serif;
-  font-weight: 900;
-  font-style: italic;
+// ---------------------------------------------------------------------------
+// Header (ab-header component)
+// ---------------------------------------------------------------------------
+.ab-header {
+  position: relative;
+  overflow: hidden;
+  padding: calc(env(safe-area-inset-top) + 14px) 16px 40px;
+  background: var(--ab-gradient);
+  color: #fff;
+
+  &--tall {
+    padding-bottom: 88px;
+  }
+
+  > *:not(.ab-header__contours) {
+    position: relative;
+  }
 }
-.center {
-  text-align: center;
-  justify-content: center;
+
+.ab-header__contours {
+  position: absolute;
+  left: -20%;
+  bottom: -30%;
+  width: 150%;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: ab-drift 18s ease-in-out infinite alternate;
+}
+
+.ab-header__bar {
+  display: flex;
   align-items: center;
+  gap: 10px;
+  min-height: 44px;
 }
 
-@import "~swiper/swiper-bundle.min.css";
-
-// Header Back button and Title hide
-.custom-toolbar {
-  --background: white; /* Set background to white */
-  --box-shadow: none; /* Remove shadow */
-  --border-color: transparent; /* Remove border (if any) */
+.ab-header__titles {
+  flex: 1;
+  min-width: 0;
 }
 
-.header-title {
-  visibility: hidden; /* Initially hidden */
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.ab-header__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-.header-title.visible {
-  visibility: visible;
-  opacity: 1;
+.ab-header__subtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  opacity: 0.85;
 }
 
-.page-title {
-  transition: opacity 0.3s ease;
-}
-.back-button {
-  font-size: 28px;
-  background: transparent;
-  color: #dada00;
+.ab-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 22px;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, transform 0.15s;
+
+  &:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 
-.custom-back-button {
-  font-size: 18px;
-  color: rgb(218, 218, 0);
-}
-.ionModelCSS {
-  // width: 100%;
-  // border-radius:50px;
-  --border-top-right-radius: 40px;
-  // --border-top-left-radius:40px;
+// ---------------------------------------------------------------------------
+// Buttons
+// ---------------------------------------------------------------------------
+.btn-cta,
+.btn-dark,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  top: 30%;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  font: 700 16px var(--ab-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.2s, box-shadow 0.2s;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  ion-icon {
+    font-size: 18px;
+  }
 }
-// .half-ionModel{
-//   --border-top-right-radius: 40px;
-//   --border-top-left-radius: 40px;
-//   width: 100%;
-//   top: 40%;
-// }
-ion-content {
-  --background: #f5f5f5;
+
+.btn-cta {
+  background: var(--ab-black);
+  color: #fff;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 24px rgba(22, 22, 22, 0.22);
+
+  ion-icon {
+    color: var(--ab-logo);
+  }
+
+  &:disabled {
+    background: #c9cbd6;
+    color: #fff;
+    opacity: 1;
+  }
+}
+
+.btn-dark {
+  background: var(--ab-ink);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: rgba(58, 79, 216, 0.08);
+  color: var(--ab-link);
+}
+
+/* Bottom action bar for checkout-style screens */
+.action-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -8px 24px rgba(20, 22, 58, 0.08);
+
+  .action-bar__price {
+    flex-shrink: 0;
+
+    small {
+      display: block;
+      font-size: 12px;
+      color: var(--ab-muted);
+    }
+
+    strong {
+      font: 700 22px var(--ab-display);
+    }
+  }
+
+  .btn-cta,
+  .btn-dark {
+    flex: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Forms
+// ---------------------------------------------------------------------------
+.field {
+  display: block;
+  margin-bottom: 14px;
+
+  > span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ab-muted);
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--ab-line);
+    border-radius: var(--ab-radius-sm);
+    background: var(--ab-mist);
+    font: 500 16px var(--ab-body);
+    color: var(--ab-ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    appearance: none;
+
+    &::placeholder {
+      color: #a3a7c0;
+    }
+
+    &:focus {
+      border-color: var(--ab-blue);
+      box-shadow: 0 0 0 4px rgba(75, 126, 240, 0.15);
+      background: #fff;
+    }
+  }
+
+  select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--ab-muted) 50%),
+      linear-gradient(135deg, var(--ab-muted) 50%, transparent 50%);
+    background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+  }
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+
+  input {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    accent-color: var(--ab-leaf);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Chips, pills, badges
+// ---------------------------------------------------------------------------
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1.5px solid var(--ab-line);
+  border-radius: 999px;
+  background: #fff;
+  font: 600 13px var(--ab-body);
+  color: var(--ab-ink);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.is-on {
+    background: var(--ab-black);
+    border-color: var(--ab-black);
+    color: #fff;
+  }
+
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+.rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e8f6ea;
+  color: #0f7a18;
+  font: 700 12px var(--ab-body);
+
+  ion-icon {
+    font-size: 11px;
+  }
+}
+
+.op-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  color: #fff;
+  font: 700 10px var(--ab-display);
+}
+
+.difficulty {
+  font-weight: 700;
+
+  &--easy { color: #0f7a18; }
+  &--moderate { color: #b77905; }
+  &--challenging { color: #c2410c; }
+}
+
+.status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font: 700 12px var(--ab-body);
+
+  &--upcoming { background: #e5ecff; color: #3a4fd8; }
+  &--completed { background: #e8f6ea; color: #0f7a18; }
+  &--cancelled { background: #fdecec; color: #c0353a; }
+}
+
+// ---------------------------------------------------------------------------
+// Trek card (ab-trek-card component)
+// ---------------------------------------------------------------------------
+ab-trek-card {
+  display: block;
+}
+
+.trek-card {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--ab-shadow);
+  outline: none;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(75, 126, 240, 0.55);
+  }
+}
+
+.trek-card__photo {
+  position: relative;
+  width: 104px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--ab-line);
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 140px;
+    object-fit: cover;
+  }
+}
+
+.trek-card__offer {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--ab-sun);
+  color: var(--ab-ink);
+  font: 700 11px var(--ab-body);
+}
+
+.trek-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.trek-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.trek-card__name {
+  margin: 2px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.trek-card__meta {
+  margin: 2px 0 6px;
+  font-size: 12.5px;
+  color: var(--ab-muted);
+}
+
+.trek-card__facts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+
+  .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--ab-muted);
+  }
+}
+
+.trek-card__depart {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--ab-muted);
+
+  ion-icon {
+    flex-shrink: 0;
+  }
+}
+
+.trek-card__bottom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.trek-card__op {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: var(--ab-muted);
+}
+
+.trek-card__price {
+  text-align: right;
+  line-height: 1.1;
+
+  s {
+    display: block;
+    font-size: 11px;
+    color: #a3a7c0;
+  }
+
+  strong {
+    font: 700 18px var(--ab-display);
+  }
+}
+
+.trek-card__seats {
+  margin: 6px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #c2410c;
+}
+
+// ---------------------------------------------------------------------------
+// Ionic overrides
+// ---------------------------------------------------------------------------
+ion-toast.toast-green {
+  --background: var(--ab-leaf);
+  --color: #fff;
+}
+
+.ionModelCSS {
+  --border-radius: 24px 24px 0 0;
+}
+
+ion-modal.sheet {
+  --border-radius: 28px;
+}
+
+// ---------------------------------------------------------------------------
+// Trek list (ab-trek-list component)
+// ---------------------------------------------------------------------------
+ab-trek-list {
+  display: block;
+}
+
+.tl-toolbar {
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.tl-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 0;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.tl-group__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #fff7c2;
+  color: #8a6d00;
+  font-size: 20px;
+}
+
+.tl-group__text {
+  flex: 1;
+  min-width: 0;
+
+  strong {
+    display: block;
+    font-size: 14.5px;
+  }
+
+  small {
+    font-size: 12.5px;
+    color: var(--ab-muted);
+  }
+}
+
+.tl-group ion-toggle {
+  --track-background-checked: var(--ab-leaf);
+}
+
+.tl-count {
+  margin: 16px 2px 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tl-list {
+  display: grid;
+  gap: 12px;
+}
+
+.tl-empty {
+  padding: 24px 12px;
+  text-align: center;
+
+  img {
+    width: 160px;
+    border-radius: 20px;
+    mix-blend-mode: multiply;
+  }
+
+  h3 {
+    margin: 12px 0 4px;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0 0 16px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Trekko lockup (ab-logo component)
+// ---------------------------------------------------------------------------
+.ab-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--ab-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ab-black);
+
+  &--light {
+    color: #fff;
+  }
+}
+
+.ab-logo__img {
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }

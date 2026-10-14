@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonModal, ToastController } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { ApiService } from '../service/api.service';
 import { apis } from '../service/api';
 import { Keyboard } from '@capacitor/keyboard';
@@ -35,10 +34,28 @@ export class LoginPage {
     private toastController: ToastController
   ) {
     this.loginForm = this.fb.group({
-      phoneno: ['', [Validators.required]],
+      phoneno: ['', [Validators.required, Validators.pattern(/^[6-9][0-9]{9}$/)]],
     });
   }
   
+  /** Show the phone error once the user has left the field or typed all 10 digits. */
+  get phoneInvalid(): boolean {
+    const ctrl = this.loginForm.get('phoneno');
+    if (!ctrl || ctrl.valid) return false;
+    const length = `${ctrl.value ?? ''}`.length;
+    return length > 0 && (ctrl.touched || length === 10);
+  }
+
+  /** Keep the phone field digits-only as the user types or pastes. */
+  onPhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const digits = input.value.replace(/\D/g, '').slice(0, 10);
+    if (digits !== input.value) {
+      input.value = digits;
+      this.loginForm.get('phoneno')?.setValue(digits);
+    }
+  }
+
   validateNumeric(event: any) {
     const pattern = /^[0-9]*$/;
     let inputChar = String.fromCharCode(event.inputType === 'deleteContentBackward' ? 0 : event.target.value);
@@ -49,15 +66,16 @@ export class LoginPage {
   }
   
   sendOtp() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     this.openOtpDialog();
     this.startCountdown(); // Start the countdown
     const phoneNumber = this.loginForm.get('phoneno')?.value;
-    console.log('Phone Number:', phoneNumber);
     const body =  phoneNumber ; // Assuming the API requires a JSON object
     this.service.postApi(this.endpoint, body).subscribe(
       (res) => {
-        console.log(res.Response);
-        
         if (res.Response?.status) {
           this.presentToast(res.Response.message, 3000); // Show success message
         } else {
@@ -95,18 +113,11 @@ export class LoginPage {
   }
   confirm() {
     const otpValue = this.otp1 + this.otp2 + this.otp3 + this.otp4 + this.otp5 + this.otp6;
-    const phoneNumber = this.loginForm.get('phoneno')?.value;
-    console.log('Phone Number:', phoneNumber);
-    console.log('Entered OTP:', otpValue); 
     this.modal.dismiss(otpValue, 'confirm');
     this.router.navigate(['tabs/Home']);
   }
-  onWillDismiss(event: Event) {
+  onWillDismiss(_event: Event) {
     this.isModalOpen = false;
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      console.log(`OTP confirmed: ${ev.detail.data}`);
-    }
   }
   async presentToast(message: string, duration: number = 2000) {
     const toast = await this.toastController.create({

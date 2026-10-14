@@ -1,39 +1,33 @@
-
-<ion-content class="content">
-  <div class="custom-toolbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
-    <h4 style="margin-right: 10px;">Trek Booking Details</h4>
-    <ion-buttons slot="start" (click)="dismissModal()">
-      <ion-button>X</ion-button>
-    </ion-buttons>   
+<ion-content class="vd">
+  <div class="vd__head">
+    <h2>Booking details</h2>
+    <button type="button" class="vd__close" aria-label="Close" (click)="dismissModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
   </div>
-  
 
-  
-  <ion-list>
-    <ion-item lines="none"> 
-      <ion-label>
-        <h2>Trek booking Details</h2>
-        <p>Name of the service provider</p>
-        <p>No. of Slots</p>
-      </ion-label>
-    </ion-item>
+  <section class="vd__block">
+    <h3>Trek</h3>
+    <div class="vd__row"><span>Trek</span><b>{{ trek.name }}</b></div>
+    <div class="vd__row"><span>Operator</span><b>{{ operator.name }}</b></div>
+    <div class="vd__row"><span>Departs</span><b>{{ trek.departure | date: 'EEE, d MMM · h:mm a' : '+0530' }}</b></div>
+    <div class="vd__row"><span>Pickup</span><b>{{ trek.pickupPoint }}</b></div>
+    <div class="vd__row"><span>Returns</span><b>{{ trek.returnBy }}</b></div>
+  </section>
 
-    <ion-item lines="none">
-      <ion-label>
-        <h2>Passenger Details</h2>
-        <p>Name of the Passenger</p>
-        <p>Gender</p>
-        <p>Age Year</p>
-      </ion-label>
-    </ion-item>
+  <section class="vd__block">
+    <h3>Travellers ({{ travellers.length }})</h3>
+    <div class="vd__pax" *ngFor="let p of travellers; let i = index">
+      <span class="vd__num">{{ i + 1 }}</span>
+      <b>{{ p.name || 'Traveller ' + (i + 1) }}</b>
+      <span class="muted">{{ p.gender || '—' }}{{ p.age ? ', ' + p.age : '' }}</span>
+    </div>
+  </section>
 
-    <ion-item lines="none">
-      <ion-label>
-        <h2>Your Ticket will be sent to</h2>
-        <p>Mobile Number</p>
-        <p>Gmail ID</p>
-        <p>State of Residency</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <section class="vd__block">
+    <h3>Ticket goes to</h3>
+    <div class="vd__row"><span>Mobile</span><b>+91 {{ contact.phone }}</b></div>
+    <div class="vd__row"><span>Email</span><b>{{ contact.email }}</b></div>
+    <div class="vd__row"><span>State</span><b>{{ contact.state }}</b></div>
+  </section>
 </ion-content>

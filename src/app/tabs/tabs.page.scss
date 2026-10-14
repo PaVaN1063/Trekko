@@ -1,31 +1,40 @@
+.ab-tabbar {
+  --background: var(--ab-logo);
+  --color: rgba(22, 22, 22, 0.6);
+  --color-selected: var(--ab-black);
+  --border: 0;
+  height: calc(64px + env(safe-area-inset-bottom));
+  padding-top: 6px;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -6px 24px rgba(20, 22, 58, 0.12);
 
-.custom-tab-bar {
-    // --background: #f1c40f; /* Yellow background */
-    // --color: black; /* Default icon and text color */
-    // --color-selected: black; /* Selected icon and text color */
-    // --tab-button-icon-size: 24px; /* Adjust icon size if needed */
-    // --tab-button-min-width: 72px; /* Ensure buttons are wide enough */
-    --background: #f1c40f; /* Yellow background */
-    --color: black; /* Default icon and text color */
-    --color-selected: black; /* Selected icon and text color */
+  ion-tab-button {
+    --ripple-color: transparent;
+    font-family: var(--ab-body);
   }
-  
-  .custom-tab-bar ion-tab-button {
-    font-weight: bold;
+
+  ion-label {
+    margin-top: 3px;
+    font-size: 11.5px;
+    font-weight: 700;
   }
-  
-  .custom-tab-bar ion-tab-button.ion-selected {
-    --color-selected: black; /* Ensure selected state uses black */
+}
+
+.ab-tabbar__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  font-size: 21px;
+  transition: background 0.25s ease;
+
+  .tab-selected & {
+    background: var(--ab-black);
+    color: var(--ab-logo);
+
+    ion-icon {
+      animation: ab-pop 0.35s ease;
+    }
   }
-  
-  .custom-tab-bar ion-tab-button ion-icon {
-    --color: black;
-    --color-selected: black;
-  }
-  
-  .custom-tab-bar ion-tab-button ion-label {
-    font-size: 12px;
-    margin-top: 4px;
-    text-align: center;
-  }
-  
+}

@@ -1,330 +1,181 @@
-
-<ion-content class="ion-padding">
-  <div class="custom-header">
-    <button class="back-button" (click)="goBack()">
-      <ion-icon name="chevron-back-outline"></ion-icon>
-    </button>
-    <!-- <h4 >Trek Details</h4> -->
-  </div>
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-<div class="card trek-card mb-3" *ngFor="let record of records">
-  <div class="card-body p-2">
-    <!-- Logo and Service Provider -->
-    <div class="d-flex align-items-center">
-      <!-- Logo -->
-      <img
-        [src]="record.logoUrl"
-        alt="Logo"
-        class="logo me-2 rounded-circle"
-      />
-
-      <!-- Service Provider Name -->
-      <div class="flex-grow-1">
-        <h6 class="mb-1"><strong>{{record.serviceProvider}}</strong></h6>
-      </div>
-
-      <!-- Special Offer Badge -->
-      <div class="offer-container">
-        <img
-          *ngIf="record.specialOffer"
-          src="assets/Logos/offers.png"
-          alt="Special Offer"
-          class="special-offer-badge"
-        />
-       
-          <button routerLink="passenger-info" class="btn btn-success btn-sm ">
-            Book {{record.bookingNumber}}
-          </button>
-      </div>
+<ion-content class="ab-page td" [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <!-- Gallery -->
+  <section class="td-gallery">
+    <div class="td-gallery__track" (scroll)="onGalleryScroll($event)">
+      <img *ngFor="let src of trek.gallery" [src]="src" [alt]="trek.name" />
     </div>
+    <div class="td-gallery__shade"></div>
+    <div class="td-gallery__bar">
+      <button type="button" class="ab-icon-btn" aria-label="Go back" (click)="goBack()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </button>
+      <span class="spacer"></span>
+      <button type="button" class="ab-icon-btn" [attr.aria-label]="saved ? 'Remove from saved' : 'Save trek'" (click)="saved = !saved">
+        <ion-icon [name]="saved ? 'heart' : 'heart-outline'" [class.pop]="saved"></ion-icon>
+      </button>
+      <button type="button" class="ab-icon-btn" aria-label="Share trek" (click)="openModal()">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </button>
+    </div>
+    <div class="td-gallery__dots">
+      <span *ngFor="let src of trek.gallery; let i = index" [class.on]="i === galleryIndex"></span>
+    </div>
+  </section>
 
-    <!-- Trek Duration and Pickup Time -->
-    <div class="d-flex justify-content-between align-items-center mt-2">
+  <div class="ab-body td-body">
+    <!-- Title -->
+    <section class="rise">
+      <div class="td-tags">
+        <span class="td-offer" *ngIf="trek.offer"><ion-icon name="pricetag"></ion-icon>{{ trek.offer.label }} with {{ trek.offer.code }}</span>
+        <span class="td-seats" *ngIf="trek.seatsLeft <= 10">{{ trek.seatsLeft }} seats left</span>
+      </div>
+      <h1 class="td-title">{{ trek.name }}</h1>
+      <p class="td-place muted"><ion-icon name="location-outline"></ion-icon>{{ trek.region }}, {{ trek.state }}</p>
+      <p class="td-rating">
+        <span class="rating-pill"><ion-icon name="star"></ion-icon>{{ trek.rating }}</span>
+        <button type="button" class="link" (click)="scrollToSection('reviews')">{{ trek.reviewCount | number }} reviews</button>
+      </p>
+    </section>
+
+    <!-- Facts -->
+    <section class="td-facts rise" style="--i: 1">
+      <div><ion-icon name="time-outline"></ion-icon><b>{{ duration }}</b><small>Duration</small></div>
+      <div><ion-icon name="trending-up-outline"></ion-icon><b>{{ trek.altitudeM | number }} m</b><small>Max altitude</small></div>
+      <div><ion-icon name="walk-outline"></ion-icon><b>{{ trek.distanceKm }} km</b><small>Trek distance</small></div>
+      <div><ion-icon name="pulse-outline"></ion-icon><b [class]="'difficulty difficulty--' + trek.difficulty.toLowerCase()">{{ trek.difficulty }}</b><small>Difficulty</small></div>
+    </section>
+
+    <!-- Departure -->
+    <section class="panel td-depart rise" style="--i: 2">
+      <div class="td-depart__icon"><ion-icon name="bus"></ion-icon></div>
+      <div class="td-depart__text">
+        <small>Next departure</small>
+        <strong>{{ trek.departure | date: 'EEE, d MMM · h:mm a' : '+0530' }}</strong>
+        <span class="muted">{{ trek.pickupPoint }}</span>
+        <span class="muted">Back by {{ trek.returnBy }}</span>
+      </div>
+    </section>
+
+    <!-- Operator -->
+    <section class="td-operator rise" style="--i: 3">
+      <span class="op-badge op-badge--lg" [style.background]="operator.color">{{ operator.initials }}</span>
       <div>
-        <p class="mb-1 text-muted">{{record.trekDuration}}</p>
-        <p class="mb-0">{{record.pickupDateTime}}</p>
+        <strong>{{ operator.name }} <ion-icon name="shield-checkmark" class="verified"></ion-icon></strong>
+        <small class="muted">Since {{ operator.since }} · {{ operator.treksRun | number }} treks run · {{ operator.rating }}★</small>
       </div>
+    </section>
 
-      <!-- Booking Button, GDPR and Share Icons Row -->
-      <div class="d-flex align-items-center">
-      
+    <!-- Section tabs -->
+    <nav class="td-tabs" #tabHeader>
+      <button type="button" *ngFor="let s of sections" [class.on]="selectedTab === s.id" (click)="scrollToSection(s.id)">{{ s.label }}</button>
+    </nav>
 
-        <!-- GDPR and Share Icons -->
-        <img src="assets/Logos/gdpr.png" alt="GDPR" class="gdpr-icon me-2" />
-        <ion-icon
-          class="share-icon"
-          name="share-social-outline"
-          (click)="openModal()"
-        ></ion-icon>
+    <!-- Route -->
+    <section class="td-section" id="route">
+      <h2>Trek route</h2>
+      <ol class="timeline">
+        <li *ngFor="let stop of trek.route; let last = last" [class.last]="last">
+          <span class="timeline__icon"><ion-icon [name]="routeIcon(stop.mode)"></ion-icon></span>
+          <div>
+            <small>{{ stop.time }}</small>
+            <strong>{{ stop.title }}</strong>
+            <p>{{ stop.detail }}</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Itinerary -->
+    <section class="td-section" id="itinerary">
+      <h2>Itinerary</h2>
+      <div class="days">
+        <article class="panel day" *ngFor="let d of trek.itinerary">
+          <span class="day__num">Day {{ d.day }}</span>
+          <div>
+            <strong>{{ d.title }}</strong>
+            <p>{{ d.detail }}</p>
+          </div>
+        </article>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
 
+    <!-- Inclusions -->
+    <section class="td-section" id="inclusions">
+      <h2>What's included</h2>
+      <div class="panel">
+        <ul class="ticks">
+          <li *ngFor="let i of trek.inclusions"><ion-icon name="checkmark-circle"></ion-icon>{{ i }}</li>
+        </ul>
+        <h3 class="sub">Not included</h3>
+        <ul class="ticks ticks--no">
+          <li *ngFor="let e of trek.exclusions"><ion-icon name="close-circle"></ion-icon>{{ e }}</li>
+        </ul>
+      </div>
+      <h3 class="sub">Why trekkers love it</h3>
+      <ul class="highlights">
+        <li *ngFor="let h of trek.highlights">{{ h }}</li>
+      </ul>
+    </section>
 
-  <ion-row style="margin-bottom: 16px">
-    <ion-col size="6" style="padding: 4px">
-      <ion-card style="border-radius: 15px">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s"
-          alt="Image 1"
-        />
-      </ion-card>
-    </ion-col>
-    <ion-col size="6" style="padding: 4px">
-      <ion-card style="border-radius: 15px">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s"
-          alt="Image 2"
-        />
-      </ion-card>
-    </ion-col>
-  </ion-row>
+    <!-- Stay -->
+    <section class="td-section" id="stay">
+      <h2>Stay</h2>
+      <div class="panel stay">
+        <div class="stay__icon"><ion-icon name="bonfire"></ion-icon></div>
+        <div>
+          <strong>{{ trek.stay.name }}</strong>
+          <small class="muted">{{ trek.stay.type }} · {{ trek.stay.location }}</small>
+          <p>{{ trek.stay.description }}</p>
+        </div>
+      </div>
+      <h3 class="sub">Activities</h3>
+      <div class="activity-chips">
+        <span class="chip" *ngFor="let a of trek.activities">{{ a }}</span>
+      </div>
+    </section>
 
-  <ion-segment #tabHeader [(ngModel)]="selectedTab" scrollable>
-    <ion-segment-button value="trekRoute" (click)="scrollToSection('trekRoute')">Trek Route</ion-segment-button>
-    <ion-segment-button value="Itenary" (click)="scrollToSection('Itenary')">Itenary</ion-segment-button>
-    <ion-segment-button value="amenities" (click)="scrollToSection('amenities')">Amenities</ion-segment-button>
-    <ion-segment-button value="reviews" (click)="scrollToSection('reviews')">Reviews</ion-segment-button>
-    <ion-segment-button value="Resorts" (click)="scrollToSection('Resorts')">Resorts</ion-segment-button>
-    <ion-segment-button value="Activites" (click)="scrollToSection('Activites')">Activites</ion-segment-button>
-    <ion-segment-button value="CancelPolicy" (click)="scrollToSection('CancelPolicy')">Cancellation Policy</ion-segment-button>
-  </ion-segment>
-
-  <div (ionScroll)="onScroll($event)" class="segment-content">
-    <div id="trekRoute" class="section">
-      <h2>Trek Route</h2>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>From Destination</ion-card-title>
-        </ion-card-header>
-  
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <!-- Left side content (Times) -->
-              <ion-col size="5">
-                <ion-row>
-                  <ion-col size="12">
-                    <p><strong>Approx Departure time</strong></p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Approx reaching time</strong></p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Approx reaching time</strong></p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Approx Departure time</strong></p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Approx reaching time</strong></p>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-  
-              <!-- Tracking Line -->
-              <ion-col size="2" class="track-container">
-                <div class="tracking-line">
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                </div>
-              </ion-col>
-  
-              <!-- Right side content (Stages) -->
-              <ion-col size="5">
-                <ion-row>
-                  <ion-col size="12">
-                    <p>
-                      <strong>Starting point</strong> (Type of transportation)
-                    </p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Stages 1</strong></p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Stages 2</strong> (Type of transportation)</p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Stages 3</strong></p>
-                  </ion-col>
-                  <ion-col size="12">
-                    <p><strong>Ending point</strong> (Type of transportation)</p>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  
-    <div id="Itenary" class="section">
-      <h2>Itenary</h2>
-      <ion-card>
-        <ion-card-content>
-          <p>
-            <strong>Day 1 Activity:</strong> Visit to the first campsite, trekking
-            activities.
-          </p>
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-content>
-          <p>
-            <strong>Day 2 Activity:</strong> Exploring the mountain, outdoor
-            activities.
-          </p>
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-content>
-          <p>
-            <strong>Day 3 Activity:</strong> Return trek and campsite farewell.
-          </p>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  
-    <div id="amenities" class="section">
-      <h2>Amenities</h2>
-      <ion-card style="border-radius: 15px">
-        <ion-card-content>
-          <div class="photos-container" style="margin-top: 10px">
-            <h3 style="color: black; font-size: 18px">Including :</h3>
-            <br />
-          </div>
-          <div class="photos-container" style="margin-top: 10px">
-            <h3 style="color: black; font-size: 18px">Excluding :</h3>
-            <br />
-          </div>
-          <div class="photos-container" style="margin-top: 10px">
-            <h3 style="color: black; font-size: 18px">Highligths :</h3>
-            <br />
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  
-    <div id="reviews" class="section">
+    <!-- Reviews -->
+    <section class="td-section" id="reviews">
       <h2>Reviews</h2>
-      <ion-card style="border-radius: 15px">
-        <ion-card-header>
-          <ion-card-title style="font-size: 25px">Customer :</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="star-rating">
-            <ion-icon
-              name="star-outline"
-              color="gold"
-              class="star-icon"
-            ></ion-icon>
-            <ion-icon
-              name="star-outline"
-              color="gold"
-              class="star-icon"
-            ></ion-icon>
-            <ion-icon
-              name="star-outline"
-              color="gold"
-              class="star-icon"
-            ></ion-icon>
-            <ion-icon
-              name="star-outline"
-              color="gold"
-              class="star-icon"
-            ></ion-icon>
-            <ion-icon
-              name="star-outline"
-              color="gold"
-              class="star-icon"
-            ></ion-icon>
+      <div class="review-summary panel">
+        <span class="review-summary__score">{{ trek.rating }}</span>
+        <div>
+          <span class="stars"><ion-icon *ngFor="let s of [1, 2, 3, 4, 5]" [name]="s <= roundRating ? 'star' : 'star-outline'"></ion-icon></span>
+          <small class="muted">Based on {{ trek.reviewCount | number }} verified trekkers</small>
+        </div>
+      </div>
+      <article class="review" *ngFor="let r of trek.reviews">
+        <div class="review__head">
+          <span class="review__avatar">{{ r.name.charAt(0) }}</span>
+          <div>
+            <strong>{{ r.name }}</strong>
+            <small class="muted">{{ r.city }} · {{ r.date }}</small>
           </div>
-          <div class="comment-box" style="margin-top: 10px">
-            <h4 style="color: black; font-size: 18px">Comments :</h4>
-            <br />
-            <textarea
-              rows="3"
-              style="
-                width: 100%;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                padding: 8px;
-              "
-            ></textarea>
-          </div>
-          <div class="photos-container" style="margin-top: 10px">
-            <h4 style="color: black; font-size: 18px">Photos :</h4>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  
-    <div id="Resorts" class="section" >
-      <h2>Resorts</h2>
-      <ion-card style="border-radius: 15px">
-        <ion-card-content>
-          <div class="photos-container" style="margin-top: 10px">
-            <h3 style="color: black; font-size: 18px">Name :</h3>
-            <br />
-          </div>
-          <div class="photos-container" style="margin-top: 10px">
-            <h3 style="color: black; font-size: 18px">Description :</h3>
-            <br />
-          </div>
-          <div class="photos-container" style="margin-top: 10px">
-            <h3 style="color: black; font-size: 18px">Location :</h3>
-            <div class="map-container" style="margin-top: 10px">
-              <img
-                src="https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/07/googleMapsTricksHero.jpg"
-                alt="Map"
-                style="width: 100%; height: auto"
-              />
-            </div>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  
-    <div id="Activites" class="section">
-      <h2>Activites</h2>
-      <ion-card style="border-radius: 15px; border: 1px solid black">
-        <h3 style="color: black; font-size: 18px; margin-left: 15px">
-          Highligths :
-        </h3>
-        <ion-card
-          style="border-radius: 15px; border: 1px solid black; height: 90px"
-        >
-          <ion-card-content>
-            <div class="photos-container" style="margin-top: 10px"></div>
-          </ion-card-content>
-        </ion-card>
-        <br />
-      </ion-card>
-    </div>
-  
-    <div id="CancelPolicy" class="section">
-      <h2>Cancellation Policy</h2>
-      <ion-card style="border-radius: 15px; border: 1px solid black">
-        <h3 style="color: black; font-size: 18px; margin-left: 15px">
-          Policy Details :
-        </h3>
-        <ion-card
-          style="border-radius: 15px; border: 1px solid black; height: 90px"
-        >
-          <ion-card-content>
-            <div class="photos-container" style="margin-top: 10px"></div>
-          </ion-card-content>
-        </ion-card>
-        <br />
-      </ion-card>
-    </div>
-  
+          <span class="rating-pill"><ion-icon name="star"></ion-icon>{{ r.rating }}</span>
+        </div>
+        <p>{{ r.text }}</p>
+      </article>
+    </section>
+
+    <!-- Cancellation -->
+    <section class="td-section" id="cancellation">
+      <h2>Cancellation policy</h2>
+      <div class="panel policy">
+        <div class="policy__row" *ngFor="let c of trek.cancellation">
+          <span>{{ c.when }}</span>
+          <b>{{ c.refund }}</b>
+        </div>
+      </div>
+    </section>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="action-bar">
+    <div class="action-bar__price">
+      <small><s>{{ trek.originalPrice | inr }}</s> per person</small>
+      <strong>{{ trek.price | inr }}</strong>
+    </div>
+    <button type="button" class="btn-cta" (click)="book()">Book now</button>
+  </div>
+</ion-footer>

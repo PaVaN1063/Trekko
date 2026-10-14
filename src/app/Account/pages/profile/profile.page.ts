@@ -1,44 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
+import { CURRENT_USER } from '../../../shared/mock-data';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
-goBack() {
-this.router.navigate(['/tabs/account'])}
-  
-  profileImage: string = '/src/assets/images/profileman.png'; // Default image
-  toDay: string; // Declare toDay property for date input
+export class ProfilePage {
+  profileImage: string = CURRENT_USER.avatar;
+  toDay = new Date().toISOString().split('T')[0];
+  genders = ['Female', 'Male', 'Other'];
+  saving = false;
 
-  constructor(private router: Router) { 
-    // Initialize toDay with the current date in 'YYYY-MM-DD' format
-    this.toDay = new Date().toISOString().split('T')[0];
-    
+  profile = {
+    name: CURRENT_USER.name,
+    email: CURRENT_USER.email,
+    phone: CURRENT_USER.phone,
+    gender: CURRENT_USER.gender,
+    dob: CURRENT_USER.dob,
+  };
+
+  notifications = [
+    { id: 'wa', label: 'WhatsApp updates', hint: 'Tickets, pickup reminders, trek lead contact', on: true },
+    { id: 'email', label: 'Email receipts', hint: 'Invoices and booking changes', on: true },
+    { id: 'offers', label: 'Offers and new treks', hint: 'Up to 2 messages a week', on: false },
+  ];
+
+  constructor(private nav: NavController, private toast: ToastController) {}
+
+  goBack() {
+    this.nav.navigateBack('/tabs/account');
   }
 
-  ngOnInit() {
-  }
-
-  // Method to trigger file input when camera icon is clicked
   triggerFileInput() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    fileInput.click();
+    document.getElementById('fileInput')?.click();
   }
 
-  // Handle file selection
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
+    const file = input.files?.[0];
+    if (file) {
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        // Set the uploaded image as the profile image
-        this.profileImage = e.target.result;
-      };
-      reader.readAsDataURL(input.files[0]); // Read the file as a Data URL
+      reader.onload = () => (this.profileImage = reader.result as string);
+      reader.readAsDataURL(file);
     }
   }
 
+  async save() {
+    this.saving = true;
+    // Mock save: no profile API yet.
+    await new Promise((r) => setTimeout(r, 700));
+    this.saving = false;
+    const t = await this.toast.create({ message: 'Profile saved', duration: 1600, position: 'top', cssClass: 'toast-green' });
+    await t.present();
+  }
 }

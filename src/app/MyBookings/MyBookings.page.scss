@@ -1,159 +1,218 @@
-//header
-.header-title {
-  margin: 0 10px; /* Add margin for spacing */
-  color: rgb(0, 0, 0); /* Adjust color for visibility */
-  font-weight: bold; /* Make the title bold */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  button {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font: 600 13.5px var(--ab-body);
+    transition: background 0.2s, color 0.2s;
+
+    &.on {
+      background: #fff;
+      color: var(--ab-ink);
+    }
+  }
 }
 
-.custom-header {
+.next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: var(--ab-ink);
+  color: #fff;
+
+  > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  small {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  strong {
+    font: 700 19px var(--ab-display);
+  }
+
+  span {
+    font-size: 13px;
+    opacity: 0.85;
+  }
+}
+
+.next__count {
+  text-align: center;
+
+  b {
+    display: block;
+    font: 800 38px var(--ab-display);
+    line-height: 1;
+    color: var(--ab-sun);
+  }
+}
+
+.ticket {
   position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
+  margin-bottom: 14px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--ab-shadow);
+
+  &--dim img {
+    filter: grayscale(0.8);
+  }
+}
+
+.ticket__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+
+  img {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    object-fit: cover;
+  }
+}
+
+.ticket__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+
+  strong {
+    font: 700 16px var(--ab-display);
+  }
+
+  small {
+    font-size: 12.5px;
+  }
+}
+
+.ticket__chev {
+  font-size: 18px;
+  color: var(--ab-muted);
+}
+
+// perforated tear line with side notches
+.ticket__tear {
+  position: relative;
+  height: 0;
+  margin: 0 18px;
+  border-top: 2px dashed var(--ab-line);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--ab-mist);
+  }
+
+  &::before { left: -27px; }
+  &::after { right: -27px; }
+}
+
+.ticket__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 13px;
+
+  b {
+    color: var(--ab-ink);
+  }
+
+  > b {
+    font: 700 16px var(--ab-display);
+  }
+}
+
+.ticket__more {
+  padding: 0 16px 16px;
+  animation: ab-rise 0.3s ease both;
+}
+
+.ticket__row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 5px 10px;
-  background: transparent;
-  z-index: 10;
-  margin-bottom: 0;
-}
+  gap: 16px;
+  padding: 7px 0;
+  font-size: 13.5px;
+  border-top: 1px solid var(--ab-line);
 
-// .back-button {
-//   background: none;
-//   border: none;
-//   color: #f1c40f;
-//   font-size: 24px;
-//   display: flex;
-//   align-items: center;
-// }
+  span {
+    flex-shrink: 0;
+    color: var(--ab-muted);
+  }
 
-.custom-dropdown-toggle {
-  background-color: transparent !important; /* Keep the background transparent */
-  border: 1px solid rgba(0, 0, 0, 0.125); /* Maintain the outline color */
-  border-radius: 40px;
-  padding-left: 15px;
-  padding-right: 15px;
-  color: #000;
-}
-
-.custom-dropdown-toggle:focus {
-  box-shadow: none; /* Remove the focus outline */
-  color: #000;
-}
-.dropdown-menu {
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Light border around the dropdown */
-  border-radius: 0.25rem; /* Rounded corners for dropdown menu */
-  margin-top: 5px;
-}
-
-.dropdown-item {
-  color: #333; /* Change text color */
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+  b {
+    text-align: right;
+    font-weight: 600;
   }
 }
 
-// **********************CARD*************************
-.custom-card {
-  position: relative;
-  border-radius: 25px;
-  overflow: hidden;
-margin-bottom: 0;
+.ticket__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
 
-.departure-bookingId{
-  margin-bottom: 10px;
+  a {
+    flex: 1;
+    min-height: 46px;
+    font-size: 14.5px;
+  }
 }
-.content-rows{
-  line-height: 12px;
+
+.refund {
+  width: 100%;
+  margin: 0;
+  font-size: 13px;
 }
-    .service-provider {
-      font-weight: bold;
-      font-size: 16px; 
-    }
 
-    .booking-id {
-      font-size: 12px;
-      white-space: nowrap;
-      margin-top: 2px;
-    }
+.empty {
+  padding: 40px 20px;
+  text-align: center;
 
-    .date-time {
-      font-size: 12px;
-      color: #666; /* Slightly gray as per the image */
-    }
+  > ion-icon {
+    font-size: 48px;
+    color: #c3c6da;
   }
 
-  .card-content {
-    padding: 5px 15px;
-    margin-top: 0; 
-    margin-bottom: 10px;
-
-    .trek-duration {
-      font-size: 14px;
-      color: #666; /* Trek duration in gray */
-    }
-
-    .pickup-date-time {
-      font-size: 14px;
-      font-weight: bold; /* Matches the bold style */
-    }
+  h3 {
+    margin: 10px 0 6px;
+    font-size: 19px;
   }
 
-  .side-section {
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    display: flex;
-    flex-direction: column; /* Aligns the items vertically */
-    align-items: flex-end; /* Align items to the right */
-  
-    .view-ticket {
-      color: #1e90ff;
-      font-size: 14px;
-    }
-  
-    
+  p {
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.5;
   }
-  .status-section {
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-    top: 0;
-    margin-bottom: 0;
-  }
-  
-  .status {
-    font-size: 12px;
-    border-radius: 15px;
-    padding: 5px 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    margin-right: 30px;
-    line-height: 10px;
-  }
-  
-  /* Define colors for each status */
-  .incoming-status {
-    background-color: #d1e7dd; /* Light green */
-    color: #198754;            /* Green text */
-    border: 1px solid #198754;  /* Green border */
-  }
-  
-  .completed-status {
-    background-color: #d0e3ff; /* Light blue */
-    color: #0d6efd;            /* Blue text */
-    border: 1px solid #0d6efd;  /* Blue border */
-  }
-  
-  .cancelled-status {
-    background-color: #fff3cd; /* Light yellow */
-    color: #ffc107;            /* Yellow text */
-    border: 1px solid #ffc107;  /* Yellow border */
-  }
-  
-  .rejected-status {
-    background-color: #f8d7da; /* Light red */
-    color: #dc3545;            /* Red text */
-    border: 1px solid #dc3545;  /* Red border */
-  }
-  
+}

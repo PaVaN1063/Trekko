@@ -43,7 +43,6 @@ export class ApiService {
     // console.log('post request url --> ', endpoint, data);
     return this.http.post<any>(endpoint, data).pipe(
       map((uresponse: Response) => {
-        console.log('POST API res', uresponse);
         return uresponse;
       }),
       // catchError(this.handleError<any>('Login'))

@@ -1,97 +1,46 @@
+<ion-content class="ab-page" [fullscreen]="true">
+  <header class="me">
+    <img class="me__contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
+    <div class="me__row rise">
+      <img class="me__avatar" [src]="user.avatar" alt="" />
+      <div class="me__text">
+        <h1>{{ user.name }}</h1>
+        <p>+91 {{ user.phone }}</p>
+      </div>
+      <a class="ab-icon-btn" routerLink="profile" aria-label="Edit profile"><ion-icon name="create-outline"></ion-icon></a>
+    </div>
 
+    <div class="me__stats rise" style="--i: 1">
+      <div><b>{{ user.treksDone }}</b><small>Treks done</small></div>
+      <div><b>{{ user.kmWalked }} km</b><small>On the trail</small></div>
+      <div><b>{{ upcoming }}</b><small>Upcoming</small></div>
+    </div>
+  </header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large" style="padding-top: 20px;">My Account</ion-title>
-  
-      <!-- Right end support icon -->
-      <ion-buttons slot="end" style="padding-top: 20px;">
-        <span>English</span>
-        <ion-button (click)="goToSupport()">
-          <img src="assets/icon/helpdesk.png" alt="Help" style="width: 24px; height: 24px;" />
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  
+  <div class="ab-body">
+    <!-- Referral -->
+    <section class="refer rise" style="--i: 2">
+      <div>
+        <strong>Give ₹200, get ₹200</strong>
+        <small>Share code <b>ANANYA200</b> with a friend.</small>
+      </div>
+      <button type="button" class="refer__btn" (click)="shareCode()">Invite</button>
+    </section>
 
+    <section class="section rise" *ngFor="let group of menu; let gi = index" [style.--i]="gi + 3">
+      <div class="section-head"><h2>{{ group.title }}</h2></div>
+      <nav class="panel menu">
+        <a class="menu__item" *ngFor="let item of group.items" [routerLink]="item.link" [class.menu__item--danger]="item.danger">
+          <span class="menu__icon"><ion-icon [name]="item.icon"></ion-icon></span>
+          <span class="menu__label">
+            {{ item.label }}
+            <small *ngIf="item.hint" class="muted">{{ item.hint }}</small>
+          </span>
+          <ion-icon *ngIf="!item.danger" class="menu__chev" name="chevron-forward"></ion-icon>
+        </a>
+      </nav>
+    </section>
 
-  <ion-content class="ion-padding">
-    <!-- Card with Options -->
-    <ion-card  >
-      <ion-list>
-        <!-- Passenger Information -->
-        <ion-item>
-          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
-          <ion-label routerLink="profile">Passenger Information</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- My Bookings -->
-        <ion-item>
-          <ion-icon name="grid-outline" slot="start"></ion-icon>
-          <ion-label>My Bookings</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Safety & Security -->
-        <ion-item>
-          <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
-          <ion-label>Safety & Security</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Help -->
-        <ion-item>
-          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
-          <ion-label>Help</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Claims -->
-        <ion-item>
-          <ion-icon name="shield-outline" slot="start"></ion-icon>
-          <ion-label>Claims</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Notifications -->
-        <ion-item>
-          <ion-icon name="notifications-outline" slot="start"></ion-icon>
-          <ion-label>Notifications</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-
-    <ion-card>
-      <ion-list>
-        <!-- Referrals -->
-        <ion-item>
-          <ion-icon name="people-circle-outline" slot="start"></ion-icon>
-          <ion-label>Referrals</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Become Partner -->
-        <ion-item>
-          <ion-icon name="briefcase-outline" slot="start"></ion-icon>
-          <ion-label>Become Partner</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Rate App -->
-        <ion-item>
-          <ion-icon name="star-outline" slot="start"></ion-icon>
-          <ion-label>Rate App</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- About -->
-        <ion-item>
-          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
-          <ion-label>About Aorbo</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <!-- Logout -->
-        <ion-item>
-          <ion-icon name="log-out-outline" slot="start"></ion-icon>
-          <ion-label color="danger" routerLink="/login">Logout</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-    
-  </ion-content>
+    <p class="version muted">Trekko · version 1.4.0</p>
+  </div>
+</ion-content>

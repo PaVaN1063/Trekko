@@ -1,14 +1,29 @@
-<ion-content [fullscreen]="true" class="content-center">
-  <div class="empty-space"></div>
-  <div class="content-wrapper">
-    <div class="logo-bg">
-          <img src="assets/icon/hikingPerson.png" alt="Logo" class="logo" />
+<ion-content [fullscreen]="true" [scrollY]="false" class="splash" [class.is-logo]="phase !== 'showcase'" [class.is-loading]="phase === 'loading' || phase === 'done'">
+  <img class="splash__contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
+
+  <!-- 1. Full artwork showcase, which closes into the logo circle -->
+  <div class="stage" aria-hidden="true">
+    <img class="stage__art" src="assets/brand/trekko-art.webp" alt="" />
+    <div class="stage__shade"></div>
+    <div class="stage__title">
+      <h1>Trekko</h1>
+      <p>Every summit starts with a single step.</p>
     </div>
-    <ion-progress-bar
-      [value]="progressValue"
-      color="warning"
-      class="custom-progress-bar"
-    ></ion-progress-bar>
-    <img src="assets/icon/splash_image.png" alt="Splash" class="splash-image" />
   </div>
+
+  <!-- 2. Logo with the trail loader around it -->
+  <main class="emblem">
+    <div class="emblem__ring">
+      <svg viewBox="0 0 260 260" class="loader" role="progressbar" aria-label="Loading Trekko" [attr.aria-valuenow]="percent" aria-valuemin="0" aria-valuemax="100">
+        <circle class="loader__track" cx="130" cy="130" r="122" />
+        <circle class="loader__fill" cx="130" cy="130" r="122" [style.stroke-dashoffset]="dashOffset" />
+      </svg>
+      <span class="loader__flag" [style.transform]="'rotate(' + progressValue * 360 + 'deg)'" [class.planted]="phase === 'done'">
+        <ion-icon name="flag"></ion-icon>
+      </span>
+      <img class="emblem__logo" src="assets/brand/trekko-logo.webp" alt="Trekko" />
+    </div>
+    <h1 class="emblem__word">Trekko</h1>
+    <p class="emblem__tag">{{ phase === 'done' ? 'Summit reached. Let’s go!' : 'Finding your trail… ' + percent + '%' }}</p>
+  </main>
 </ion-content>

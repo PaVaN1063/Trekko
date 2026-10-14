@@ -1,165 +1,93 @@
-<ion-content class="ion-padding" fullscreen scroll-y="false">
-  <form [formGroup]="loginForm">
-    <div class="container">
-      <div class="empty-space">
+<ion-content fullscreen class="login-content">
+  <div class="login-screen">
+    <!-- Hero -->
+    <section class="hero">
+      <img class="hero-contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
 
-      </div>
-      <div class="highlight-text">
-        <h1 style="font-size: 1.8rem; font-weight: bold; line-height: 1; color: #ffffff;line-height: 35px;">
-          <span class="text_your_trek">Your Trek,</span><br />
-          Just a<br />Click<br />Away<span style="color: yellow;">!</span>
-        </h1>
+      <div class="brand">
+        <ab-logo [size]="30" [light]="true"></ab-logo>
       </div>
 
-      <div class="form-container">
-        <!-- Phone Input -->
-        <ion-input
-          type="text"
-          placeholder="Phone Number"
-          formControlName="phoneno"
-          class="input-field"
-        ></ion-input>
+      <h1 class="headline rise">
+        <span class="headline-dark">Your Trek,</span><br />
+        Just a Click Away<span class="headline-accent">!</span>
+      </h1>
+      <p class="tagline rise" style="--i: 1">Book treks, track your trips and explore the trails with friends.</p>
+    </section>
 
-        <div class="otp-button-container">
-          <!-- Send OTP Button -->
-          <ion-button id="open-modal" expand="block" shape="round" (click)="sendOtp()">
-            Continue
-          </ion-button>
-        </div>
-      </div>
+    <!-- Login sheet -->
+    <section class="sheet rise" style="--i: 2">
+      <h2 class="sheet-title">Log in or sign up</h2>
+      <p class="sheet-subtitle">We'll send a one-time code to your phone.</p>
 
-      <div class="image-container">
-        <ion-img src="/assets/illustrations/abstract.png" alt="Illustration"></ion-img>
-      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="sendOtp()">
+        <label class="phone-field" [class.phone-field--invalid]="phoneInvalid">
+          <span class="phone-prefix">+91</span>
+          <input
+            type="tel"
+            inputmode="numeric"
+            autocomplete="tel-national"
+            maxlength="10"
+            placeholder="Phone number"
+            formControlName="phoneno"
+            aria-label="Phone number"
+            (input)="onPhoneInput($event)"
+          />
+        </label>
+        <p class="field-error" *ngIf="phoneInvalid">Enter a valid 10-digit mobile number.</p>
 
-      <div class="agreement-content">
-        <div class="poppins-regular">
-          <span>By continuing, you agree to our</span>
-          <br/>
-          <a id="agreement-text" routerDirection="forward" href="#">Terms of Use & Privacy Policy</a>
-        </div>
-      </div>
-    </div>
-  </form>
-  <div *ngIf="isModalOpen" class="modal-backdrop" (click)="cancel()"></div>
+        <ion-button type="submit" expand="block" shape="round" class="continue-btn" [disabled]="loginForm.invalid">
+          Continue
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </form>
+
+      <p class="signup-link">
+        New to Trekko? <a routerLink="/signup">Create an account</a>
+      </p>
+      <p class="signup-link signup-link--small">
+        <a routerLink="/forget-password">Changed your mobile number?</a>
+      </p>
+
+      <p class="terms">
+        By continuing, you agree to our<br />
+        <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a>
+      </p>
+    </section>
+  </div>
 </ion-content>
 
-
-<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)"  class="half-ionModel">
+<!-- OTP sheet -->
+<ion-modal
+  class="otp-modal"
+  [initialBreakpoint]="0.65"
+  [breakpoints]="[0, 0.65]"
+  (willDismiss)="onWillDismiss($event)"
+>
   <ng-template>
-    <ion-content class="ion-padding" scroll-y="false" fullscreen="true">
-      <ion-grid id="myotp" mode="ios" class="ion-text-center">
-          <ion-row>
-              <ion-col size="12">
-                  <h2 class="otp-header">Verify Phone</h2>
-                  <p class="otp-subtext">Code has been sent to +91{{this.loginForm.get('phoneno')?.value}}</p>
-              </ion-col>
-          </ion-row>
-  
-          <ion-row id="myotpgridrow" mode="ios">
-            <ion-col id="myotpgridrowcol1" mode="ios" size="2">
-                <ion-input
-                    [(ngModel)]="otp1"
-                    id="myotpotp1"
-                    fill="outline"
-                    maxlength="1"
-                    minlength="1"
-                    mode="md"
-                    type="tel"
-                    class="myotpotp"
-                    style="--border-radius: 10px; --background: rgba(255, 255, 255, 0.8); --placeholder-color: rgba(0, 0, 0, 0.5); --color: #000; --font-weight:800"
-                    (ionInput)="validateNumeric($event)"
-                    ></ion-input>
-            </ion-col>
-            <ion-col id="myotpgridrowcol2" mode="ios" size="2">
-                <ion-input
-                    [(ngModel)]="otp2"
-                    id="myotpotp2"
-                    fill="outline"
-                    maxlength="1"
-                    minlength="1"
-                    mode="md"
-                    type="tel"
-                    class="myotpotp"
-                    style="--border-radius: 10px; --background: rgba(255, 255, 255, 0.8); --placeholder-color: rgba(0, 0, 0, 0.5); --color: #000; "
-                ></ion-input>
-            </ion-col>
-            <ion-col id="myotpgridrowcol3" mode="ios" size="2">
-                <ion-input
-                    [(ngModel)]="otp3"
-                    id="myotpotp3"
-                    fill="outline"
-                    maxlength="1"
-                    minlength="1"
-                    mode="md"
-                    type="tel"
-                    class="myotpotp"
-                    style="--border-radius: 10px; --background: rgba(255, 255, 255, 0.8); --placeholder-color: rgba(0, 0, 0, 0.5); --color: #000;"
-                ></ion-input>
-            </ion-col>
-            <ion-col id="myotpgridrowcol4" mode="ios" size="2">
-                <ion-input
-                    [(ngModel)]="otp4"
-                    id="myotpotp4"
-                    fill="outline"
-                    maxlength="1"
-                    minlength="1"
-                    mode="md"
-                    type="tel"
-                    class="myotpotp"
-                    style="--border-radius: 10px; --background: rgba(255, 255, 255, 0.8); --placeholder-color: rgba(0, 0, 0, 0.5); --color: #000;"
-                ></ion-input>
-            </ion-col>
-            <ion-col id="myotpgridrowcol5" mode="ios" size="2">
-                <ion-input
-                    [(ngModel)]="otp5"
-                    id="myotpotp5"
-                    fill="outline"
-                    maxlength="1"
-                    minlength="1"
-                    mode="md"
-                    type="tel"
-                    class="myotpotp"
-                    style="--border-radius: 10px; --background: rgba(255, 255, 255, 0.8); --placeholder-color: rgba(0, 0, 0, 0.5); --color: #000;"
-                ></ion-input>
-            </ion-col>
-            <ion-col id="myotpgridrowcol6" mode="ios" size="2">
-                <ion-input
-                    [(ngModel)]="otp6"
-                    id="myotpotp6"
-                    fill="outline"
-                    maxlength="1"
-                    minlength="1"
-                    mode="md"
-                    type="tel"
-                    class="myotpotp"
-                    style="--border-radius: 10px; --background: rgba(255, 255, 255, 0.8); --placeholder-color: rgba(0, 0, 0, 0.5); --color: #000;"
-                ></ion-input>
-            </ion-col>
-        </ion-row>
-        
-  
-          <ion-row>
-              <ion-col size="12">
-                  <p class="otp-info">Didn't get OTP code?</p>
-                  <div class="countdown-timer" *ngIf="countdown > 0">
-                      <p>Resend OTP in {{ countdown }} seconds</p>
-                  </div>
-                  <div *ngIf="countdown === 0">
-                      <ion-text color="primary" (click)="resendOtp()">Resend OTP</ion-text>
-                  </div>
-              </ion-col>
-          </ion-row>
-  
-          <ion-row>
-              <ion-col size="12">
-                  <ion-button expand="block" shape="round" color="dark" (click)="confirm()">
-                      Verify
-                  </ion-button>
-              </ion-col>
-          </ion-row>
-      </ion-grid>
-  </ion-content>
-  
+    <ion-content class="otp-content" [scrollY]="false">
+      <div class="otp-sheet">
+        <h2 class="otp-header">Verify your phone</h2>
+        <p class="otp-subtext">
+          Enter the 6-digit code sent to <strong>+91 {{ loginForm.get('phoneno')?.value }}</strong>
+        </p>
+
+        <div class="otp-boxes">
+          <ion-input [(ngModel)]="otp1" maxlength="1" type="tel" inputmode="numeric" fill="outline" mode="md" class="otp-box" aria-label="Digit 1" (ionInput)="validateNumeric($event)"></ion-input>
+          <ion-input [(ngModel)]="otp2" maxlength="1" type="tel" inputmode="numeric" fill="outline" mode="md" class="otp-box" aria-label="Digit 2" (ionInput)="validateNumeric($event)"></ion-input>
+          <ion-input [(ngModel)]="otp3" maxlength="1" type="tel" inputmode="numeric" fill="outline" mode="md" class="otp-box" aria-label="Digit 3" (ionInput)="validateNumeric($event)"></ion-input>
+          <ion-input [(ngModel)]="otp4" maxlength="1" type="tel" inputmode="numeric" fill="outline" mode="md" class="otp-box" aria-label="Digit 4" (ionInput)="validateNumeric($event)"></ion-input>
+          <ion-input [(ngModel)]="otp5" maxlength="1" type="tel" inputmode="numeric" fill="outline" mode="md" class="otp-box" aria-label="Digit 5" (ionInput)="validateNumeric($event)"></ion-input>
+          <ion-input [(ngModel)]="otp6" maxlength="1" type="tel" inputmode="numeric" fill="outline" mode="md" class="otp-box" aria-label="Digit 6" (ionInput)="validateNumeric($event)"></ion-input>
+        </div>
+
+        <p class="otp-info" *ngIf="countdown > 0">Resend code in <strong>{{ countdown }}s</strong></p>
+        <p class="otp-info" *ngIf="countdown === 0">
+          Didn't get it? <button type="button" class="link-btn" (click)="resendOtp()">Resend code</button>
+        </p>
+
+        <ion-button expand="block" shape="round" class="verify-btn" (click)="confirm()">Verify</ion-button>
+      </div>
+    </ion-content>
   </ng-template>
 </ion-modal>

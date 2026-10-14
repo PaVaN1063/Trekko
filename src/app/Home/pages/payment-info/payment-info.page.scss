@@ -1,62 +1,285 @@
-.custom-toolbar {
-  --background: white; /* Set background to white */
-  --box-shadow: none;  /* Remove any shadow */
-  --border-color: transparent; /* Remove any border or underline */
+.timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  font: 700 14px var(--ab-display);
+  font-variant-numeric: tabular-nums;
+
+  &--low {
+    background: var(--ab-danger);
+  }
 }
 
-ion-card {
-    margin: 10px 15px;
+.hold {
+  margin: 0 0 12px;
+  font-size: 13px;
+}
+
+.link-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: 700 13px var(--ab-body);
+  color: var(--ab-link);
+}
+
+.review {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  img {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    object-fit: cover;
+  }
+}
+
+.review__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    font: 700 16px var(--ab-display);
+  }
+
+  small {
+    font-size: 12.5px;
+  }
+}
+
+.coupon__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 4px 4px 14px;
+  border: 1.5px dashed #c9cde6;
+  border-radius: 14px;
+
+  ion-icon {
+    font-size: 18px;
+    color: var(--ab-muted);
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: 700 15px var(--ab-body);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    &::placeholder {
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #a3a7c0;
+    }
+  }
+}
+
+.apply {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--ab-ink);
+  color: #fff;
+  font: 700 14px var(--ab-body);
+
+  &:disabled {
+    opacity: 0.35;
+  }
+}
+
+.coupon__applied {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #e8f6ea;
+  color: #0f5132;
+  font-size: 14px;
+  animation: ab-rise 0.35s ease both;
+
+  ion-icon {
+    font-size: 22px;
+    color: var(--ab-leaf);
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.coupon__error {
+  margin: 8px 2px 0;
+  font-size: 12.5px;
+  color: var(--ab-danger);
+}
+
+.coupon__hint {
+  margin: 10px 2px 0;
+  font-size: 12.5px;
+}
+
+.bill {
+  small {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+}
+
+.bill__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 14px;
+
+  &--save {
+    color: #0f7a18;
+    font-weight: 600;
+  }
+}
+
+.bill__total {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1.5px dashed var(--ab-line);
+  font: 700 17px var(--ab-display);
+}
+
+.methods {
+  padding: 6px;
+}
+
+.method {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &.on {
+    background: #eef2ff;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  img {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  ion-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  ion-text {
-    font-weight: bold;
-  }
-  
-  ion-item {
-    --inner-padding-end: 0;
-    border-radius: 10px;
-  }
-  
-  ion-avatar {
-    background-color: transparent;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  ion-img {
-    width: 100%;
-    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 0 1px var(--ab-line);
     object-fit: contain;
   }
-  .content-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+}
+
+.method__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    font-size: 15px;
   }
-  
-  .view-details-button {
-    margin-left: 20px; /* Adjust this value to move it more to the right */
+
+  small {
+    font-size: 12.5px;
   }
-  ion-card {
-    margin: 12px;
+}
+
+.method__radio {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c9cde6;
+  border-radius: 50%;
+  transition: border 0.2s;
+
+  .method.on & {
+    border: 7px solid var(--ab-link);
   }
-  
-  ion-item {
-    --min-height: 50px;
+}
+
+.upi {
+  margin: 4px 10px 10px;
+}
+
+.secure {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 4px 0;
+  font-size: 12.5px;
+}
+
+// Success overlay
+.success {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(20, 22, 58, 0.55);
+  backdrop-filter: blur(4px);
+  animation: fade 0.25s ease both;
+}
+
+.success__card {
+  width: 100%;
+  max-width: 360px;
+  padding: 28px 22px 22px;
+  border-radius: 28px;
+  background: #fff;
+  text-align: center;
+  animation: ab-rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+
+  h2 {
+    margin: 16px 0 8px;
+    font-size: 22px;
+    font-weight: 800;
   }
-  
-  ion-button {
-    margin-left: 10px;
+
+  p {
+    margin: 0 0 20px;
+    font-size: 14px;
+    line-height: 1.5;
   }
-  
+}
+
+.success__tick {
+  display: inline-grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--ab-logo);
+  color: var(--ab-black);
+  font-size: 40px;
+  animation: ab-pop 0.6s ease 0.3s both;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

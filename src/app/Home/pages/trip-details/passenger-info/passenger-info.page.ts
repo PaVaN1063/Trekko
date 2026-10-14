@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { CURRENT_USER, INDIAN_STATES, Trek, getTrek } from '../../../../shared/mock-data';
+
+interface Passenger {
+  name: string;
+  age: number | null;
+  gender: string;
+}
 
 @Component({
   selector: 'app-passenger-info',
@@ -6,63 +15,56 @@ import { Component } from '@angular/core';
   styleUrls: ['./passenger-info.page.scss'],
 })
 export class PassengerInfoPage {
+  trek: Trek;
+  states = INDIAN_STATES;
+  genders = ['Female', 'Male', 'Other'];
+  addOnPrices = { freeCancellation: 199, insurance: 99 };
+
   formData = {
-    fromDay: '',
-    toDay: '',
-    emailId: '',
-    phoneNumber: '',
-    stateOfResidency: '',
-    sendUpdatesOnWhatsapp: false,
+    emailId: CURRENT_USER.email,
+    phoneNumber: CURRENT_USER.phone.replace(/\s/g, ''),
+    stateOfResidency: 'Karnataka',
+    sendUpdatesOnWhatsapp: true,
     freeCancellation: false,
-    insuranceDetails: '',
-    termsAndConditions: {
-      agree: false,        // For "I agree to the terms and conditions..."
-      agreeAorbo: false    // For "I agree to the Aorbo terms and conditions..."
-    },
-    amount: 0,
-    passengers: [{ name: '', age: '', gender: '' }]
+    insurance: true,
+    termsAndConditions: { agree: false, agreeTrekko: false },
+    passengers: [{ name: CURRENT_USER.name, age: 29, gender: CURRENT_USER.gender }] as Passenger[],
   };
 
-  // Adds a new passenger to the list
-  addPassenger() {
-    this.formData.passengers.push({ name: '', age: '', gender: '' });
+  constructor(route: ActivatedRoute, private router: Router, private nav: NavController) {
+    this.trek = getTrek(route.snapshot.queryParamMap.get('id'));
   }
 
-  // Removes a passenger if there is more than one
+  get gendersFilled(): boolean {
+    return this.formData.passengers.every((p) => !!p.gender);
+  }
+
+  get total(): number {
+    const pax = this.formData.passengers.length;
+    let perPerson = this.trek.price;
+    if (this.formData.freeCancellation) perPerson += this.addOnPrices.freeCancellation;
+    if (this.formData.insurance) perPerson += this.addOnPrices.insurance;
+    return perPerson * pax;
+  }
+
+  addPassenger() {
+    this.formData.passengers.push({ name: '', age: null, gender: '' });
+  }
+
   removePassenger(index: number) {
     if (this.formData.passengers.length > 1) {
       this.formData.passengers.splice(index, 1);
     }
   }
 
-  // Processes the form data for payment
   payNow() {
-    const formData = {
-      passengerDetails: this.formData.passengers,
-      contactDetails: {
-        emailId: this.formData.emailId,
-        phoneNumber: this.formData.phoneNumber,
-        stateOfResidency: this.formData.stateOfResidency,
-        sendUpdatesOnWhatsapp: this.formData.sendUpdatesOnWhatsapp,
-      },
-      dateDetails: {
-        fromDay: this.formData.fromDay,
-        toDay: this.formData.toDay,
-      },
-      freeCancellation: this.formData.freeCancellation,
-      insuranceDetails: this.formData.insuranceDetails,
-      termsAndConditions: {
-        agree: this.formData.termsAndConditions.agree,         // Terms and conditions agreement
-        agreeAorbo: this.formData.termsAndConditions.agreeAorbo // Aorbo terms agreement
-      }
-    };
-
-    // Log form data for debugging purposes
-    console.log(formData);
+    this.router.navigate(['/tabs/Home/payment-info'], {
+      queryParams: { id: this.trek.id, pax: this.formData.passengers.length, total: this.total },
+      state: { booking: this.formData },
+    });
   }
 
-  // Navigate back to the previous page
   goBack() {
-    window.history.back();
+    this.nav.back();
   }
 }

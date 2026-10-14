@@ -1,113 +1,226 @@
-ion-content {
-  --background: linear-gradient(to right, #51bbfd, #3136b9);
-  overflow-y: hidden;
+// Centre of the logo on screen; the showcase closes into this point.
+$cx: 50%;
+$cy: 42%;
+$logo-r: 88px;
+
+.splash {
+  --background: var(--ab-gradient);
+  color: #fff;
 }
 
-.empty-space {
-  height: 50px;
-  width: 100%;
-  background: transparent;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 40px;
+.splash__contours {
+  position: absolute;
+  left: -40%;
+  bottom: -5%;
+  width: 180%;
+  opacity: 0.3;
+  animation: ab-drift 6s ease-in-out infinite alternate;
 }
 
-.custom-progress-bar {
-  width: 60%;
-  height: 10px;
-  border-radius: 50px;
-}
-
-@keyframes jiggle {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  10% {
-    transform: scale(1.05);
-  }
-  20% {
-    transform: scale(0.95);
-  }
-  30% {
-    transform: scale(1.02);
-  }
-  40% {
-    transform: scale(0.98);
-  }
-  50% {
-    transform: scale(1);
-  }
-}
-
-@keyframes zoomIn {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-}
-
-@keyframes slideUpFadeOut {
-  0% {
-    transform: translateY(200px);
-    opacity: 0;
-  }
-  50% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-}
-
-@keyframes zoomInOut {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-}
-
-.splash-image {
-  width: 80%;
-  height: auto;
-  animation: jiggle 1s ease forwards, zoomIn 0.5s ease forwards 1s;
-}
-
-.logo-bg {
-  background: linear-gradient(to right, #fed900, #f3fb00);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 200px;
+// ---------- 1. Showcase ----------
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   overflow: hidden;
-  animation: slideUpFadeOut 1.5s ease forwards 0.5s;
+  clip-path: circle(150% at $cx $cy);
+  transition: clip-path 0.8s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.35s ease 0.75s;
+  animation: stage-in 0.6s ease both;
+
+  .is-logo & {
+    clip-path: circle($logo-r at $cx $cy);
+    opacity: 0;
+  }
 }
 
-.logo {
-  width: 50%;
-  height: auto;
-  animation: zoomInOut 1.5s ease forwards 0.5s;
+.stage__art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 15% 50%;
+  transform: scale(1.12);
+  // Pan from the hiker across to the summit flag
+  animation: pan 2.4s cubic-bezier(0.45, 0, 0.25, 1) 0.1s both;
+}
+
+.stage__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 22, 58, 0.35) 0%, transparent 30%, transparent 55%, rgba(20, 22, 58, 0.8) 100%);
+  transition: opacity 0.4s;
+
+  .is-logo & {
+    opacity: 0;
+  }
+}
+
+.stage__title {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: calc(env(safe-area-inset-bottom) + 56px);
+  transition: opacity 0.3s, transform 0.3s;
+
+  h1 {
+    margin: 0;
+    font-size: 54px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    animation: ab-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+  }
+
+  p {
+    margin: 6px 0 0;
+    font-size: 16px;
+    opacity: 0.9;
+    animation: ab-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s both;
+  }
+
+  .is-logo & {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+// ---------- 2. Logo + trail loader ----------
+.emblem {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.emblem__ring {
+  position: absolute;
+  left: $cx;
+  top: $cy;
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%);
+}
+
+.emblem__logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: $logo-r * 2;
+  height: $logo-r * 2;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1.04);
+  opacity: 0;
+  box-shadow: 0 22px 44px rgba(20, 22, 58, 0.45);
+  transition: opacity 0.4s ease 0.55s, transform 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) 0.55s;
+
+  .is-logo & {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  .is-loading & {
+    opacity: 1;
+  }
+}
+
+.loader__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 11;
+}
+
+.loader__fill {
+  fill: none;
+  stroke: var(--ab-logo);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 766.55; // 2πr for r = 122
+  filter: drop-shadow(0 0 6px rgba(248, 235, 77, 0.7));
+}
+
+// Flag that rides the tip of the trail
+.loader__flag {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  .is-loading & {
+    opacity: 1;
+  }
+
+  ion-icon {
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    margin-left: -11px;
+    font-size: 22px;
+    color: var(--ab-logo);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  }
+
+  &.planted ion-icon {
+    animation: flag-plant 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  }
+}
+
+.emblem__word,
+.emblem__tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  .is-loading & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.emblem__word {
+  top: calc(#{$cy} + 138px);
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.emblem__tag {
+  top: calc(#{$cy} + 188px);
+  margin: 0;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+
+  .is-loading & {
+    opacity: 0.85;
+  }
+}
+
+@keyframes stage-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pan {
+  from { object-position: 12% 50%; transform: scale(1.15); }
+  to { object-position: 88% 50%; transform: scale(1.04); }
+}
+
+@keyframes flag-plant {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.7) translateY(-4px); }
+  100% { transform: scale(1.3); }
 }

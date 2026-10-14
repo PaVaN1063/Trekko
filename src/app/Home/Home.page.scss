@@ -1,153 +1,355 @@
-.Section-1 {
-  .cards-tripTickets {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 16px;
+// ---------- Hero ----------
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  padding: calc(env(safe-area-inset-top) + 18px) 20px 86px;
+  background: var(--ab-gradient);
+  color: #fff;
+}
 
-    @media (max-width: 768px) {
-      flex-direction: column; /* Stack vertically on smaller screens */
-      gap: 12px;
-    }
+.home-hero__contours {
+  position: absolute;
+  left: -25%;
+  bottom: -35%;
+  width: 150%;
+  opacity: 0.32;
+  pointer-events: none;
+  animation: ab-drift 18s ease-in-out infinite alternate;
+}
 
-    .card {
-      width: 100%; /* Adjust card width */
-      border-radius: 20px;
-      padding: 10px;
+.home-hero__top {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
 
-      @media (max-width: 768px) {
-        padding: 8px; /* Adjust padding for smaller screens */
-      }
+.home-hero__hello {
+  margin: 4px 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.9;
+}
 
-      @media (max-width: 480px) {
-        padding: 6px; /* Further adjust padding for very small screens */
-      }
-    }
+.home-hero__title {
+  margin: 0;
+  max-width: 260px;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.home-hero__avatar {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  background: var(--ab-sun);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// ---------- Search card ----------
+.search {
+  position: relative;
+  z-index: 1;
+  margin: -64px 16px 0;
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: var(--ab-shadow-lift);
+}
+
+.search__route {
+  position: relative;
+  border: 1.5px solid var(--ab-line);
+  border-radius: 16px;
+
+  // dotted trail line between From and To
+  &::before {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 30px;
+    bottom: 30px;
+    border-left: 2px dotted #b8bdd8;
+  }
+}
+
+.search__leg,
+.search__date {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: text;
+
+  & + .search__leg {
+    border-top: 1.5px solid var(--ab-line);
+  }
+}
+
+.search__dot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  &--from {
+    border: 3px solid var(--ab-blue);
+    background: #fff;
   }
 
-  .custom-chip {
-    width: 110px;
+  &--to {
+    background: var(--ab-leaf);
+    box-shadow: 0 0 0 3px rgba(21, 162, 31, 0.2);
+  }
+}
+
+.search__text {
+  flex: 1;
+  min-width: 0;
+
+  small {
+    display: block;
     font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 5px;
-
-    @media (max-width: 768px) {
-      width: 100px;
-      font-size: 10px; /* Decrease font size */
-      margin-bottom: 10px; /* Create space for stacking */
-      padding: 2px; /* Ensure consistent padding for smaller screens */
-    }
-
-    @media (max-width: 480px) {
-      width: 90px; /* Adjust size for very small screens */
-      font-size: 9px; /* Further decrease font size */
-    }
-
-    @media (min-width: 1200px) {
-      width: 120px; /* Increase size for larger screens */
-      font-size: 14px;
-      padding: 4px; /* Adjust padding if needed for larger screens */
-    }
-
-    &.selected {
-      background-color: #d1e7dd;
-      color: #0f5132;
-      width: 120px;
-    }
+    font-weight: 600;
+    color: var(--ab-muted);
   }
 
-  .departure-container {
-    position: relative;
+  input {
+    width: 100%;
+    padding: 2px 0 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: 600 16px var(--ab-body);
+    color: var(--ab-ink);
 
-    .form-label {
-      font-size: 12px; /* Smaller label font */
-      margin-bottom: 0.3rem; /* Decreased margin */
-
-      @media (max-width: 768px) {
-        font-size: 11px; /* Decrease label font size on smaller screens */
-      }
-
-      @media (max-width: 480px) {
-        font-size: 10px; /* Further decrease label font size */
-      }
-    }
-
-    input[type="date"] {
-      font-size: 12px; /* Default font size */
-      padding: 6px 8px 6px 25px; /* Reduced padding */
-      width: 80px; /* Default width */
-
-      @media (max-width: 768px) {
-        font-size: 10px; /* Decrease font size */
-        width: 90%; /* Full width for tablets */
-      }
-
-      @media (max-width: 480px) {
-        font-size: 9px; /* Further decrease font size */
-        width: 100%; /* Ensure full width on very small screens */
-      }
-
-      @media (min-width: 1200px) {
-        font-size: 14px; /* Larger font size for desktops */
-        width: 130px; /* Increase width for larger screens */
-      }
-    }
-
-    .calendar-icon {
-      position: absolute;
-      top: 50%;
-      left: 8px; /* Adjust position */
-      transform: translateY(-50%);
-      width: 18px; /* Default icon size */
-      height: 18px;
-
-      @media (max-width: 768px) {
-        width: 16px; /* Decrease icon size */
-        height: 16px;
-      }
-
-      @media (max-width: 480px) {
-        width: 14px; /* Further decrease icon size */
-        height: 14px;
-      }
-
-      @media (min-width: 1200px) {
-        width: 24px; /* Increase icon size for larger screens */
-        height: 24px;
-      }
-    }
-  }
-
-  .trek-chips {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 3px; /* Closer spacing between chips */
-    margin-left: 8px; /* Reduced margin */
-
-    @media (max-width: 768px) {
-      flex-direction: row; /* Ensure side-by-side alignment on small screens */
-    }
-
-    @media (max-width: 480px) {
-      gap: 2px; /* Adjust gap for very small screens */
+    &::placeholder {
+      color: #a3a7c0;
+      font-weight: 500;
     }
   }
 }
 
-.swiper-container .card {
-  width: 30vw; /* Responsive width */
-  height: 30vw; /* Keep height proportional */
+.search__swap {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--ab-line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ab-link);
+  font-size: 18px;
 
-  @media (max-width: 768px) {
-    width: 40vw;
-    height: 40vw;
+  &:active {
+    transform: translateY(-50%) rotate(180deg);
+    transition: transform 0.3s;
+  }
+}
+
+.search__date {
+  margin-top: 10px;
+  border: 1.5px solid var(--ab-line);
+  border-radius: 16px;
+
+  > ion-icon {
+    font-size: 18px;
+    color: var(--ab-muted);
+  }
+}
+
+.search__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 14px;
+}
+
+// ---------- Body ----------
+.home-body {
+  padding: 26px 16px calc(28px + env(safe-area-inset-bottom));
+}
+
+.stack {
+  display: grid;
+  gap: 12px;
+}
+
+// Leaving soon: tall photo cards
+.feature {
+  position: relative;
+  width: 210px;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 22px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: var(--ab-shadow);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
   }
 
-  @media (max-width: 480px) {
-    width: 50vw;
-    height: 50vw;
+  &:active img {
+    transform: scale(1.05);
   }
+}
+
+.feature__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 22, 58, 0) 40%, rgba(20, 22, 58, 0.85) 100%);
+}
+
+.feature__date {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ab-ink);
+  font: 700 12px var(--ab-body);
+}
+
+.feature__info {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+
+  strong {
+    display: block;
+    font: 700 19px var(--ab-display);
+    line-height: 1.15;
+  }
+
+  small {
+    display: block;
+    margin-top: 2px;
+    font-size: 12.5px;
+    opacity: 0.85;
+  }
+
+  b {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--ab-sun);
+    color: var(--ab-ink);
+    font: 700 14px var(--ab-display);
+  }
+}
+
+// Offers: ticket-style coupons
+.coupon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--ab-ink);
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+
+  // ticket notches
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    margin-top: -9px;
+    border-radius: 50%;
+    background: var(--ab-mist);
+  }
+
+  &::before { left: -9px; }
+  &::after { right: -9px; }
+}
+
+.coupon__value {
+  font: 800 26px var(--ab-display);
+  color: var(--ab-sun);
+}
+
+.coupon__on {
+  margin-top: 2px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.coupon__code {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1.5px dashed rgba(255, 255, 255, 0.25);
+  font-size: 12.5px;
+
+  b {
+    letter-spacing: 0.06em;
+    color: var(--ab-sun);
+  }
+}
+
+// Weather
+.weather {
+  width: 200px;
+  padding: 16px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--ab-shadow);
+
+  strong {
+    display: block;
+    font: 700 16px var(--ab-display);
+  }
+
+  small {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--ab-muted);
+  }
+
+  p {
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+}
+
+.weather__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  ion-icon {
+    font-size: 28px;
+    color: var(--ab-blue);
+  }
+}
+
+.weather__temp {
+  font: 800 30px var(--ab-display);
 }

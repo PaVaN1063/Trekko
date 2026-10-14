@@ -1,81 +1,48 @@
-<ion-content scroll-y="false" style=" --background: linear-gradient(to right, #51BBFD, #3136b9);">
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <ion-grid>
-      <ion-row class="ion-justify-content-center ion-text-left">
-        <ion-col size="12">
-          <h1 style="font-size: 2.3rem; font-weight: bold; line-height: 1; margin: 5px; color: #000; position: relative;">
-            <ion-icon style="font-size: 3rem; color: white;" name="ellipsis-horizontal-outline"></ion-icon>
-            <ion-icon 
-              style="font-size: 2.3rem; color: white; position: absolute; right: 0; top: 0;" 
-              name="close-outline" routerLink="/login">
-            </ion-icon>
-            
-            <br />
-            <span class="text_lets">Let's</span><br />Create<br />Your<br />Account
-          </h1>
-        </ion-col>
-      </ion-row>
-      <br />
-      <ion-row class="ion-justify-content-center">
+<ion-content fullscreen class="auth">
+  <div class="auth__screen">
+    <section class="auth__hero">
+      <img class="auth__contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
+      <button type="button" class="ab-icon-btn" aria-label="Back to log in" routerLink="/login" routerDirection="back">
+        <ion-icon name="chevron-back"></ion-icon>
+      </button>
+      <h1 class="auth__headline rise">Join the trail.</h1>
+      <p class="auth__tagline rise" style="--i: 1">Create your Trekko account to book treks and keep every ticket in one place.</p>
+    </section>
 
-        <ion-col>
+    <section class="auth__sheet rise" style="--i: 2">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
+        <label class="field">
+          <span>Full name</span>
+          <input formControlName="fullName" autocomplete="name" placeholder="As on your ID" />
+          <small class="field-error" *ngIf="showError('fullName')">Enter your full name.</small>
+        </label>
 
-          <!-- Full Name Input -->
-          <ion-item class="custom-input">
-            <ion-icon style="color: #000" name="person"></ion-icon>
-            <ion-input formControlName="fullName" placeholder="Full Name"></ion-input>
-          </ion-item>
-          <div *ngIf="signupForm.get('fullName')?.touched && signupForm.get('fullName')?.invalid" class="error">
-            <p *ngIf="signupForm.get('fullName')?.errors?.['required']">Full Name is required.</p>
-            <p *ngIf="signupForm.get('fullName')?.errors?.['minlength']">Full Name must be at least 2 characters long.</p>
+        <label class="field">
+          <span>Email</span>
+          <input formControlName="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" />
+          <small class="field-error" *ngIf="showError('email')">Enter a valid email address.</small>
+        </label>
+
+        <label class="field">
+          <span>Mobile number</span>
+          <div class="prefix-input">
+            <b>+91</b>
+            <input formControlName="mobileNumber" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit number" (input)="digitsOnly($event)" />
           </div>
+          <small class="field-error" *ngIf="showError('mobileNumber')">Enter a valid 10-digit mobile number.</small>
+        </label>
 
-          <!-- Email Address Input -->
-          <ion-item class="custom-input">
-            <ion-icon name="mail-outline" slot="start" color="dark"></ion-icon>
-            <ion-input formControlName="email" placeholder="Email Address"></ion-input>
-          </ion-item>
-          <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="error">
-            <p *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</p>
-            <p *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email address.</p>
-          </div>
+        <label class="check">
+          <input type="checkbox" formControlName="terms" />
+          <span>I agree to Trekko's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</span>
+        </label>
 
-          <!-- Mobile Number Input -->
-          <ion-item class="custom-input">
-            <ion-icon name="lock-closed" style="color: black"></ion-icon>
-            <ion-input formControlName="mobileNumber"  type="number" inputmode="numeric" maxlength="10" placeholder="Mobile Number"></ion-input>
-          </ion-item>
-          <div *ngIf="signupForm.get('mobileNumber')?.touched && signupForm.get('mobileNumber')?.invalid" class="error">
-            <p *ngIf="signupForm.get('mobileNumber')?.errors?.['required']">Mobile Number is required.</p>
-            <p *ngIf="signupForm.get('mobileNumber')?.errors?.['pattern']">Please enter a valid 10-digit Mobile Number.</p>
-          </div>
+        <button type="submit" class="btn-cta auth__submit" [disabled]="submitting">
+          {{ submitting ? 'Creating account…' : 'Create account' }}
+        </button>
+      </form>
 
-          <div class="bottom">
-            <!-- Terms & Conditions -->
-            <div class="custom-checkbox">
-              <ion-checkbox formControlName="terms" slot="start" color="dark"></ion-checkbox>&nbsp;
-              <ion-label color="dark">
-                I agree to the <a href="#" style="color: #000">Terms & Privacy</a>
-              </ion-label>
-            </div>
-            <div *ngIf="signupForm.get('terms')?.touched && signupForm.get('terms')?.invalid" class="error">
-              <p>You must agree to the Terms & Privacy.</p>
-            </div>
-
-            <!-- Sign Up Button -->
-            <ion-button (click)="postMethod()" expand="block" shape="round" color="light" class="signUpButton">
-              Sign Up
-            </ion-button>
-
-            <!-- Sign In Option -->
-            <p style="text-align: center; margin-top: 20px; color: #000">
-              Have an account?
-              <a href="#" style="color: #ffffff; font-weight: bold">Sign In</a>
-            </p>
-          </div>
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+      <p class="auth__switch">Already have an account? <a routerLink="/login" routerDirection="back">Log in</a></p>
+    </section>
+  </div>
 </ion-content>

@@ -1,37 +1,10 @@
-
-
 <ion-tabs (ionTabsDidChange)="onTabChange($event.tab)">
-  <ion-tab-bar slot="bottom" class="custom-tab-bar">
-    <ion-tab-button tab="Home" href="/tabs/Home">
-      <ion-icon *ngIf="selectedTab === 'Home'; else homeOutline" name="home"></ion-icon>
-      <ng-template #homeOutline>
-        <ion-icon name="home-outline"></ion-icon>
-      </ng-template>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="MyBookings" href="/tabs/MyBookings">
-      <ion-icon *ngIf="selectedTab === 'MyBookings'; else calendarOutline" name="calendar"></ion-icon>
-      <ng-template #calendarOutline>
-        <ion-icon name="calendar-outline"></ion-icon>
-      </ng-template>
-      <ion-label>My Bookings</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="Help" href="/tabs/Help">
-      <ion-icon *ngIf="selectedTab === 'Help'; else headsetOutline" name="headset"></ion-icon>
-      <ng-template #headsetOutline>
-        <ion-icon name="headset-outline"></ion-icon>
-      </ng-template>
-      <ion-label>Help</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="account" href="/tabs/account">
-      <ion-icon *ngIf="selectedTab === 'account'; else personOutline" name="person"></ion-icon>
-      <ng-template #personOutline>
-        <ion-icon name="person-outline"></ion-icon>
-      </ng-template>
-      <ion-label>Account</ion-label>
+  <ion-tab-bar slot="bottom" class="ab-tabbar">
+    <ion-tab-button *ngFor="let t of tabs" [tab]="t.id" [href]="'/tabs/' + t.id">
+      <span class="ab-tabbar__icon">
+        <ion-icon [name]="selectedTab === t.id ? t.icon : t.icon + '-outline'"></ion-icon>
+      </span>
+      <ion-label>{{ t.label }}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

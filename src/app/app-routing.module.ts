@@ -8,7 +8,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '',
+    path: 'splash-screen',
     loadChildren: () =>
       import('./Components/splash-screen/splash-screen.module').then(
         (m) => m.SplashScreenPageModule
