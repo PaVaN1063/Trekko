@@ -22,42 +22,43 @@
   text-align: center;
 }
 
-.mark {
-  width: 168px;
-  height: 168px;
-  overflow: visible;
-  filter: drop-shadow(0 18px 30px rgba(20, 22, 58, 0.35));
+.splash__logo {
+  position: relative;
+  width: 196px;
+  height: 196px;
+  animation: logo-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 22px 40px rgba(20, 22, 58, 0.4);
+  }
 }
 
-.mark__sun {
-  transform-origin: 256px 256px;
-  animation: sun-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.mark__peaks {
-  animation: peaks-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.25s both;
-}
-
-/* The mask slides up, revealing the trail from the bottom to the summit */
-.mark__trail-mask {
-  animation: trail-reveal 0.9s ease-in-out 0.75s both;
-}
-
-.mark__flag {
-  transform-origin: 262px 180px;
-  animation: flag-pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) 1.5s both;
+/* Warm sunrise glow that breathes behind the logo */
+.splash__halo {
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 196, 77, 0.55) 0%, rgba(255, 196, 77, 0) 70%);
+  animation: halo 2.4s ease-in-out 0.6s infinite alternate;
 }
 
 .splash__word {
-  margin-top: 26px;
-  animation: ab-rise 0.6s ease 1.1s both;
+  margin: 26px 0 0;
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  animation: ab-rise 0.6s ease 0.6s both;
 }
 
 .splash__tag {
   margin: 6px 0 0;
   font-size: 15px;
   opacity: 0.85;
-  animation: ab-rise 0.6s ease 1.25s both;
+  animation: ab-rise 0.6s ease 0.75s both;
 }
 
 .splash__trail {
@@ -81,22 +82,12 @@
   transition: width 0.1s linear;
 }
 
-@keyframes sun-in {
-  from { transform: scale(0.4); opacity: 0; }
+@keyframes logo-in {
+  from { transform: translateY(40px) scale(0.75); opacity: 0; }
   to { transform: none; opacity: 1; }
 }
 
-@keyframes peaks-up {
-  from { transform: translateY(70%); }
-  to { transform: none; }
-}
-
-@keyframes trail-reveal {
-  from { transform: translateY(370px); }
-  to { transform: translateY(0); }
-}
-
-@keyframes flag-pop {
-  from { transform: scale(0); }
-  to { transform: none; }
+@keyframes halo {
+  from { transform: scale(0.92); opacity: 0.6; }
+  to { transform: scale(1.08); opacity: 1; }
 }

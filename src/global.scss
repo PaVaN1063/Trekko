@@ -763,15 +763,16 @@ ab-trek-list {
 }
 
 // ---------------------------------------------------------------------------
-// Trekko wordmark (ab-logo component)
+// Trekko lockup (ab-logo component)
 // ---------------------------------------------------------------------------
 .ab-logo {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
+  gap: 0.4em;
   font-family: var(--ab-display);
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   color: var(--ab-black);
 
   &--light {
@@ -779,9 +780,9 @@ ab-trek-list {
   }
 }
 
-.ab-logo__o {
-  width: 0.72em;
-  height: 0.72em;
-  margin-left: 0.04em;
-  transform: translateY(0.02em);
+.ab-logo__img {
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }

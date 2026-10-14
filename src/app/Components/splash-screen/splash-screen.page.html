@@ -2,29 +2,11 @@
   <img class="splash__contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
 
   <main class="splash__center">
-    <svg class="mark" viewBox="0 0 512 512" aria-hidden="true">
-      <defs>
-        <clipPath id="splash-clip"><circle cx="256" cy="256" r="256" /></clipPath>
-        <mask id="splash-trail-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="560">
-          <rect class="mark__trail-mask" x="0" y="190" width="512" height="370" fill="#fff" />
-        </mask>
-      </defs>
-      <circle class="mark__sun" cx="256" cy="256" r="256" fill="#F8EB4D" />
-      <g clip-path="url(#splash-clip)">
-        <g class="mark__peaks">
-          <path d="M-30 540 L118 330 L250 540 Z" fill="#161616" />
-          <path d="M78 540 L262 176 L470 540 Z" fill="#161616" stroke="#F8EB4D" stroke-width="16" stroke-linejoin="round" />
-        </g>
-        <path class="mark__trail" mask="url(#splash-trail-mask)" d="M232 540 C 232 486, 330 476, 330 434 C 330 392, 222 392, 226 352 C 230 314, 300 312, 292 274 C 286 248, 268 236, 264 214"
-          fill="none" stroke="#F8EB4D" stroke-width="15" stroke-linecap="round" stroke-dasharray="1 27" />
-      </g>
-      <g class="mark__flag">
-        <path d="M262 180 V104" stroke="#161616" stroke-width="13" stroke-linecap="round" />
-        <path d="M268 104 L332 124 L268 146 Z" fill="#161616" />
-      </g>
-    </svg>
-
-    <div class="splash__word"><ab-logo [size]="46" [light]="true"></ab-logo></div>
+    <div class="splash__logo">
+      <span class="splash__halo" aria-hidden="true"></span>
+      <img src="assets/brand/trekko-logo.webp" alt="Trekko" />
+    </div>
+    <h1 class="splash__word">Trekko</h1>
     <p class="splash__tag">Find your trail.</p>
   </main>
 
