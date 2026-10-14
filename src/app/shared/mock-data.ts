@@ -402,8 +402,8 @@ export const BOOKINGS: Booking[] = [
 export const CURRENT_USER = {
   name: 'Ananya Rao',
   firstName: 'Ananya',
-  email: 'ananya.rao@gmail.com',
-  phone: '98450 12345',
+  email: 'ananya.rao@example.com',
+  phone: '98765 43210',
   gender: 'Female',
   dob: '1997-04-18',
   city: 'Bengaluru',
