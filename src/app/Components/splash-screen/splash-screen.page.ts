@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
   templateUrl: './splash-screen.page.html',
   styleUrls: ['./splash-screen.page.scss'],
 })
-export class SplashScreenPage implements OnInit, AfterViewInit {
-  progressValue: number = 0;
+export class SplashScreenPage implements OnInit, OnDestroy {
+  progressValue = 0;
+  private interval?: ReturnType<typeof setInterval>;
 
   constructor(private router: Router) {}
 
@@ -16,21 +17,16 @@ export class SplashScreenPage implements OnInit, AfterViewInit {
   }
 
   startProgress() {
-    const interval = setInterval(() => {
-      this.progressValue += 0.01;
-
+    this.interval = setInterval(() => {
+      this.progressValue = Math.min(1, this.progressValue + 0.0125);
       if (this.progressValue >= 1) {
-        clearInterval(interval);
-        this.router.navigate(['/login']);
+        clearInterval(this.interval);
+        this.router.navigate(['/login'], { replaceUrl: true });
       }
-    }, 20);
+    }, 25);
   }
 
-  ngAfterViewInit() {
-    const bgLogo = document.querySelector('.animated-bg');
-    const logo = document.querySelector('.animated-logo');
-
-    bgLogo?.classList.add('start-animation');
-    logo?.classList.add('start-animation');
+  ngOnDestroy() {
+    clearInterval(this.interval);
   }
 }

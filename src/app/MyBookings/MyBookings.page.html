@@ -1,90 +1,74 @@
-<ion-content>
-  <div class="custom-header">
-    <h5>Trek Bookings</h5>
-    <!-- Right-end Dropdown -->
-    <div class="dropdown">
-      <button
-        class="btn btn-outline-secondary btn-sm dropdown-toggle custom-dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        All Bookings
-      </button>
-      <ul
-        class="dropdown-menu dropdown-menu-end"
-        aria-labelledby="dropdownMenuButton"
-      >
-        <li><a class="dropdown-item" href="#">All Bookings</a></li>
-        <li><a class="dropdown-item" href="#">Incoming</a></li>
-        <li><a class="dropdown-item" href="#">Completed</a></li>
-        <li><a class="dropdown-item" href="#">Cancelled</a></li>
-        <li><a class="dropdown-item" href="#">Rejected</a></li>
-      </ul>
-    </div>
-  </div>
-
+<ion-content class="ab-page" [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div *ngFor="let record of records">
-    <ion-card
-      routerLink="/tabs/Home/trip-details"
-      class="custom-card"
-    >
-      <ion-card-content class="card-content">
-        <ion-row class="departure-bookingId">
-          <ion-col size="8">
-            <ion-text class="date-time">Departure Date & Time</ion-text>
-          </ion-col>
-          <ion-col size="4"><p class="booking-id">Booking ID: XXXXXX</p></ion-col>
-        </ion-row>
-        <ion-row class="content-rows">
-          <ion-col size="12">
-            <ion-text class="service-provider">{{ record.serviceProvider }}</ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row class="content-rows">
-          <ion-col size="12">
-            <ion-text class="trek-duration">{{ record.trekDuration }}</ion-text>
-          </ion-col>
-        </ion-row>
-        <ion-row class="content-rows">
-          <ion-col size="12">
-            <ion-text class="pickup-date-time">{{ record.pickupDateTime }}</ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-  
-      <div class="side-section">
-        <ion-text class="view-ticket">View Ticket</ion-text>
-      </div>
-    </ion-card>
-    
-    <div class="status-section">
-      <ion-text 
-        class="status"
-        [ngClass]="{
-          'incoming-status': record.status === 'Incoming',
-          'completed-status': record.status === 'Completed',
-          'cancelled-status': record.status === 'Cancelled',
-          'rejected-status': record.status === 'Rejected'
-        }"
-      >
-        {{ record.status }}
-      </ion-text>
+
+  <ab-header title="My bookings" [subtitle]="upcomingCount + ' upcoming · ' + completedCount + ' completed'">
+    <div class="filters">
+      <button type="button" *ngFor="let f of filters" [class.on]="filter === f" (click)="filter = f">{{ f }}</button>
     </div>
-    
+  </ab-header>
+
+  <div class="ab-body">
+    <!-- Next trek countdown -->
+    <section class="next rise" *ngIf="next && (filter === 'Upcoming' || filter === 'All')">
+      <div>
+        <small>Your next trek</small>
+        <strong>{{ next.trek.name }}</strong>
+        <span>{{ next.trek.departure | date: 'EEE, d MMM · h:mm a' : '+0530' }}</span>
+      </div>
+      <div class="next__count">
+        <b>{{ daysTo(next.trek.departure) }}</b>
+        <small>{{ daysTo(next.trek.departure) === 1 ? 'day' : 'days' }} to go</small>
+      </div>
+    </section>
+
+    <article class="ticket rise" *ngFor="let b of visible; let i = index" [style.--i]="i + 1" [class.ticket--dim]="b.booking.status === 'Cancelled'">
+      <div class="ticket__main" (click)="toggle(b.booking.id)">
+        <img [src]="b.trek.image" [alt]="b.trek.name" />
+        <div class="ticket__info">
+          <span [class]="'status status--' + b.booking.status.toLowerCase()">{{ b.booking.status }}</span>
+          <strong>{{ b.trek.name }}</strong>
+          <small class="muted">{{ b.trek.departure | date: 'EEE, d MMM y' : '+0530' }} · {{ b.booking.travellers }} {{ b.booking.travellers === 1 ? 'traveller' : 'travellers' }}</small>
+        </div>
+        <ion-icon class="ticket__chev" [name]="open === b.booking.id ? 'chevron-up' : 'chevron-down'"></ion-icon>
+      </div>
+
+      <div class="ticket__tear"></div>
+
+      <div class="ticket__foot">
+        <span class="muted">Booking ID <b>{{ b.booking.id }}</b></span>
+        <b>{{ b.booking.amountPaid | inr }}</b>
+      </div>
+
+      <div class="ticket__more" *ngIf="open === b.booking.id">
+        <div class="ticket__row"><span>Pickup</span><b>{{ b.trek.pickupPoint }}</b></div>
+        <div class="ticket__row"><span>Reporting time</span><b>{{ b.trek.departure | date: 'h:mm a' : '+0530' }} (be there 20 min early)</b></div>
+        <div class="ticket__row"><span>Seats</span><b>{{ b.booking.seats.join(', ') }}</b></div>
+        <div class="ticket__row"><span>Operator</span><b>{{ operatorName(b.trek.operatorId) }}</b></div>
+        <div class="ticket__actions">
+          <ng-container [ngSwitch]="b.booking.status">
+            <ng-container *ngSwitchCase="'Upcoming'">
+              <a class="btn-ghost" [href]="mapsLink(b.trek.pickupPoint)" target="_blank" rel="noopener"><ion-icon name="navigate-outline"></ion-icon>Directions</a>
+              <a class="btn-dark" routerLink="/tabs/Help"><ion-icon name="chatbubbles-outline"></ion-icon>Get help</a>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Completed'">
+              <a class="btn-cta" [routerLink]="['/tabs/Home/trip-details']" [queryParams]="{ id: b.trek.id }"><ion-icon name="star-outline"></ion-icon>Rate this trek</a>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Cancelled'">
+              <p class="refund muted">Refund of {{ b.booking.amountPaid * 0.9 | inr }} sent to your original payment method.</p>
+              <a class="btn-ghost" [routerLink]="['/tabs/Home/trip-details']" [queryParams]="{ id: b.trek.id }">Book again</a>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </article>
+
+    <div class="empty" *ngIf="!visible.length">
+      <ion-icon name="ticket-outline"></ion-icon>
+      <h3>No {{ filter.toLowerCase() }} bookings</h3>
+      <p class="muted">Treks you book show up here with your ticket and pickup details.</p>
+      <a class="btn-cta" routerLink="/tabs/Home">Find a trek</a>
+    </div>
   </div>
-  
-  <ion-row *ngIf="transactionData === false" class="ion-justify-content-center">
-    <ion-col>
-      <ion-img
-        src="../../assets/illustrations/NoResultsFound.jpg"
-        alt="Not Found"
-        style="max-width: 700px; height: auto"
-      ></ion-img>
-    </ion-col>
-  </ion-row>
 </ion-content>

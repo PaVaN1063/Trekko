@@ -1,111 +1,94 @@
-.content{
-  --background:white;
+.share {
+  --background: #fff;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 20px;
+}
+
+.share__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: env(safe-area-inset-top);
+
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
   }
-.trek-card {
-  position: relative; /* Make the card the positioned container */
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  padding: 10px;
 }
 
-.logo {
-  width: 50px;
-  height: 50px;
-}
-
-.special-offer-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30%;
-}
-
-.gdpr-icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
-
-
-.price-label {
-  padding: 6px;
-  margin-top: 30px;
-  font-size: 12px;
-  font-weight: bold;
-  border: 1px solid black;
-  padding-left: 7px;
-  padding-right: 7px;
-  border-radius: 15px;
-}
-
-  // *******************************************
-
-
-  .start_Date{
-    font-size: 10px;
-  }
-  .onwards{
-    font-size: 10px;
-    font-weight: 800;
-    color: rgb(255, 255, 255);
-    padding: 12px;
-    background-color: rgb(129, 129, 129);
-    border-radius: 40px;
-    
-  }
-
-/* Styles for the first ion-card */
-.service-card {
-  padding-right: 20px;
-  height: 150px;
-  position: relative;
-}
-
-/* Special Offer Image */
-.service-card .special-offer-image {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 40px;
-  height: 40px;
-  animation: pulse 2s infinite;
+.share__close {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
   border-radius: 50%;
+  background: var(--ab-mist);
+  color: var(--ab-ink);
+  font-size: 20px;
 }
 
-/* Position and Style the Side Section */
-.service-card .side-section {
-  position: absolute;
-  top: 50px;
-  right: 10px;
+.share__trek {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 22px;
+  padding: 10px;
+  background: var(--ab-mist);
+  box-shadow: none;
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  strong {
+    display: block;
+    font: 700 16px var(--ab-display);
+  }
+
+  small {
+    font-size: 12.5px;
+  }
+}
+
+.share__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 8px;
+}
+
+.share__target {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  z-index: 1; /* Add this line */
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: none;
+  font: 600 12px var(--ab-body);
+  color: var(--ab-ink);
 }
 
-
-/* Align Text and Icon in the Side Section */
-.service-card .sideImg {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.share__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  color: #fff;
+  font-size: 26px;
 }
 
-
-
-.service-card .sideImgIcon {
-  margin-right: 10px; /* Space between images */
-  width: 20px;
-  height: 20px;
+.share__note {
+  margin: 26px 0 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: #fff7c2;
+  color: #5c4500;
+  font-size: 13px;
+  line-height: 1.5;
 }
-
-.service-card .view-itenary {
-  margin-top: 10px;
-  color: #4779b5;
-  font-weight: bold;
-  text-align: right;
-  font-size: 10px;
-}
-

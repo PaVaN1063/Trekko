@@ -1,191 +1,103 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import Swiper from 'swiper';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IonContent, ModalController, NavController } from '@ionic/angular';
 import { ShareTripPage } from './share-trip/share-trip.page';
-import { ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { RouteStop, Trek, durationLabel, getOperator, getTrek } from '../../../shared/mock-data';
 
 @Component({
   selector: 'app-trip-details',
   templateUrl: './trip-details.page.html',
   styleUrls: ['./trip-details.page.scss'],
 })
-export class TripDetailsPage implements OnInit {
-  @ViewChild('tabHeader', { static: false }) tabHeader!: ElementRef;
+export class TripDetailsPage {
+  @ViewChild(IonContent) content!: IonContent;
 
-  tab: any;
-  selectedTab: string = 'trekRoute'; // Initialize with default value
+  trek: Trek;
+  saved = false;
+  galleryIndex = 0;
+  selectedTab = 'route';
 
-  selectedSegment = 'Trip Route';
-  ngOnInit() {
-    console.log('Page opended');
-  }
+  sections = [
+    { id: 'route', label: 'Route' },
+    { id: 'itinerary', label: 'Itinerary' },
+    { id: 'inclusions', label: 'Inclusions' },
+    { id: 'stay', label: 'Stay' },
+    { id: 'reviews', label: 'Reviews' },
+    { id: 'cancellation', label: 'Cancellation' },
+  ];
+
   constructor(
-    private modalController: ModalController,
-    private router: Router
+    route: ActivatedRoute,
+    private router: Router,
+    private nav: NavController,
+    private modalController: ModalController
   ) {
-    this.getData();
+    this.trek = getTrek(route.snapshot.queryParamMap.get('id'));
   }
-  handleRefresh(event: any) {
-    setTimeout(() => {
-      // Any calls to load data go here
-      event.target.complete();
-    }, 2000);
+
+  get operator() {
+    return getOperator(this.trek.operatorId);
   }
+
+  get duration() {
+    return durationLabel(this.trek);
+  }
+
+  get roundRating() {
+    return Math.round(this.trek.rating);
+  }
+
+  routeIcon(mode: RouteStop['mode']): string {
+    return { bus: 'bus', jeep: 'car-sport', walk: 'walk', camp: 'bonfire', flag: 'flag' }[mode];
+  }
+
   goBack() {
-    window.history.back();
+    this.nav.back();
   }
-  // ngAfterViewInit() {
-  //   const swiper = new Swiper('.swiper-container', {
-  //     slidesPerView: 2.5, // Display 3.25 slides
-  //     spaceBetween: 0.1,
-  //     loop: true,
-  //     pagination: {
-  //       el: '.swiper-pagination',
-  //       clickable: true,
-  //     },
-  //     navigation: {
-  //       nextEl: null, // Hide navigation arrows
-  //       prevEl: null,
-  //     },
-  //     autoplay: {
-  //       delay: 2500,
-  //       disableOnInteraction: false,
-  //     },
-  //   });
-  // }
-  isArray(content: any): boolean {
-    return Array.isArray(content);
+
+  onGalleryScroll(event: Event) {
+    const el = event.target as HTMLElement;
+    this.galleryIndex = Math.round(el.scrollLeft / el.clientWidth);
   }
-  tabs = [
-    {
-      title: 'Trip Route',
-      content: [
-        {
-          cardTitle: 'Boarding Points',
-          cardSubTitle: 'From Destination',
-        },
-      ],
-    },
-    {
-      title: 'Iternary',
-      content: [
-        {
-          cardTitle: 'Day 1 Activity',
-          description: 'Visit to the first campsite, trekking activities.',
-        },
-        {
-          cardTitle: 'Day 2 Activity',
-          description: 'Exploring the mountain, outdoor activites.',
-        },
-        {
-          cardTitle: 'Day 3 Activity',
-          description: 'Return trek and campsite.',
-        },
-      ],
-    },
-    {
-      title: 'Amenities',
-      content: 'Amenities content',
-    },
-    {
-      title: 'Reviews',
-      content: 'Reviews content',
-    },
-    {
-      title: 'Resorts',
-      content: 'Resorts content',
-    },
-    {
-      title: 'Activities',
-      content: 'Activities content',
-    },
-    {
-      title: 'Cancel Policy',
-      content: 'Cancel Policy content',
-    },
-    {
-      title: 'Others',
-      content: 'Others content',
-    },
-  ];
-  images = [
-    {
-      name: 'Trekking1',
-      img: 'assets/images/trek1.jpeg',
-    },
-    {
-      name: 'Trekking2',
-      img: 'assets/images/trek2.jpg',
-    },
-    {
-      name: 'Trekking1',
-      img: 'assets/images/trek1.jpeg',
-    },
-    {
-      name: 'Trekking2',
-      img: 'assets/images/trek2.jpg',
-    },
-  ];
+
+  /** Distance from the top of the scroll area to a section. */
+  private async sectionTop(id: string): Promise<number | null> {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    const scroller = await this.content.getScrollElement();
+    return el.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop;
+  }
+
+  async onScroll(event: any) {
+    const scrollTop: number = event.detail.scrollTop;
+    let active = this.sections[0].id;
+    for (const s of this.sections) {
+      const top = await this.sectionTop(s.id);
+      if (top !== null && top - 90 <= scrollTop) active = s.id;
+    }
+    this.selectedTab = active;
+  }
+
+  async scrollToSection(sectionId: string) {
+    const top = await this.sectionTop(sectionId);
+    if (top !== null) {
+      this.selectedTab = sectionId;
+      await this.content.scrollToPoint(0, top - 60, 450);
+    }
+  }
+
   async openModal() {
     const modal = await this.modalController.create({
       component: ShareTripPage,
+      componentProps: { trekId: this.trek.id },
       cssClass: 'ionModelCSS',
+      breakpoints: [0, 0.75, 1],
+      initialBreakpoint: 0.75,
     });
-    return await modal.present();
-  }
-  // Dismiss modal
-  dismissModal() {
-    this.modalController.dismiss(null, 'cancel');
+    await modal.present();
   }
 
-  showHeaderTitle = false; // Initially hide the header title
-
-  records: any = [];
-  transactionData: boolean = false;
-  search: string = '';
-  getData() {
-    this.records = [
-      {
-        logoUrl:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7G0MEuj1pEwy-MN5xsPIGGit5lFu6X9CVCw&s',
-        serviceProvider: 'Mountain Adventures',
-        trekDuration: '5 Days 4 Nights',
-        pickupDateTime: '2024-10-15 10:00 AM',
-        specialOffer: 'Special offer',
-        bookingNumber: 1001,
-      },
-    ];
-  }
-
-  onImageLoad() {
-    console.log('Image loaded successfully');
-  }
-  onScroll(event: any) {
-    const scrollTop = event.detail.scrollTop; // Get the scroll position
-    const segments = document.querySelectorAll('.section'); // Get all section elements
-
-    let activeSectionId = ''; // Variable to store the currently active section ID
-
-    segments.forEach((section: Element) => {
-      const { offsetTop, clientHeight } = section as HTMLElement;
-
-      // Check if the section is at the top of the viewport
-      if (scrollTop >= offsetTop && scrollTop < offsetTop + clientHeight) {
-        activeSectionId = section.id; // Set the active section ID
-      }
-    });
-
-    // Update the selected tab based on the active section
-    if (activeSectionId) {
-      this.selectedTab = activeSectionId;
-    }
-  }
-
-  scrollToSection(sectionId: string) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      this.selectedTab = sectionId; // Update selected tab when clicking on segment
-    }
+  book() {
+    this.router.navigate(['/tabs/Home/trip-details/passenger-info'], { queryParams: { id: this.trek.id } });
   }
 }

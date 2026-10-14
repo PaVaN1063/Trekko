@@ -1,0 +1,147 @@
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0 14px;
+  height: 50px;
+  border-radius: 16px;
+  background: #fff;
+  color: var(--ab-muted);
+
+  ion-icon {
+    font-size: 18px;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: 500 15px var(--ab-body);
+    color: var(--ab-ink);
+  }
+
+  button {
+    border: 0;
+    background: none;
+    color: var(--ab-muted);
+    font-size: 20px;
+  }
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.contact__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--ab-shadow);
+  color: var(--ab-ink);
+  text-decoration: none;
+
+  b {
+    margin-top: 4px;
+    font-size: 14px;
+  }
+
+  small {
+    font-size: 11.5px;
+  }
+}
+
+.contact__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 22px;
+
+  &--call { background: #e5ecff; color: var(--ab-link); }
+  &--wa { background: #e3f9ea; color: #128c4b; }
+  &--mail { background: #fff7c2; color: #8a6d00; }
+}
+
+.active {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  img {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  strong {
+    display: block;
+    font: 700 16px var(--ab-display);
+  }
+
+  small {
+    font-size: 12.5px;
+  }
+}
+
+.active__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.faqs {
+  padding: 4px 16px;
+}
+
+.faq + .faq {
+  border-top: 1px solid var(--ab-line);
+}
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: 600 14.5px var(--ab-body);
+  color: var(--ab-ink);
+
+  ion-icon {
+    flex-shrink: 0;
+    color: var(--ab-muted);
+    transition: transform 0.25s ease;
+
+    .faq.open & {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.faq__a {
+  margin: -4px 0 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ab-muted);
+  animation: ab-rise 0.25s ease both;
+}
+
+.no-results {
+  margin: 14px 0;
+  font-size: 14px;
+}

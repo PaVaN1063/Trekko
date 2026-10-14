@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.page.html',
   styleUrls: ['./forget-password.page.scss'],
 })
-export class ForgetPasswordPage implements OnInit {
+export class ForgetPasswordPage {
+  email = '';
+  sent = false;
 
-  constructor() { }
-
-  ngOnInit() {
+  send() {
+    // Mock: no recovery API yet, so show the confirmation state.
+    this.sent = true;
   }
-
 }

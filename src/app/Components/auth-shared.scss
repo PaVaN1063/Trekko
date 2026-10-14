@@ -1,0 +1,102 @@
+// Shared look for Sign up and Forgot password (matches Login)
+.auth {
+  --background: var(--ab-gradient);
+}
+
+.auth__screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.auth__hero {
+  position: relative;
+  overflow: hidden;
+  padding: calc(env(safe-area-inset-top) + 16px) 24px 34px;
+  color: #fff;
+
+  > *:not(.auth__contours) {
+    position: relative;
+  }
+}
+
+.auth__contours {
+  position: absolute;
+  left: -30%;
+  bottom: -40%;
+  width: 160%;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.auth__headline {
+  margin: 28px 0 8px;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.auth__tagline {
+  margin: 0;
+  max-width: 310px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.auth__sheet {
+  flex: 1;
+  padding: 28px 24px calc(env(safe-area-inset-bottom) + 24px);
+  background: #fff;
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -10px 30px rgba(20, 22, 58, 0.18);
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ab-danger);
+}
+
+.prefix-input {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--ab-line);
+  border-radius: var(--ab-radius-sm);
+  background: var(--ab-mist);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+
+  &:focus-within {
+    border-color: var(--ab-blue);
+    box-shadow: 0 0 0 4px rgba(75, 126, 240, 0.15);
+    background: #fff;
+  }
+
+  b {
+    padding: 0 12px 0 14px;
+    border-right: 1.5px solid var(--ab-line);
+  }
+
+  input {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+}
+
+.auth__submit {
+  margin-top: 22px;
+}
+
+.auth__switch {
+  margin: 18px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ab-muted);
+
+  a {
+    font-weight: 700;
+    text-decoration: none;
+  }
+}

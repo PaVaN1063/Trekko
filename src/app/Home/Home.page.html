@@ -1,348 +1,129 @@
-<ion-content>
+<ion-content class="ab-page" [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
- <div class="Section-1">
-  <header class="home-header">
-    <div>
-      <p class="greeting">Hello, explorer 👋</p>
-      <h1 class="home-title">Where's your next trek?</h1>
+
+  <!-- Hero -->
+  <header class="home-hero">
+    <img class="home-hero__contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
+    <div class="home-hero__top">
+      <div>
+        <p class="home-hero__hello rise">Hi {{ user.firstName }}</p>
+        <h1 class="home-hero__title rise" style="--i: 1">Where are you trekking next?</h1>
+      </div>
+      <a class="home-hero__avatar tap" routerLink="/tabs/account" aria-label="Your account">
+        <img [src]="user.avatar" alt="" />
+      </a>
     </div>
-    <img class="home-logo" src="assets/icon/App_Logo.png" alt="Aorbo" />
   </header>
 
-<div class="cards-tripTickets">
-<div class="card head-card">
-  <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #tripForm="ngForm">
-      <div class="mb-2">
-        <label for="fromInput" class="form-label" style="font-size: 14px"
-          >From</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="fromInput"
-          placeholder="Starting city"
-          [(ngModel)]="from"
-          name="from"
-          required
-          style="font-size: 14px; padding: 8px"
-        />
-      </div>
-
-      <div class="mb-2">
-        <label for="toInput" class="form-label" style="font-size: 14px"
-          >To</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="toInput"
-          placeholder="Trek or destination"
-          [(ngModel)]="to"
-          name="to"
-          required
-          style="font-size: 14px; padding: 8px"
-        />
-      </div>
-      <div class="departure-container mb-2">
-        <label for="departureDay" class="form-label" style="font-size: 14px;">Departure Day</label>
-      
-        <div class="departure-row">
-          <div class="date-field position-relative">
-            <!-- Calendar Icon -->
-            <img
-              src="../../assets/icon/calendar.png"
-              alt="Calendar Icon"
-              class="calendar-icon"
-            />
-      
-            <!-- Input Field for Date -->
-            <input
-              type="date"
-              class="form-control"
-              id="departureDay"
-              [(ngModel)]="departureDay"
-              name="departureDay"
-              required
-            />
-          </div>
-      
-          <div class="trek-chips">
-            <ion-chip
-              class="custom-chip"
-              [outline]="!isWeekendTrekSelected"
-              (click)="toggleWeekendTrek()"
-              [ngClass]="{'selected': isWeekendTrekSelected}"
-            >
-              <ion-label>Weekend Trek</ion-label>
-              <ion-icon *ngIf="isWeekendTrekSelected" name="close"></ion-icon>
-            </ion-chip>
-            
-            <ion-chip
-              class="custom-chip"
-              [outline]="!isPersonalizedTrekSelected"
-              (click)="togglePersonalizedTrek()"
-              [ngClass]="{'selected': isPersonalizedTrekSelected}"
-            >
-              <ion-label>Personalized Trek</ion-label>
-              <ion-icon *ngIf="isPersonalizedTrekSelected" name="close"></ion-icon>
-            </ion-chip>
-          </div>
-          
-        </div>
-      </div>
-      
-      
-      <div class="d-grid">
-        <button
-          type="submit"
-          class="btn search-btn rounded-pill"
-          [disabled]="!tripForm.valid"
-        >
-          <i class="fa-solid fa-shoe-prints"></i> Search
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-</div>
- </div>
- 
-  <div class="Section-2">
-    <div class="top-trips-card" style="padding: 0">
-      <div
-        class="d-flex justify-content-between align-items-center section-header"
-        style="margin-bottom: 0; padding: 5px 0"
-      >
-        <h2 class="ms-3 mb-0" style="font-size: 16px; margin: 0">Top Treks</h2>
-        <ion-button
-          fill="clear"
-          size="small"
-          routerLink="top-trips"
-          style="text-transform: none; font-size: 12px; padding: 0"
-          >View More</ion-button
-        >
-      </div>
-
-      <div class="swiper-container" style="margin: 0">
-        <div class="swiper-wrapper">
-          <div
-            class="swiper-slide"
-            *ngFor="let slide of slides1; let i = index"
-            [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
-            style="margin-right: 2px; padding-right: 0px"
-          >
-            <ion-card
-              class="card"
-              routerLink="/tabs/Home/trip-details"
-              style="
-                width: 30vw; /* Make width responsive */
-                height: 30vw; /* Keep height proportional */
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                margin: 0;
-              "
-            >
-              <img
-                routerLink="/tabs/Home/trip-details"
-                [src]="slide.image"
-                alt="{{ slide.title }}"
-                style="
-                  width: 30vw;
-                  height: 30vw;
-                  border-radius: 20px;
-                  overflow: hidden;
-                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                "
-              />
-            </ion-card>
-          </div>
-        </div>
-      </div>
+  <!-- Search card -->
+  <form class="search panel rise" style="--i: 2" (ngSubmit)="onSubmit()" #tripForm="ngForm">
+    <div class="search__route">
+      <label class="search__leg">
+        <span class="search__dot search__dot--from"></span>
+        <span class="search__text">
+          <small>From</small>
+          <input name="from" [(ngModel)]="from" placeholder="Your city" required autocomplete="off" />
+        </span>
+      </label>
+      <button type="button" class="search__swap tap" aria-label="Swap from and to" (click)="swap()">
+        <ion-icon name="swap-vertical"></ion-icon>
+      </button>
+      <label class="search__leg">
+        <span class="search__dot search__dot--to"></span>
+        <span class="search__text">
+          <small>To</small>
+          <input name="to" [(ngModel)]="to" placeholder="Trek or region" required autocomplete="off" />
+        </span>
+      </label>
     </div>
 
-    <div class="offers-card" style="padding: 0">
-      <div
-        class="section-header"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0;
-          padding: 5px 0;
-        "
-      >
-        <h2 class="ms-3 mb-0" style="font-size: 16px; margin: 0">Offers</h2>
-        <ion-button
-          fill="clear"
-          size="small"
-          routerLink="offers"
-          style="text-transform: none; font-size: 12px; padding: 0"
-          >View More</ion-button
-        >
-      </div>
+    <label class="search__date">
+      <ion-icon name="calendar-clear-outline"></ion-icon>
+      <span class="search__text">
+        <small>Departure</small>
+        <input type="date" name="departureDay" [(ngModel)]="departureDay" [min]="today" required />
+      </span>
+    </label>
 
-      <div class="swiper-container" style="margin: 0">
-        <div class="swiper-container" style="margin: 0">
-          <div class="swiper-wrapper">
-            <div
-              class="swiper-slide"
-              *ngFor="let slide of slides2; let i = index"
-              [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
-              style="margin-right: 2px; padding-right: 0px"
-            >
-              <ion-card
-                class="card"
-                routerLink="/tabs/Home/trip-details"
-                style="
-                  width: 30vw; /* Make width responsive */
-                  height: 30vw; /* Keep height proportional */
-                  border-radius: 20px;
-                  overflow: hidden;
-                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                  margin: 0;
-                "
-              >
-                <img
-                  routerLink="/tabs/Home/trip-details"
-                  [src]="slide.image"
-                  alt="{{ slide.title }}"
-                  style="
-                    width: 30vw;
-                    height: 30vw;
-                    border-radius: 20px;
-                    overflow: hidden;
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                  "
-                />
-              </ion-card>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="search__chips">
+      <button type="button" class="chip" [class.is-on]="isWeekendTrekSelected" (click)="toggleWeekendTrek()">
+        <ion-icon [name]="isWeekendTrekSelected ? 'checkmark' : 'sunny-outline'"></ion-icon>Weekend treks
+      </button>
+      <button type="button" class="chip" [class.is-on]="isPersonalizedTrekSelected" (click)="togglePersonalizedTrek()">
+        <ion-icon [name]="isPersonalizedTrekSelected ? 'checkmark' : 'people-outline'"></ion-icon>Private group
+      </button>
     </div>
 
-    <div class="trek-shorts-card" style="padding: 0">
-      <div
-        class="section-header"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0;
-          padding: 5px 0;
-        "
-      >
-        <h2 class="ms-3 mb-0" style="font-size: 16px; margin: 0">
-          Trek Shorts
-        </h2>
-        <ion-button
-          fill="clear"
-          size="small"
-          routerLink="offers"
-          style="text-transform: none; font-size: 12px; padding: 0"
-          >View More</ion-button
-        >
-      </div>
+    <button type="submit" class="btn-cta" [disabled]="!tripForm.valid">
+      <ion-icon name="search"></ion-icon>Find treks
+    </button>
+  </form>
 
-      <div class="swiper-container" style="margin: 0">
-        <div class="swiper-wrapper">
-          <div
-            class="swiper-slide"
-            *ngFor="let slide of slides; let i = index"
-            [ngStyle]="{'margin-left': i === 0 ? '10px' : '0px'}"
-            style="margin-right: 2px; padding-right: 0px"
-          >
-            <ion-card
-              class="card"
-              routerLink="/tabs/Home/trip-details"
-              style="
-                width: 30vw; /* Make width responsive */
-                height: 30vw; /* Keep height proportional */
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                margin: 0;
-              "
-            >
-              <img
-                routerLink="/tabs/Home/trip-details"
-                [src]="slide.image"
-                alt="{{ slide.title }}"
-                style="
-                  width: 30vw;
-                  height: 30vw;
-                  border-radius: 20px;
-                  overflow: hidden;
-                  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                "
-              />
-            </ion-card>
+  <div class="home-body">
+    <!-- This weekend -->
+    <section class="section rise" style="--i: 3">
+      <div class="section-head">
+        <h2>Leaving soon</h2>
+        <a routerLink="/tabs/Home/top-trips">See all</a>
+      </div>
+      <div class="rail">
+        <a class="feature tap" *ngFor="let t of leavingSoon" [routerLink]="['/tabs/Home/trip-details']" [queryParams]="{ id: t.id }">
+          <img [src]="t.image" [alt]="t.name" loading="lazy" />
+          <span class="feature__shade"></span>
+          <span class="feature__date">{{ t.departure | date: 'EEE d MMM' : '+0530' }}</span>
+          <span class="feature__info">
+            <strong>{{ t.name }}</strong>
+            <small>{{ t.region }} · {{ duration(t) }}</small>
+            <b>{{ t.price | inr }}</b>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Offers -->
+    <section class="section rise" style="--i: 4">
+      <div class="section-head">
+        <h2>Offers for you</h2>
+        <a routerLink="/tabs/Home/offers">All offers</a>
+      </div>
+      <div class="rail">
+        <a class="coupon tap" *ngFor="let t of offerTreks" [routerLink]="['/tabs/Home/trip-details']" [queryParams]="{ id: t.id }">
+          <span class="coupon__value">{{ t.offer?.label }}</span>
+          <span class="coupon__on">on {{ t.name }}</span>
+          <span class="coupon__code">Use <b>{{ t.offer?.code }}</b></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Top rated -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Top rated this month</h2>
+        <a routerLink="/tabs/Home/top-trips">View all</a>
+      </div>
+      <div class="stack">
+        <ab-trek-card *ngFor="let t of topRated; let i = index" [trek]="t" class="rise" [style.--i]="i + 5"></ab-trek-card>
+      </div>
+    </section>
+
+    <!-- Weather -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Trail weather</h2>
+      </div>
+      <div class="rail">
+        <article class="weather" *ngFor="let w of weather">
+          <div class="weather__top">
+            <ion-icon [name]="w.icon"></ion-icon>
+            <span class="weather__temp">{{ w.temp }}°</span>
           </div>
-        </div>
+          <strong>{{ w.place }}</strong>
+          <small>{{ w.condition }} · H {{ w.high }}° L {{ w.low }}°</small>
+          <p>{{ w.advice }}</p>
+        </article>
       </div>
-    </div>
-
-    <div class="weather-section">
-      <div class="weather-cards">
-        <ion-card
-          *ngFor="let alert of weatherAlerts"
-          style="height: 160px; border-radius: 20px"
-          [ngStyle]="{'background-image': alert.backgroundImage, 'background-size': 'cover','background-repeat': 'no-repeat'}"
-        >
-          <div
-            class="content"
-            style="position: relative; height: 100%; padding: 20px"
-          >
-            <!-- City and Time -->
-            <label style="color: white; font-size: 20px; font-weight: bold"
-              >{{ alert.city }}</label
-            ><br />
-            <label style="color: white; font-size: 15px; font-weight: bold"
-              >{{ alert.time }}</label
-            ><br />
-            <label
-              style="
-                color: white;
-                font-size: 15px;
-                font-weight: bold;
-                margin-top: 60px;
-              "
-              >{{ alert.condition }}</label
-            >
-
-            <!-- Temperature positioned at the top right corner -->
-            <label
-              style="
-                color: white;
-                font-size: 45px;
-                position: absolute;
-                top: 20px;
-                right: 20px;
-              "
-            >
-              {{ alert.temperature }}°
-            </label>
-
-            <!-- High/Low positioned at the bottom right corner -->
-            <label
-              style="
-                color: white;
-                font-size: 15px;
-                font-weight: bold;
-                position: absolute;
-                bottom: 20px;
-                right: 20px;
-              "
-            >
-              H:{{ alert.high }}° L:{{ alert.low }}°
-            </label>
-          </div>
-        </ion-card>
-      </div>
-    </div>
+    </section>
   </div>
 </ion-content>

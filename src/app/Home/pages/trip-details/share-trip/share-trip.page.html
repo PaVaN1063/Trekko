@@ -1,107 +1,25 @@
-
-<ion-content>
-  <div class="custom-toolbar" style="display: flex; align-items: center; padding: 10px;">
-  
-    <ion-buttons slot="start" (click)="dismissModal()">
-      <ion-button style="font-size: 20px;">X</ion-button>
-    </ion-buttons>   
-    <h4>Share</h4>
+<ion-content class="share">
+  <div class="share__head">
+    <h2>Share this trek</h2>
+    <button type="button" class="share__close" aria-label="Close" (click)="dismissModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
   </div>
-  <div class="card trek-card mb-3" *ngFor="let record of records">
-    <div class="card-body p-2">
-      <!-- Logo and Service Provider -->
-      <div class="d-flex align-items-center">
-        <!-- Logo -->
-        <img [src]="record.logoUrl" alt="Logo" class="logo me-2 rounded-circle" />
-        
-        <!-- Service Provider Name -->
-        <div class="flex-grow-1">
-          <h6 class="mb-1"><strong>{{record.serviceProvider}}</strong></h6>
-        </div>
-  
-        <!-- Special Offer Badge -->
-        <div class="offer-container">
-          <img *ngIf="record.specialOffer" src="assets/Logos/offers.png" alt="Special Offer" class="special-offer-badge" />
-          <p class="price-label">XXXX</p>
-        </div>
-      </div>
-  
-      <!-- Trek Duration and Pickup Time -->
-      <div class="d-flex justify-content-between align-items-center mt-2">
-        <div>
-          <p class="mb-1 text-muted">{{record.trekDuration}}</p>
-          <p class="mb-0">{{record.pickupDateTime}}</p>
-        </div>
-  
-        <div class="d-flex flex-column align-items-end">
-          <div class="d-flex align-items-center">
-            <img src="assets/Logos/gdpr.png" alt="GDPR" class="gdpr-icon me-2" />
-          </div>
-          <a href="" class="mb-0" style="text-decoration: none;">View Itinerary</a>
-        </div>
-      </div>
+
+  <div class="share__trek panel">
+    <img [src]="trek.image" [alt]="trek.name" />
+    <div>
+      <strong>{{ trek.name }}</strong>
+      <small class="muted">{{ trek.departure | date: 'EEE, d MMM' : '+0530' }} · {{ duration }} · {{ trek.price | inr }}</small>
     </div>
   </div>
-   
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-icon name="logo-instagram"></ion-icon>
-        <p>Instagram Chats</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-instagram"></ion-icon>
-        <p>Instagram Feed</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="chatbubbles-outline"></ion-icon>
-        <p>Messages</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="paper-plane-outline"></ion-icon>
-        <p>Telegram</p>
-      </ion-col>
-    </ion-row>
+  <div class="share__grid">
+    <button type="button" class="share__target tap rise" *ngFor="let t of targets; let i = index" [style.--i]="i" (click)="share(t.id)">
+      <span class="share__icon" [style.background]="t.bg"><ion-icon [name]="t.icon"></ion-icon></span>
+      <span>{{ t.label }}</span>
+    </button>
+  </div>
 
-    <!-- Third row of icons -->
-    <ion-row>
-      <ion-col>
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <p>Whatsapp</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-facebook"></ion-icon>
-        <p>Facebook</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-instagram"></ion-icon>
-        <p>Instagram</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="camera-outline"></ion-icon>
-        <p>Snapshot</p>
-      </ion-col>
-    </ion-row>
-
-    <!-- Fourth row of icons -->
-    <ion-row>
-      <ion-col>
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <p>Business Whatsapp</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="copy-outline"></ion-icon>
-        <p>Copy Link</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-linkedin"></ion-icon>
-        <p>LinkedIn</p>
-      </ion-col>
-      <ion-col>
-        <ion-icon name="logo-pinterest"></ion-icon>
-        <p>Pinterest</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <p class="share__note muted">Friends who book with your link get ₹200 off. You get ₹200 credit after their trek.</p>
 </ion-content>

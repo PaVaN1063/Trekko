@@ -1,13 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>aboutus</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ab-page" [fullscreen]="true">
+  <ab-header [back]="true" backHref="/tabs/account" title="About Aorbo" subtitle="Treks, sorted."></ab-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">aboutus</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ab-body">
+    <section class="story panel rise">
+      <img src="assets/icon/App_Logo.png" alt="" />
+      <p>
+        Aorbo started on a cancelled bus to Kumara Parvatha in 2023. We wanted one place to compare trek operators,
+        see exactly what's included, and book a seat in minutes, without chasing WhatsApp groups.
+      </p>
+    </section>
+
+    <section class="numbers rise" style="--i: 1">
+      <div><b>42,000+</b><small>trekkers booked</small></div>
+      <div><b>180</b><small>verified operators</small></div>
+      <div><b>4.8★</b><small>average rating</small></div>
+    </section>
+
+    <section class="section rise" style="--i: 2">
+      <div class="section-head"><h2>How we keep you safe</h2></div>
+      <div class="panel promise" *ngFor="let p of promises">
+        <span class="promise__icon"><ion-icon [name]="p.icon"></ion-icon></span>
+        <div>
+          <strong>{{ p.title }}</strong>
+          <p class="muted">{{ p.text }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rise" style="--i: 3">
+      <div class="section-head"><h2>Run treks? Partner with us</h2></div>
+      <div class="panel partner">
+        <p>List your departures, fill seats faster and get paid within 48 hours of every trek.</p>
+        <a class="btn-dark" href="mailto:partners@aorbo.in">Email partners@aorbo.in</a>
+      </div>
+    </section>
+
+    <p class="legal muted">Aorbo Travel Technologies Pvt. Ltd. · Bengaluru, Karnataka<br />Terms · Privacy · Licences</p>
+  </div>
 </ion-content>

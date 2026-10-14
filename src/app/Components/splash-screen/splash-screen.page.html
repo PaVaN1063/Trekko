@@ -1,14 +1,20 @@
-<ion-content [fullscreen]="true" class="content-center">
-  <div class="empty-space"></div>
-  <div class="content-wrapper">
-    <div class="logo-bg">
-          <img src="assets/icon/hikingPerson.png" alt="Logo" class="logo" />
+<ion-content [fullscreen]="true" [scrollY]="false" class="splash">
+  <img class="splash__contours" src="assets/illustrations/abstract.png" alt="" aria-hidden="true" />
+
+  <main class="splash__center">
+    <div class="splash__sun">
+      <img class="splash__hiker" src="assets/icon/hikingPerson.png" alt="" />
     </div>
-    <ion-progress-bar
-      [value]="progressValue"
-      color="warning"
-      class="custom-progress-bar"
-    ></ion-progress-bar>
-    <img src="assets/icon/splash_image.png" alt="Splash" class="splash-image" />
-  </div>
+    <h1 class="splash__word">Aorbo</h1>
+    <p class="splash__tag">Treks, sorted.</p>
+  </main>
+
+  <footer class="splash__trail" aria-label="Loading">
+    <div class="splash__track">
+      <div class="splash__fill" [style.width.%]="progressValue * 100"></div>
+      <span class="splash__marker" [style.left.%]="progressValue * 100">
+        <ion-icon name="flag"></ion-icon>
+      </span>
+    </div>
+  </footer>
 </ion-content>
