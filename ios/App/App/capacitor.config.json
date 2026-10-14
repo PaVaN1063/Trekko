@@ -2,7 +2,6 @@
 	"appId": "io.aorbo.starter",
 	"appName": "Trekko",
 	"webDir": "www",
-	"bundledWebRuntime": false,
 	"plugins": {
 		"SplashScreen": {
 			"launchShowDuration": 3000,
