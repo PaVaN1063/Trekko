@@ -1,19 +1,5 @@
 <p align="center">
-  <img src="src/assets/brand/trekko-logo.webp" alt="Trekko logo" width="150" />
-</p>
-
-<h1 align="center">Trekko</h1>
-
-<p align="center">
-  Find a trek, check what's included, book your seat and keep every ticket in one place.
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Angular-18-DD0031?logo=angular&logoColor=white" alt="Angular 18" />
-  <img src="https://img.shields.io/badge/Ionic-8-3880FF?logo=ionic&logoColor=white" alt="Ionic 8" />
-  <img src="https://img.shields.io/badge/Capacitor-6-119EFF?logo=capacitor&logoColor=white" alt="Capacitor 6" />
-  <img src="https://img.shields.io/badge/TypeScript-5.4-3178C6?logo=typescript&logoColor=white" alt="TypeScript 5.4" />
-  <img src="https://img.shields.io/badge/license-All%20rights%20reserved-lightgrey" alt="All rights reserved" />
+  <img src="docs/screenshots/trekko-banner.webp" alt="Trekko: find your trail, explore beyond. Built with Angular 18, Ionic 8, Capacitor 6 and TypeScript." />
 </p>
 
 <p align="center">
