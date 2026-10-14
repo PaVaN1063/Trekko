@@ -33,8 +33,8 @@ export class AccountPage {
       title: 'More',
       items: [
         { label: 'Help & support', icon: 'chatbubbles-outline', link: '/tabs/Help' },
-        { label: 'Become a trek partner', icon: 'briefcase-outline', link: 'aboutus', hint: 'List your treks on Aorbo' },
-        { label: 'About Aorbo', icon: 'information-circle-outline', link: 'aboutus' },
+        { label: 'Become a trek partner', icon: 'briefcase-outline', link: 'aboutus', hint: 'List your treks on Trekko' },
+        { label: 'About Trekko', icon: 'information-circle-outline', link: 'aboutus' },
         { label: 'Log out', icon: 'log-out-outline', link: '/login', danger: true },
       ],
     },
@@ -43,9 +43,9 @@ export class AccountPage {
   constructor(private toast: ToastController) {}
 
   async shareCode() {
-    const text = 'Use my code ANANYA200 on Aorbo and get ₹200 off your first trek: https://aorbo.in/r/ANANYA200';
+    const text = 'Use my code ANANYA200 on Trekko and get ₹200 off your first trek: https://trekko.in/r/ANANYA200';
     if (navigator.share) {
-      await navigator.share({ title: 'Aorbo invite', text }).catch(() => undefined);
+      await navigator.share({ title: 'Trekko invite', text }).catch(() => undefined);
       return;
     }
     try {

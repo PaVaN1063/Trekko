@@ -27,7 +27,7 @@ export class PassengerInfoPage {
     sendUpdatesOnWhatsapp: true,
     freeCancellation: false,
     insurance: true,
-    termsAndConditions: { agree: false, agreeAorbo: false },
+    termsAndConditions: { agree: false, agreeTrekko: false },
     passengers: [{ name: CURRENT_USER.name, age: 29, gender: CURRENT_USER.gender }] as Passenger[],
   };
 

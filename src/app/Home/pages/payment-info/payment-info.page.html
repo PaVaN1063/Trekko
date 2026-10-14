@@ -36,7 +36,7 @@
           </div>
         </ng-template>
         <p class="coupon__error" *ngIf="couponError">{{ couponError }}</p>
-        <p class="coupon__hint muted" *ngIf="!couponApplied">First trek with Aorbo? Try <b>FIRSTTREK</b> for {{ 250 | inr }} off.</p>
+        <p class="coupon__hint muted" *ngIf="!couponApplied">First trek with Trekko? Try <b>FIRSTTREK</b> for {{ 250 | inr }} off.</p>
       </div>
     </section>
 
@@ -80,7 +80,7 @@
     <div class="success__card">
       <div class="success__tick"><ion-icon name="checkmark"></ion-icon></div>
       <h2>You're going to {{ trek.name }}!</h2>
-      <p class="muted">Booking <b>AOR-{{ bookingRef }}</b> is confirmed. Your ticket is in My Bookings and on WhatsApp.</p>
+      <p class="muted">Booking <b>TRK-{{ bookingRef }}</b> is confirmed. Your ticket is in My Bookings and on WhatsApp.</p>
       <button type="button" class="btn-cta" (click)="viewBookings()">View my ticket</button>
     </div>
   </div>

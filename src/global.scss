@@ -1,7 +1,7 @@
 /*
- * Aorbo design system
+ * Trekko design system
  * ----------------------------------------------------------------------------
- * Colors: the original Aorbo palette (sky → indigo gradient, sun yellow,
+ * Colors: the original Trekko palette (sky → indigo gradient, sun yellow,
  *         leaf green, gold tab bar).
  * Type:   Bricolage Grotesque for headings and numbers, Figtree for text.
  * Motif:  topographic contour lines over the brand gradient.
@@ -760,4 +760,28 @@ ab-trek-list {
   p {
     margin: 0 0 16px;
   }
+}
+
+// ---------------------------------------------------------------------------
+// Trekko wordmark (ab-logo component)
+// ---------------------------------------------------------------------------
+.ab-logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--ab-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ab-black);
+
+  &--light {
+    color: #fff;
+  }
+}
+
+.ab-logo__o {
+  width: 0.72em;
+  height: 0.72em;
+  margin-left: 0.04em;
+  transform: translateY(0.02em);
 }

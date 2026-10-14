@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Trekko app icon">
+  <rect width="1024" height="1024" fill="#F8EB4D"/>
+  <!-- artwork kept inside the central safe zone for Android adaptive icons -->
+  <g transform="translate(192 210) scale(1.25)">
+    <path d="M-60 650 L118 330 L250 650 Z" fill="#161616"/>
+    <path d="M78 650 L262 176 L470 650 Z" fill="#161616" stroke="#F8EB4D" stroke-width="16" stroke-linejoin="round"/>
+    <path d="M232 650 C 232 520, 330 486, 330 434 C 330 392, 222 392, 226 352 C 230 314, 300 312, 292 274 C 286 248, 268 236, 264 214"
+          fill="none" stroke="#F8EB4D" stroke-width="15" stroke-linecap="round" stroke-dasharray="1 27"/>
+    <path d="M262 180 V104" stroke="#161616" stroke-width="13" stroke-linecap="round"/>
+    <path d="M268 104 L332 124 L268 146 Z" fill="#161616"/>
+  </g>
+</svg>

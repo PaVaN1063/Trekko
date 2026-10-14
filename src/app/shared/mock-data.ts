@@ -1,5 +1,5 @@
 /**
- * Mock data for the Aorbo UI.
+ * Mock data for the Trekko UI.
  * Everything the screens show comes from here, so swapping in real API calls
  * later only means replacing these exports with service calls.
  */
@@ -392,11 +392,11 @@ export const TREKS: Trek[] = [
 ];
 
 export const BOOKINGS: Booking[] = [
-  { id: 'AOR-7K2Q9M', trekId: 'kumara-parvatha', status: 'Upcoming', bookedOn: '2026-10-09', travellers: 2, amountPaid: 5798, seats: ['L4', 'L5'] },
-  { id: 'AOR-3HX8TB', trekId: 'hampta-pass', status: 'Upcoming', bookedOn: '2026-10-02', travellers: 1, amountPaid: 9999, seats: ['Tent 3'] },
-  { id: 'AOR-9PD4WE', trekId: 'skandagiri', status: 'Completed', bookedOn: '2026-08-28', travellers: 3, amountPaid: 3897, seats: ['12', '13', '14'] },
-  { id: 'AOR-5LN6CR', trekId: 'kudremukh', status: 'Completed', bookedOn: '2026-07-14', travellers: 2, amountPaid: 6398, seats: ['U2', 'U3'] },
-  { id: 'AOR-2VZ7JA', trekId: 'dudhsagar', status: 'Cancelled', bookedOn: '2026-07-01', travellers: 1, amountPaid: 3499, seats: ['L9'] },
+  { id: 'TRK-7K2Q9M', trekId: 'kumara-parvatha', status: 'Upcoming', bookedOn: '2026-10-09', travellers: 2, amountPaid: 5798, seats: ['L4', 'L5'] },
+  { id: 'TRK-3HX8TB', trekId: 'hampta-pass', status: 'Upcoming', bookedOn: '2026-10-02', travellers: 1, amountPaid: 9999, seats: ['Tent 3'] },
+  { id: 'TRK-9PD4WE', trekId: 'skandagiri', status: 'Completed', bookedOn: '2026-08-28', travellers: 3, amountPaid: 3897, seats: ['12', '13', '14'] },
+  { id: 'TRK-5LN6CR', trekId: 'kudremukh', status: 'Completed', bookedOn: '2026-07-14', travellers: 2, amountPaid: 6398, seats: ['U2', 'U3'] },
+  { id: 'TRK-2VZ7JA', trekId: 'dudhsagar', status: 'Cancelled', bookedOn: '2026-07-01', travellers: 1, amountPaid: 3499, seats: ['L9'] },
 ];
 
 export const CURRENT_USER = {

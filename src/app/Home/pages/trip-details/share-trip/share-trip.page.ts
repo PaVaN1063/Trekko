@@ -43,11 +43,11 @@ export class ShareTripPage implements OnInit {
   }
 
   private get link() {
-    return `https://aorbo.in/trek/${this.trek.id}?ref=ANANYA200`;
+    return `https://trekko.in/trek/${this.trek.id}?ref=ANANYA200`;
   }
 
   private get message() {
-    return `Join me on ${this.trek.name} (${this.duration}) with Aorbo! ${this.link}`;
+    return `Join me on ${this.trek.name} (${this.duration}) with Trekko! ${this.link}`;
   }
 
   async share(id: TargetId) {

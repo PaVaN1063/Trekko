@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Trekko">
+  <defs>
+    <clipPath id="tk-c"><circle cx="256" cy="256" r="256"/></clipPath>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="#F8EB4D"/>
+  <g clip-path="url(#tk-c)">
+    <!-- side peak, separated from the main peak by a yellow gap -->
+    <path d="M-30 540 L118 330 L250 540 Z" fill="#161616"/>
+    <!-- main peak -->
+    <path d="M78 540 L262 176 L470 540 Z" fill="#161616" stroke="#F8EB4D" stroke-width="16" stroke-linejoin="round"/>
+    <!-- switchback trail -->
+    <path d="M232 540 C 232 486, 330 476, 330 434 C 330 392, 222 392, 226 352 C 230 314, 300 312, 292 274 C 286 248, 268 236, 264 214"
+          fill="none" stroke="#F8EB4D" stroke-width="15" stroke-linecap="round" stroke-dasharray="1 27"/>
+  </g>
+  <!-- summit flag -->
+  <path d="M262 180 V104" stroke="#161616" stroke-width="13" stroke-linecap="round"/>
+  <path d="M268 104 L332 124 L268 146 Z" fill="#161616"/>
+</svg>
