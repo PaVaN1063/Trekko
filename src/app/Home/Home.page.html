@@ -3,19 +3,16 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
  <div class="Section-1">
-  <div
-  class="advertise-space"
-  style="background-color: transparent; height: 80px"
-></div>
-<div class="title" style="padding-left: 20px; font-weight: 500">
-  <h3 style="font-weight: 500">Trip Tickets</h3>
-</div>
+  <header class="home-header">
+    <div>
+      <p class="greeting">Hello, explorer 👋</p>
+      <h1 class="home-title">Where's your next trek?</h1>
+    </div>
+    <img class="home-logo" src="assets/icon/App_Logo.png" alt="Aorbo" />
+  </header>
 
 <div class="cards-tripTickets">
-<div
-  class="card head-card mx-1 my-1 shadow"
-  style="border-radius: 20px; padding: 10px"
->
+<div class="card head-card">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #tripForm="ngForm">
       <div class="mb-2">
@@ -26,6 +23,7 @@
           type="text"
           class="form-control"
           id="fromInput"
+          placeholder="Starting city"
           [(ngModel)]="from"
           name="from"
           required
@@ -41,6 +39,7 @@
           type="text"
           class="form-control"
           id="toInput"
+          placeholder="Trek or destination"
           [(ngModel)]="to"
           name="to"
           required
@@ -50,8 +49,8 @@
       <div class="departure-container mb-2">
         <label for="departureDay" class="form-label" style="font-size: 14px;">Departure Day</label>
       
-        <div class="d-flex align-items-center">
-          <div class="position-relative">
+        <div class="departure-row">
+          <div class="date-field position-relative">
             <!-- Calendar Icon -->
             <img
               src="../../assets/icon/calendar.png"
@@ -70,7 +69,7 @@
             />
           </div>
       
-          <div class="trek-chips d-flex align-items-center">
+          <div class="trek-chips">
             <ion-chip
               class="custom-chip"
               [outline]="!isWeekendTrekSelected"
@@ -99,9 +98,8 @@
       <div class="d-grid">
         <button
           type="submit"
-          class="btn btn-warning rounded-pill"
+          class="btn search-btn rounded-pill"
           [disabled]="!tripForm.valid"
-          style="font-size: 14px; padding: 6px 12px"
         >
           <i class="fa-solid fa-shoe-prints"></i> Search
         </button>

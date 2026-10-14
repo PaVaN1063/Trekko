@@ -34,10 +34,28 @@ export class LoginPage {
     private toastController: ToastController
   ) {
     this.loginForm = this.fb.group({
-      phoneno: ['', [Validators.required]],
+      phoneno: ['', [Validators.required, Validators.pattern(/^[6-9][0-9]{9}$/)]],
     });
   }
   
+  /** Show the phone error once the user has left the field or typed all 10 digits. */
+  get phoneInvalid(): boolean {
+    const ctrl = this.loginForm.get('phoneno');
+    if (!ctrl || ctrl.valid) return false;
+    const length = `${ctrl.value ?? ''}`.length;
+    return length > 0 && (ctrl.touched || length === 10);
+  }
+
+  /** Keep the phone field digits-only as the user types or pastes. */
+  onPhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const digits = input.value.replace(/\D/g, '').slice(0, 10);
+    if (digits !== input.value) {
+      input.value = digits;
+      this.loginForm.get('phoneno')?.setValue(digits);
+    }
+  }
+
   validateNumeric(event: any) {
     const pattern = /^[0-9]*$/;
     let inputChar = String.fromCharCode(event.inputType === 'deleteContentBackward' ? 0 : event.target.value);
@@ -48,6 +66,10 @@ export class LoginPage {
   }
   
   sendOtp() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     this.openOtpDialog();
     this.startCountdown(); // Start the countdown
     const phoneNumber = this.loginForm.get('phoneno')?.value;

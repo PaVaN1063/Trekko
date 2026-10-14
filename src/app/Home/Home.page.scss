@@ -1,138 +1,144 @@
+$ink: #14163a;
+$muted: #6b6f8a;
+
 .Section-1 {
-  .cards-tripTickets {
+  padding: calc(env(safe-area-inset-top) + 16px) 12px 4px;
+
+  .home-header {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 16px;
-
-    @media (max-width: 768px) {
-      flex-direction: column; /* Stack vertically on smaller screens */
-      gap: 12px;
-    }
-
-    .card {
-      width: 100%; /* Adjust card width */
-      border-radius: 20px;
-      padding: 10px;
-
-      @media (max-width: 768px) {
-        padding: 8px; /* Adjust padding for smaller screens */
-      }
-
-      @media (max-width: 480px) {
-        padding: 6px; /* Further adjust padding for very small screens */
-      }
-    }
+    gap: 12px;
+    padding: 4px 8px 14px;
   }
 
-  .custom-chip {
-    width: 110px;
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 5px;
+  .greeting {
+    margin: 0 0 2px;
+    font-size: 13px;
+    color: $muted;
+  }
 
-    @media (max-width: 768px) {
-      width: 100px;
-      font-size: 10px; /* Decrease font size */
-      margin-bottom: 10px; /* Create space for stacking */
-      padding: 2px; /* Ensure consistent padding for smaller screens */
-    }
+  .home-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--ion-text-color, $ink);
+  }
 
-    @media (max-width: 480px) {
-      width: 90px; /* Adjust size for very small screens */
-      font-size: 9px; /* Further decrease font size */
-    }
+  .home-logo {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 
-    @media (min-width: 1200px) {
-      width: 120px; /* Increase size for larger screens */
-      font-size: 14px;
-      padding: 4px; /* Adjust padding if needed for larger screens */
-    }
+  .head-card {
+    width: 100%;
+    border: 0;
+    border-radius: 22px;
+    padding: 4px;
+    box-shadow: 0 8px 24px rgba(20, 22, 58, 0.1);
+  }
 
-    &.selected {
-      background-color: #d1e7dd;
-      color: #0f5132;
-      width: 120px;
+  .form-label {
+    margin-bottom: 4px;
+    font-size: 13px !important;
+    font-weight: bold;
+    color: $muted;
+  }
+
+  .form-control {
+    border-radius: 12px;
+    border-color: #dcdff0;
+    background: #f6f7fc;
+    padding: 10px 12px !important;
+    font-size: 15px !important;
+
+    &:focus {
+      border-color: #4b7ef0;
+      box-shadow: 0 0 0 3px rgba(75, 126, 240, 0.15);
+      background: #fff;
     }
   }
 
   .departure-container {
     position: relative;
+  }
 
-    .form-label {
-      font-size: 12px; /* Smaller label font */
-      margin-bottom: 0.3rem; /* Decreased margin */
+  .departure-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-      @media (max-width: 768px) {
-        font-size: 11px; /* Decrease label font size on smaller screens */
-      }
+  .date-field {
+    width: 100%;
 
-      @media (max-width: 480px) {
-        font-size: 10px; /* Further decrease label font size */
-      }
+    input[type='date'] {
+      width: 100%;
+      padding-left: 38px !important;
     }
+  }
 
-    input[type="date"] {
-      font-size: 12px; /* Default font size */
-      padding: 6px 8px 6px 25px; /* Reduced padding */
-      width: 80px; /* Default width */
-
-      @media (max-width: 768px) {
-        font-size: 10px; /* Decrease font size */
-        width: 90%; /* Full width for tablets */
-      }
-
-      @media (max-width: 480px) {
-        font-size: 9px; /* Further decrease font size */
-        width: 100%; /* Ensure full width on very small screens */
-      }
-
-      @media (min-width: 1200px) {
-        font-size: 14px; /* Larger font size for desktops */
-        width: 130px; /* Increase width for larger screens */
-      }
-    }
-
-    .calendar-icon {
-      position: absolute;
-      top: 50%;
-      left: 8px; /* Adjust position */
-      transform: translateY(-50%);
-      width: 18px; /* Default icon size */
-      height: 18px;
-
-      @media (max-width: 768px) {
-        width: 16px; /* Decrease icon size */
-        height: 16px;
-      }
-
-      @media (max-width: 480px) {
-        width: 14px; /* Further decrease icon size */
-        height: 14px;
-      }
-
-      @media (min-width: 1200px) {
-        width: 24px; /* Increase icon size for larger screens */
-        height: 24px;
-      }
-    }
+  .calendar-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
   }
 
   .trek-chips {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 3px; /* Closer spacing between chips */
-    margin-left: 8px; /* Reduced margin */
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
-    @media (max-width: 768px) {
-      flex-direction: row; /* Ensure side-by-side alignment on small screens */
+  .custom-chip {
+    margin: 0;
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px;
+    border-radius: 17px;
+    --color: #{$ink};
+    border-color: #c9cde6;
+
+    &.selected {
+      --background: #d1e7dd;
+      background: #d1e7dd;
+      --color: #0f5132;
+      color: #0f5132;
+      border-color: transparent;
     }
 
-    @media (max-width: 480px) {
-      gap: 2px; /* Adjust gap for very small screens */
+    ion-icon {
+      margin: 0 -4px 0 6px;
+      font-size: 16px;
+    }
+  }
+
+  .search-btn {
+    margin-top: 6px;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: $ink;
+    border: 0;
+    background: linear-gradient(90deg, #f0e94c, #f5c518);
+    box-shadow: 0 6px 16px rgba(245, 197, 24, 0.35);
+
+    &:disabled {
+      color: rgba(20, 22, 58, 0.55);
+      box-shadow: none;
+      opacity: 0.6;
+    }
+
+    i {
+      margin-right: 6px;
     }
   }
 }
