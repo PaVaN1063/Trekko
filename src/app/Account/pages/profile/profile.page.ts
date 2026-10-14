@@ -13,7 +13,7 @@ export class ProfilePage {
   genders = ['Female', 'Male', 'Other'];
   saving = false;
 
-  form = {
+  profile = {
     name: CURRENT_USER.name,
     email: CURRENT_USER.email,
     phone: CURRENT_USER.phone,

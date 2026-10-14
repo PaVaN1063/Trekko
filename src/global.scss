@@ -29,6 +29,8 @@
   --ab-indigo: #3136b9;
   --ab-sun: #f0e94c;
   --ab-gold: #f1c40f;
+  --ab-logo: #f8eb4d;
+  --ab-black: #161616;
   --ab-leaf: #15a21f;
   --ab-ink: #14163a;
   --ab-muted: #6b6f8a;
@@ -39,7 +41,7 @@
   --ab-link: #3a4fd8;
 
   --ab-gradient: linear-gradient(160deg, var(--ab-sky) 0%, var(--ab-blue) 45%, var(--ab-indigo) 100%);
-  --ab-cta: linear-gradient(90deg, var(--ab-sun), var(--ab-leaf));
+  --ab-cta: var(--ab-black);
 
   --ab-display: 'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
   --ab-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -215,7 +217,7 @@ a {
   color: #fff;
 
   &--tall {
-    padding-bottom: 56px;
+    padding-bottom: 88px;
   }
 
   > *:not(.ab-header__contours) {
@@ -314,9 +316,20 @@ a {
 }
 
 .btn-cta {
-  background: var(--ab-cta);
-  color: var(--ab-ink);
-  box-shadow: 0 8px 20px rgba(21, 162, 31, 0.28);
+  background: var(--ab-black);
+  color: #fff;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 24px rgba(22, 22, 22, 0.22);
+
+  ion-icon {
+    color: var(--ab-logo);
+  }
+
+  &:disabled {
+    background: #c9cbd6;
+    color: #fff;
+    opacity: 1;
+  }
 }
 
 .btn-dark {
@@ -453,8 +466,8 @@ a {
   }
 
   &.is-on {
-    background: var(--ab-ink);
-    border-color: var(--ab-ink);
+    background: var(--ab-black);
+    border-color: var(--ab-black);
     color: #fff;
   }
 

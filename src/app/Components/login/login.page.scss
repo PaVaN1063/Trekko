@@ -158,18 +158,23 @@ $leaf: #15a21f;
 .continue-btn {
   margin: 18px 0 0;
   height: 52px;
-  --background: linear-gradient(90deg, #{$sun}, #{$leaf});
-  --background-activated: linear-gradient(90deg, #{$sun}, #{$leaf});
-  --color: #{$ink};
-  --box-shadow: 0 8px 20px rgba(21, 162, 31, 0.3);
+  --background: #161616;
+  --background-activated: #000;
+  --color: #fff;
+  --box-shadow: 0 10px 24px rgba(22, 22, 22, 0.22);
   font-weight: bold;
   font-size: 16px;
   text-transform: none;
   letter-spacing: 0.3px;
 
+  ion-icon {
+    color: #f8eb4d;
+  }
+
   &[disabled] {
+    --background: #c9cbd6;
     --box-shadow: none;
-    opacity: 0.45;
+    opacity: 1;
   }
 }
 

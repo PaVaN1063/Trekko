@@ -1,7 +1,7 @@
 .ab-tabbar {
-  --background: var(--ab-gold);
-  --color: rgba(20, 22, 58, 0.62);
-  --color-selected: var(--ab-ink);
+  --background: var(--ab-logo);
+  --color: rgba(22, 22, 22, 0.6);
+  --color-selected: var(--ab-black);
   --border: 0;
   height: calc(64px + env(safe-area-inset-bottom));
   padding-top: 6px;
@@ -30,7 +30,8 @@
   transition: background 0.25s ease;
 
   .tab-selected & {
-    background: rgba(255, 255, 255, 0.55);
+    background: var(--ab-black);
+    color: var(--ab-logo);
 
     ion-icon {
       animation: ab-pop 0.35s ease;

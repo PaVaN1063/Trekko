@@ -13,25 +13,25 @@
     <section class="panel rise" style="--i: 1">
       <label class="field">
         <span>Full name</span>
-        <input name="name" [(ngModel)]="form.name" required minlength="2" autocomplete="name" />
+        <input name="name" [(ngModel)]="profile.name" required minlength="2" autocomplete="name" />
       </label>
       <label class="field">
         <span>Email <em class="verified"><ion-icon name="checkmark-circle"></ion-icon>Verified</em></span>
-        <input name="email" type="email" [(ngModel)]="form.email" required email autocomplete="email" />
+        <input name="email" type="email" [(ngModel)]="profile.email" required autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" />
       </label>
       <label class="field">
         <span>Mobile <em class="verified"><ion-icon name="checkmark-circle"></ion-icon>Verified</em></span>
-        <input name="phone" [value]="'+91 ' + form.phone" disabled />
+        <input name="phone" [value]="'+91 ' + profile.phone" disabled />
       </label>
       <div class="field">
         <span>Gender</span>
         <div class="gender">
-          <button type="button" class="chip" *ngFor="let g of genders" [class.is-on]="form.gender === g" (click)="form.gender = g">{{ g }}</button>
+          <button type="button" class="chip" *ngFor="let g of genders" [class.is-on]="profile.gender === g" (click)="profile.gender = g">{{ g }}</button>
         </div>
       </div>
       <label class="field">
         <span>Date of birth</span>
-        <input name="dob" type="date" [(ngModel)]="form.dob" [max]="toDay" />
+        <input name="dob" type="date" [(ngModel)]="profile.dob" [max]="toDay" />
       </label>
     </section>
 
